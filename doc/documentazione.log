@@ -1,0 +1,515 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.11.20)  8 DEC 2019 20:30
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**documentazione.tex
+(./documentazione.tex
+LaTeX2e <2019-10-01> patch level 3
+(c:/texlive/2019/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/10/25 v1.4k Standard LaTeX document class
+(c:/texlive/2019/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2019/10/25 v1.4k Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(c:/texlive/2019/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2018/08/11 v2.0j Standard LaTeX package
+
+(c:/texlive/2019/texmf-dist/tex/latex/base/t1enc.def
+File: t1enc.def 2018/08/11 v2.0j Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
+))
+(c:/texlive/2019/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2018/08/11 v1.3c Input encoding file
+\inpenc@prehook=\toks14
+\inpenc@posthook=\toks15
+)
+(c:/texlive/2019/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2019/11/14 3.36 The Babel package
+
+(c:/texlive/2019/texmf-dist/tex/generic/babel/switch.def
+File: switch.def 2019/11/14 3.36 Babel switching mechanism
+)
+(c:/texlive/2019/texmf-dist/tex/generic/babel-english/english.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
+
+(c:/texlive/2019/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2019/11/14 3.36 Babel common definitions
+\babel@savecnt=\count88
+\U@D=\dimen103
+
+(c:/texlive/2019/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@dirlevel=\count89
+)
+Package babel Info: \l@canadian = using hyphenrules for english
+(babel)             (\language0) on input line 102.
+Package babel Info: \l@australian = using hyphenrules for ukenglish
+(babel)             (\language21) on input line 105.
+Package babel Info: \l@newzealand = using hyphenrules for ukenglish
+(babel)             (\language21) on input line 108.
+))
+(c:/texlive/2019/texmf-dist/tex/latex/frontespizio/frontespizio.sty
+Package: frontespizio 2011/09/21 1.4a (Enrico Gregorio)
+
+(c:/texlive/2019/texmf-dist/tex/latex/tools/afterpage.sty
+Package: afterpage 2014/10/28 v1.08 After-Page Package (DPC)
+\AP@output=\toks16
+\AP@partial=\box27
+\AP@footins=\box28
+)
+(c:/texlive/2019/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(c:/texlive/2019/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+(c:/texlive/2019/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/01 v1.3d Standard LaTeX Graphics (DPC,SPQR)
+
+(c:/texlive/2019/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(c:/texlive/2019/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(c:/texlive/2019/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen104
+\Gin@req@width=\dimen105
+)
+(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
+
+(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+(c:/texlive/2019/texmf-dist/tex/generic/iftex/ifpdf.sty
+Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
+
+(c:/texlive/2019/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2019/11/07 v1.0c TeX engine tests
+)))
+(c:/texlive/2019/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+
+(c:/texlive/2019/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+)
+\@envbody=\toks18
+)
+(c:/texlive/2019/texmf-dist/tex/generic/iftex/ifxetex.sty
+Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
+)
+\front@out=\write3
+\openout3 = `documentazione-frn.tex'.
+
+)
+(c:/texlive/2019/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count90
+\lst@gtempboxa=\box29
+\lst@token=\toks19
+\lst@length=\count91
+\lst@currlwidth=\dimen106
+\lst@column=\count92
+\lst@pos=\count93
+\lst@lostspace=\dimen107
+\lst@width=\dimen108
+\lst@newlines=\count94
+\lst@lineno=\count95
+\lst@maxwidth=\dimen109
+
+(c:/texlive/2019/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
+\c@lstnumber=\count96
+\lst@skipnumbers=\count97
+\lst@framebox=\box30
+)
+(c:/texlive/2019/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2019/09/10 1.8c listings configuration
+))
+Package: listings 2019/09/10 1.8c (Carsten Heinz)
+
+(c:/texlive/2019/texmf-dist/tex/latex/koma-script/scrextend.sty
+Package: scrextend 2019/10/12 v3.27 KOMA-Script package (extend other classes w
+ith features of KOMA-Script classes)
+
+(c:/texlive/2019/texmf-dist/tex/latex/koma-script/scrkbase.sty
+Package: scrkbase 2019/10/12 v3.27 KOMA-Script package (KOMA-Script-dependent b
+asics and keyval usage)
+
+(c:/texlive/2019/texmf-dist/tex/latex/koma-script/scrbase.sty
+Package: scrbase 2019/10/12 v3.27 KOMA-Script package (KOMA-Script-independent 
+basics and keyval usage)
+
+(c:/texlive/2019/texmf-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2019/10/12 v3.27 KOMA-Script package (loading files)
+)
+Package scrbase Info: \ifpdftex already defined.
+(scrbase)             If \ifpdftex does not behave like
+(scrbase)             it was described at the KOMA-Script manual, try to
+(scrbase)             load `scrbase.sty' earlier or find out at which
+(scrbase)             package or class \ifpdftex was defined before.
+Package scrbase Info: \ifVTeX already defined.
+(scrbase)             If \ifVTeX does not behave like
+(scrbase)             it was described at the KOMA-Script manual, try to
+(scrbase)             load `scrbase.sty' earlier or find out at which
+(scrbase)             package or class \ifVTeX was defined before.
+)))
+(c:/texlive/2019/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2018/04/16 v5.8 Page Geometry
+
+(c:/texlive/2019/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count98
+\Gm@cntv=\count99
+\c@Gm@tempcnt=\count100
+\Gm@bindingoffset=\dimen110
+\Gm@wd@mp=\dimen111
+\Gm@odd@mp=\dimen112
+\Gm@even@mp=\dimen113
+\Gm@layoutwidth=\dimen114
+\Gm@layoutheight=\dimen115
+\Gm@layouthoffset=\dimen116
+\Gm@layoutvoffset=\dimen117
+\Gm@dimlist=\toks20
+)
+(c:/texlive/2019/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2019/09/01 v3.3d Customizing captions (AR)
+
+(c:/texlive/2019/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2019/09/01 v1.8d caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 64.
+\captionmargin=\dimen118
+\captionmargin@=\dimen119
+\captionwidth=\dimen120
+\caption@tempdima=\dimen121
+\caption@indent=\dimen122
+\caption@parindent=\dimen123
+\caption@hangindent=\dimen124
+)
+\c@caption@flags=\count101
+\c@ContinuedFloat=\count102
+Package caption Info: listings package is loaded.
+)
+(./documentazione.aux)
+\openout1 = `documentazione.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+
+(c:/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count103
+\scratchdimen=\dimen125
+\scratchbox=\box31
+\nofMPsegments=\count104
+\nofMParguments=\count105
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count106
+\MPscratchDim=\dimen126
+\MPnumerator=\count107
+\makeMPintoPDFobject=\count108
+\everyMPtoPDFconversion=\toks22
+) (c:/texlive/2019/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(c:/texlive/2019/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+))
+(c:/texlive/2019/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+(c:/texlive/2019/texmf-dist/tex/generic/iftex/ifluatex.sty
+Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+))))
+(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2019/07/25 v0.30 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+41.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 459.
+
+(c:/texlive/2019/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\AtBeginShipoutBox=\box32
+\c@lstlisting=\count109
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(86.72377pt, 424.06033pt, 86.72377pt)
+* v-part:(T,H,B)=(86.72377pt, 671.5993pt, 86.72377pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=424.06033pt
+* \textheight=671.5993pt
+* \oddsidemargin=14.45378pt
+* \evensidemargin=14.45378pt
+* \topmargin=-22.54622pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=57.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+<documentazione-frn.pdf, id=1, 597.50829pt x 845.0471pt>
+File: documentazione-frn.pdf Graphic file (type pdf)
+<use documentazione-frn.pdf>
+Package pdftex.def Info: documentazione-frn.pdf  used on input line 18.
+(pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
+[1
+
+ <./documentazione-frn.pdf{c:/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pd
+ftex.map}>] (./documentazione.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 5.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 5.
+)
+\tf@toc=\write4
+\openout4 = `documentazione.toc'.
+
+ [1
+
+]
+<./images/diagrams/UserMockup.jpg, id=32, 793.96625pt x 573.14125pt>
+File: ./images/diagrams/UserMockup.jpg Graphic file (type jpg)
+<use ./images/diagrams/UserMockup.jpg>
+Package pdftex.def Info: ./images/diagrams/UserMockup.jpg  used on input line 5
+2.
+(pdftex.def)             Requested size: 424.06033pt x 306.12468pt.
+ [1
+
+ <./images/diagrams/UserMockup.jpg>]
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 7
+0.
+(c:/texlive/2019/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 70.
+ [2
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+[]\T1/cmr/m/n/10 Login,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--113
+[]\T1/cmr/m/n/10 Display all the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--113
+[]\T1/cmr/m/n/10 Browse,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--113
+\T1/cmr/m/n/10 Find,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--113
+\T1/cmr/m/n/10 Dis-play
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--114
+[]\T1/cmr/m/n/10 View
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--114
+\T1/cmr/m/n/10 Statis-tic,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--114
+\T1/cmr/m/n/10 Rated
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--114
+\T1/cmr/m/n/10 Films,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--114
+\T1/cmr/m/n/10 View
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--114
+\T1/cmr/m/n/10 Most
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--114
+\T1/cmr/m/n/10 Searched
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 116--116
+[]\T1/cmr/m/n/10 Update
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 117--117
+[]\T1/cmr/m/n/10 Delete
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--118
+[]\T1/cmr/m/n/10 Select
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--118
+\T1/cmr/m/n/10 Film,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--118
+\T1/cmr/m/n/10 Dis-play
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 119--119
+[]\T1/cmr/m/n/10 Vote
+ []
+
+
+Overfull \hbox (18.53682pt too wide) in paragraph at lines 109--121
+ [][] 
+ []
+
+<./images/diagrams/CinemaEvaluate.jpeg, id=43, 1033.91269pt x 918.73238pt>
+File: ./images/diagrams/CinemaEvaluate.jpeg Graphic file (type jpg)
+<use ./images/diagrams/CinemaEvaluate.jpeg>
+Package pdftex.def Info: ./images/diagrams/CinemaEvaluate.jpeg  used on input l
+ine 126.
+(pdftex.def)             Requested size: 537.28148pt x 477.43518pt.
+
+Overfull \hbox (113.22115pt too wide) in paragraph at lines 126--127
+ [] 
+ []
+
+
+Overfull \hbox (15.0pt too wide) in paragraph at lines 123--131
+[]$[]$ 
+ []
+
+[3
+
+] [4 <./images/diagrams/CinemaEvaluate.jpeg>]
+<./images/diagrams/AnalysisUML.png, id=50, 544.0325pt x 447.6725pt>
+File: ./images/diagrams/AnalysisUML.png Graphic file (type png)
+<use ./images/diagrams/AnalysisUML.png>
+Package pdftex.def Info: ./images/diagrams/AnalysisUML.png  used on input line 
+141.
+(pdftex.def)             Requested size: 296.84093pt x 244.27382pt.
+ [5
+
+ <./images/diagrams/AnalysisUML.png>]
+<./images/diagrams/architecture_diagram.png, id=57, 313.77225pt x 290.2845pt>
+File: ./images/diagrams/architecture_diagram.png Graphic file (type png)
+<use ./images/diagrams/architecture_diagram.png>
+Package pdftex.def Info: ./images/diagrams/architecture_diagram.png  used on in
+put line 165.
+(pdftex.def)             Requested size: 307.55214pt x 284.52756pt.
+ [6
+
+ <./images/diagrams/architecture_diagram.png>] (./documentazione.aux) ) 
+Here is how much of TeX's memory you used:
+ 6276 strings out of 492164
+ 95626 string characters out of 6129087
+ 205129 words of memory out of 5000000
+ 10552 multiletter control sequences out of 15000+600000
+ 9803 words of font info for 22 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 57i,11n,61p,574b,351s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texl
+ive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}<c:/texlive/2019/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2019/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2019/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/
+sfbx0900.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfbx1000.p
+fb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb><c:/tex
+live/2019/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb><c:/texlive/2019/
+texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb><c:/texlive/2019/texmf-dist
+/fonts/type1/public/cm-super/sfrm1000.pfb>
+Output written on documentazione.pdf (8 pages, 403279 bytes).
+PDF statistics:
+ 90 PDF objects out of 1000 (max. 8388607)
+ 60 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+

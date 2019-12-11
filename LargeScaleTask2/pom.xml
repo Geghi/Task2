@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>LargeScaleTask2</groupId>
+	<artifactId>LargeScaleTask2</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Task2</name>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-base</artifactId>
+			<version>11</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-web</artifactId>
+			<version>11</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>11</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>11</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.controlsfx/controlsfx -->
+		<dependency>
+			<groupId>org.controlsfx</groupId>
+			<artifactId>controlsfx</artifactId>
+			<version>8.40.14</version>
+		</dependency>
+
+
+
+	</dependencies>
+
+</project>
