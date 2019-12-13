@@ -24,7 +24,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
-<?import org.controlsfx.control.Rating?>
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.resources.HomeController">
    <center>
@@ -57,7 +56,6 @@
                                     </AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="798.0" prefWidth="867.0" styleClass="background" stylesheets="@css/DarkTheme.css">
 	<children>
-                                          <Rating fx:id="Vote" layoutX="110.0" layoutY="508.0" onMouseClicked="#addVote" prefHeight="33.0" style="-fx-padding: 0;" AnchorPane.topAnchor="508.0" />
                                           <ImageView fitHeight="270.0" fitWidth="400.0" layoutX="72.0" layoutY="50.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="50.0">
                                              <image>
                                                 <Image url="@Images/default.png" />
@@ -132,6 +130,12 @@
                                                 <Button mnemonicParsing="false" text="Add" />
                                             </buttons>
                                           </ButtonBar>
+                                          <ComboBox fx:id="voteBox" layoutX="118.0" layoutY="502.0" prefWidth="80.0" />
+                                          <Button fx:id="voteBtn" layoutX="217.0" layoutY="502.0" mnemonicParsing="false" onAction="#addVote" prefWidth="80.0" text="Vote">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Button>
                                        </children>
                                        <opaqueInsets>
                                           <Insets />
@@ -159,7 +163,7 @@
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                              </columnResizePolicy>
                                           </TableView>
-                                          <ComboBox fx:id="AnalyticsSelection" layoutX="35.0" layoutY="41.0" prefHeight="30.0" prefWidth="200.0" stylesheets="@css/DarkTheme.css" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0">
+                                          <ComboBox fx:id="analyticsSelection" layoutX="35.0" layoutY="41.0" prefHeight="30.0" prefWidth="200.0" stylesheets="@css/DarkTheme.css" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -168,7 +172,7 @@
                                                 <String fx:value="list-cell" />
                                              </styleClass>
                                           </ComboBox>
-                                          <ComboBox fx:id="Filters" layoutX="45.0" layoutY="51.0" prefHeight="30.0" prefWidth="150.0" stylesheets="@css/DarkTheme.css" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="25.0">
+                                          <ComboBox fx:id="filters" layoutX="45.0" layoutY="51.0" prefHeight="30.0" prefWidth="150.0" stylesheets="@css/DarkTheme.css" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="25.0">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>

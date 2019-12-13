@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.controlsfx.control.Rating;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,25 +17,28 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Menu;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class HomeController implements Initializable {
 
-	ObservableList<String> AnalyticsValues = FXCollections.observableArrayList("Item 1", "Item 2");
-	ObservableList<String> FiltersValues = FXCollections.observableArrayList("Item 1", "Item 2");
+	ObservableList<String> analyticsValues = FXCollections.observableArrayList("Item 1", "Item 2");
+	ObservableList<String> filtersValues = FXCollections.observableArrayList("Item 1", "Item 2");
+	ObservableList<Integer> voteValues = FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 	@FXML
-	private Rating Vote;
+	private Button voteBtn;
 	@FXML
-	private ComboBox<String> Filters;
+	private ComboBox<Integer> voteBox;
+	@FXML
+	private ComboBox<String> filters;
 	@FXML
 	private Menu Analytics;
 	@FXML
-	private ComboBox<String> AnalyticsSelection;
+	private ComboBox<String> analyticsSelection;
 	@FXML
 	private TableView<String> FilmTable;
 	@FXML
@@ -54,12 +55,12 @@ public class HomeController implements Initializable {
 	private Button logoutBtn;
 	@FXML
 	private Button addBtn;
-	
+
 	@FXML
 	private void addFilm(ActionEvent event) {
 		System.out.println("Testing");
 	}
-	
+
 	@FXML
 	private void logoutAction(ActionEvent event) throws IOException {
 		Parent Home = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
@@ -68,37 +69,36 @@ public class HomeController implements Initializable {
 		window.setScene(scene);
 		window.show();
 	}
-	
 
 	@FXML
 	private void initializeBox() {
-		AnalyticsSelection.setValue("Item 1");
-		AnalyticsSelection.setItems(AnalyticsValues);
-		Filters.setValue("Item 1");
-		Filters.setItems(FiltersValues);
+		analyticsSelection.setValue("Item 1");
+		analyticsSelection.setItems(analyticsValues);
+		filters.setValue("Item 1");
+		filters.setItems(filtersValues);
+		voteBox.setValue(1);
+		voteBox.setItems(voteValues);
 	}
-	
+
 	@FXML
 	public void deleteFilm(ActionEvent event) {
 		System.out.println("test");
 	}
-	
+
 	@FXML
 	public void searchFilm(ActionEvent event) {
 		System.out.println("Test2");
 	}
 
 	@FXML
-	public void addVote(MouseEvent event) {
-		// TODO set the vote on the DB
+	public void addVote(ActionEvent event) {
+		SingleSelectionModel<Integer> x = voteBox.getSelectionModel();
+		System.out.println(x.getSelectedItem());
 	}
-	
+
 	public void inizializePieChart() {
-		ObservableList<PieChart.Data> pieChartData = 
-				FXCollections.observableArrayList(new PieChart.Data("Horror", 50),
-						new PieChart.Data("Action", 30),
-						new PieChart.Data("Fantasy", 90),
-						new PieChart.Data("Anime", 10));
+		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Horror", 50),
+				new PieChart.Data("Action", 30), new PieChart.Data("Fantasy", 90), new PieChart.Data("Anime", 10));
 		pieChart.setData(pieChartData);
 		pieChart.setStartAngle(90);
 	}
