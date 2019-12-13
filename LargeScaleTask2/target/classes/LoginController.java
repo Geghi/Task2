@@ -17,6 +17,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import main.resources.moviesEvaluation.MainApp;
 
 public class LoginController implements Initializable {
 	@FXML
@@ -27,6 +28,7 @@ public class LoginController implements Initializable {
 	private TextField usernameField;
 	@FXML
 	private PasswordField passwordField;
+	
 
 	@FXML
 	public void loadRegisterPage(MouseEvent event) throws IOException {
@@ -39,11 +41,19 @@ public class LoginController implements Initializable {
 
 	@FXML
 	public void loginAction(ActionEvent event) throws IOException {
+		boolean check = MainApp.managerM.checkUser(usernameField.getText());
 		
+		if(check) {
+			System.out.println("user found");
+		} else {
+			System.out.println("User not found");
+			return;
+		}
 		if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
 			System.err.println("You have to specify a Username and a Password");
 			return;
 		}
+		
 		Parent Home = FXMLLoader.load(getClass().getClassLoader().getResource("Home.fxml"));
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Scene scene = new Scene(Home);

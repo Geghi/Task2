@@ -130,7 +130,11 @@
                                                 <Button mnemonicParsing="false" text="Add" />
                                             </buttons>
                                           </ButtonBar>
-                                          <ComboBox fx:id="voteBox" layoutX="118.0" layoutY="502.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="voteBox" layoutX="118.0" layoutY="502.0" prefWidth="80.0" stylesheets="@css/DarkTheme.css">
+                                             <styleClass>
+                                                <String fx:value="ComboBox" />
+                                                <String fx:value="list-cell" />
+                                             </styleClass></ComboBox>
                                           <Button fx:id="voteBtn" layoutX="217.0" layoutY="502.0" mnemonicParsing="false" onAction="#addVote" prefWidth="80.0" text="Vote">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
