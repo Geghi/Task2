@@ -1,5 +1,7 @@
 package main.resources;
 
+import main.resources.moviesEvaluation.MainApp;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +21,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -31,15 +35,13 @@ public class HomeController implements Initializable {
 	ObservableList<String> filtersValues = FXCollections.observableArrayList("Item 1", "Item 2");
 	ObservableList<Integer> voteValues = FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 	@FXML
-	private Button voteBtn;
+	private Button voteBtn, searchBtn, deleteBtn, addBtn, logoutBtn;
 	@FXML
 	private ComboBox<Integer> voteBox;
 	@FXML
-	private ComboBox<String> filters;
+	private ComboBox<String> filters, analyticsSelection;
 	@FXML
 	private Menu Analytics;
-	@FXML
-	private ComboBox<String> analyticsSelection;
 	@FXML
 	private TableView<String> FilmTable;
 	@FXML
@@ -47,17 +49,13 @@ public class HomeController implements Initializable {
 	@FXML
 	private PieChart pieChart;
 	@FXML
-	private Button deleteBtn;
-	@FXML
-	private Button searchBtn;
-	@FXML
 	private TextField searchText;
 	@FXML
-	private Button logoutBtn;
-	@FXML
-	private Button addBtn;
-	@FXML
 	private Label errorLabel;
+	@FXML
+	private TabPane tabPane;
+	@FXML
+	private Tab adminTab, analyticsTab, homeTab;
 
 	@FXML
 	private void addFilm(ActionEvent event) {
@@ -68,11 +66,13 @@ public class HomeController implements Initializable {
 
 	@FXML
 	private void logoutAction(ActionEvent event) throws IOException {
+		MainApp.user = null;
 		Parent Home = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Scene scene = new Scene(Home);
 		window.setScene(scene);
 		window.show();
+		System.out.println("Logout completed.");
 	}
 
 	@FXML
@@ -104,6 +104,8 @@ public class HomeController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		if (!MainApp.user.getAdmin())
+			tabPane.getTabs().remove(adminTab);
 		initializeBox();
 		FilmColumn.setCellValueFactory(new PropertyValueFactory<String, String>("First Film"));
 		inizializePieChart();

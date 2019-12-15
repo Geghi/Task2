@@ -29,9 +29,9 @@
    <center>
       <AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@css/DarkTheme.css" BorderPane.alignment="CENTER">
          <children>
-            <TabPane tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <tabs>
-                <Tab text="Home">
+                <Tab fx:id="homeTab" text="Home">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -146,7 +146,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Analytics">
+                <Tab fx:id="analyticsTab" text="Analytics">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -191,7 +191,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                  <Tab text="AdminSection">
+                  <Tab fx:id="adminTab" text="AdminSection">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -199,7 +199,8 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="background" stylesheets="@css/DarkTheme.css">
                                        <children>
-                                          <TableView layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
+                                          <Label focusTraversable="false" layoutX="133.0" layoutY="14.0" style="-fx-font-size: 24;" text="DELETE FILM" AnchorPane.topAnchor="18.0" />
+                                          <TableView focusTraversable="false" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
                                              <columns>
                                                 <TableColumn prefWidth="75.0" text="Film" />
                                              </columns>
@@ -210,12 +211,11 @@
                                           <TextField fx:id="searchText" layoutX="18.0" layoutY="64.0" prefWidth="240.0" promptText="Search films..." AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="64.0" />
                                           <Button fx:id="deleteBtn" layoutX="272.0" layoutY="104.0" mnemonicParsing="false" onAction="#deleteFilm" prefWidth="100.0" text="Delete" AnchorPane.topAnchor="104.0" />
                                           <Button fx:id="searchBtn" layoutX="272.0" layoutY="67.0" mnemonicParsing="false" onAction="#searchFilm" prefWidth="100.0" text="Search" AnchorPane.topAnchor="64.0" />
-                                          <Label layoutX="133.0" layoutY="14.0" style="-fx-font-size: 24;" text="DELETE FILM" AnchorPane.topAnchor="18.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="background" stylesheets="@css/DarkTheme.css">
                                        <children>
-                                          <Label layoutX="147.0" layoutY="21.0" style="-fx-font-size: 24;" text="ADD FILM" AnchorPane.topAnchor="18.0" />
+                                          <Label focusTraversable="false" layoutX="147.0" layoutY="21.0" style="-fx-font-size: 24;" text="ADD FILM" AnchorPane.topAnchor="18.0" />
                                           <TextArea layoutX="23.0" layoutY="71.0" prefHeight="380.0" prefWidth="350.0" promptText="Insert Json Script..." />
                                           <Button fx:id="addBtn" layoutX="153.0" layoutY="473.0" mnemonicParsing="false" onAction="#addFilm" prefHeight="30.0" prefWidth="90.0" text="Add" />
                                        </children></AnchorPane>
@@ -232,7 +232,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Label fx:id="errorLabel" alignment="CENTER" layoutX="386.0" layoutY="578.0" style="-fx-text-fill: #ff0400;" text="Hidden Error Message." visible="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Label fx:id="errorLabel" alignment="CENTER" focusTraversable="false" layoutX="386.0" layoutY="578.0" style="-fx-text-fill: #ff0400;" text="Hidden Error Message." visible="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
          </children>
          <BorderPane.margin>
             <Insets />

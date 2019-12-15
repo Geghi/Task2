@@ -12,7 +12,8 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 
 	private Stage primaryStage;
-	static public MongoManager managerM;
+	public static MongoManager managerM;
+	public static User user = null;
 
 	@Override
 	public void start(Stage primaryStage) {

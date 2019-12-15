@@ -18,19 +18,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import main.resources.moviesEvaluation.MainApp;
+import main.resources.moviesEvaluation.User;
 
 public class LoginController implements Initializable {
 	@FXML
 	private Button loginBtn;
 	@FXML
-	private Label registerLink;
+	private Label registerLink, errorLabel;
 	@FXML
 	private TextField usernameField;
 	@FXML
 	private PasswordField passwordField;
-	@FXML
-	private Label errorLabel;
-	
+	private User user = null;
 
 	@FXML
 	public void loadRegisterPage(MouseEvent event) throws IOException {
@@ -39,6 +38,10 @@ public class LoginController implements Initializable {
 		Scene scene = new Scene(Home);
 		window.setScene(scene);
 		window.show();
+	}
+	
+	public User getUser() {
+		return user;
 	}
 
 	@FXML
@@ -49,8 +52,8 @@ public class LoginController implements Initializable {
 			return;
 		}
 		
-		boolean check = MainApp.managerM.checkUser(usernameField.getText(), passwordField.getText());
-		if(check) {
+		user = MainApp.managerM.checkUser(usernameField.getText(), passwordField.getText());
+		if(user != null) {
 			System.out.println("The user " + usernameField.getText() + " is now logged in.");
 		} else {
 			errorLabel.setText("User not found");
