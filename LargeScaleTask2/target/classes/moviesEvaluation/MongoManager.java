@@ -1,8 +1,13 @@
 package main.resources.moviesEvaluation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bson.Document;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
+import static com.mongodb.client.model.Filters.*;
 
 public class MongoManager {
 
@@ -42,20 +47,33 @@ public class MongoManager {
 		return false;
 	}
 
-	public boolean checkUser(String username) {
+	public boolean checkUser(String username, String password) {
+//		BasicDBObject query = new BasicDBObject();
+//		List<BasicDBObject> obj = new ArrayList<BasicDBObject>();
+//		obj.add(new BasicDBObject("username", username));
+//		obj.add(new BasicDBObject("password", password));
+//		MongoCursor<Document> cursor = userCollection.find(query).iterator();
 		
-		// TODO
-		MongoCursor<Document> cursor = userCollection.find().iterator();
-
+		MongoCursor<Document> cursor = userCollection.find(and(eq("username", username),eq("password", password))).iterator();
 		try {
-			while (cursor.hasNext()) {
+			if (cursor.hasNext()) {
 				System.out.println(cursor.next().toJson());
+				return true;
 			}
 		} finally {
 			cursor.close();
 		}
 		
 		return false;
+	}
+	
+	public void registerUser(String name, String username, String password, String country) {
+		Document document = new Document("name", name)
+				.append("username", username)
+				.append("password", password)
+				.append("country", country);
+
+		userCollection.insertOne(document);
 	}
 
 }

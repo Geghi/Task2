@@ -26,6 +26,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor></Label>
             <PasswordField fx:id="passwordField" layoutX="275.0" layoutY="324.0" prefHeight="30.0" prefWidth="250.0" promptText="Insert your password" />
+            <Label fx:id="errorLabel" alignment="CENTER" layoutX="319.0" layoutY="508.0" style="-fx-text-fill: #ff0400;" text="Hidden Error Message" textAlignment="CENTER" visible="false" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
          </children>
       </AnchorPane>
    </bottom>

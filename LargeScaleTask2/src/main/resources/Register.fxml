@@ -13,25 +13,26 @@
    <bottom>
       <AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@css/DarkTheme.css" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="372.0" layoutY="53.0" style="-fx-font-size: 20;" text="Name:" />
-            <TextField fx:id="nameField" layoutX="250.0" layoutY="83.0" prefHeight="25.0" prefWidth="300.0" promptText="Insert your name..." />
-            <Label layoutX="379.0" layoutY="132.0" style="-fx-font-size: 20;" text="User:" />
-            <TextField fx:id="userField" layoutX="250.0" layoutY="162.0" prefHeight="25.0" prefWidth="300.0" promptText="Insert your username" />
-            <Label layoutX="358.0" layoutY="218.0" style="-fx-font-size: 20;" text="Password:" />
-            <Label layoutX="322.0" layoutY="293.0" style="-fx-font-size: 20;" text="Confirm Password:" />
-            <Label layoutX="364.0" layoutY="370.0" style="-fx-font-size: 20;" text="Country:" />
-            <TextField fx:id="countryField" layoutX="250.0" layoutY="400.0" prefHeight="25.0" prefWidth="300.0" promptText="Insert your country" />
-            <Button fx:id="registerBtn" layoutX="355.0" layoutY="441.0" mnemonicParsing="false" onAction="#registerAction" prefHeight="30.0" prefWidth="90.0" text="Register">
+            <Label layoutX="372.0" layoutY="53.0" style="-fx-font-size: 20;" text="Name:" AnchorPane.bottomAnchor="517.0" />
+            <TextField fx:id="nameField" layoutX="250.0" layoutY="83.0" prefHeight="25.0" prefWidth="300.0" promptText="Insert your name..." AnchorPane.bottomAnchor="492.0" />
+            <Label layoutX="379.0" layoutY="132.0" style="-fx-font-size: 20;" text="User:" AnchorPane.bottomAnchor="438.0" />
+            <TextField fx:id="userField" layoutX="250.0" layoutY="162.0" prefHeight="25.0" prefWidth="300.0" promptText="Insert your username" AnchorPane.bottomAnchor="413.0" />
+            <Label layoutX="358.0" layoutY="218.0" style="-fx-font-size: 20;" text="Password:" AnchorPane.bottomAnchor="352.0" />
+            <Label layoutX="322.0" layoutY="293.0" style="-fx-font-size: 20;" text="Confirm Password:" AnchorPane.bottomAnchor="277.0" />
+            <Label layoutX="364.0" layoutY="370.0" style="-fx-font-size: 20;" text="Country:" AnchorPane.bottomAnchor="200.0" />
+            <TextField fx:id="countryField" layoutX="250.0" layoutY="400.0" prefHeight="25.0" prefWidth="300.0" promptText="Insert your country" AnchorPane.bottomAnchor="175.0" />
+            <Button fx:id="registerBtn" layoutX="343.0" layoutY="441.0" mnemonicParsing="false" onAction="#registerAction" prefHeight="30.0" prefWidth="120.0" text="Register" AnchorPane.bottomAnchor="126.0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Label fx:id="loginLink" layoutX="282.0" layoutY="495.0" onMouseClicked="#loadLoginPage" text="Already registered? Click here to log in.">
+            <Label fx:id="loginLink" layoutX="282.0" layoutY="495.0" onMouseClicked="#loadLoginPage" text="Already registered? Click here to log in." AnchorPane.bottomAnchor="84.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Label>
-            <PasswordField fx:id="passwordField" layoutX="250.0" layoutY="248.0" prefHeight="25.0" prefWidth="300.0" promptText="Insert your password" />
-            <PasswordField fx:id="confirmField" layoutX="250.0" layoutY="323.0" prefHeight="25.0" prefWidth="300.0" promptText="Confirm your password" />
+            <PasswordField fx:id="passwordField" layoutX="250.0" layoutY="248.0" prefHeight="25.0" prefWidth="300.0" promptText="Insert your password" AnchorPane.bottomAnchor="327.0" />
+            <PasswordField fx:id="confirmField" layoutX="250.0" layoutY="323.0" prefHeight="25.0" prefWidth="300.0" promptText="Confirm your password" AnchorPane.bottomAnchor="252.0" />
+            <Label fx:id="errorLabel" alignment="CENTER" layoutX="386.0" layoutY="542.0" style="-fx-text-fill: #ff0400;" text="Hidden Error Message." visible="false" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
          </children>
       </AnchorPane>
    </bottom>

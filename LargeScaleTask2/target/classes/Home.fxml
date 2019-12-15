@@ -27,9 +27,9 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.resources.HomeController">
    <center>
-      <AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="column-header" stylesheets="@css/DarkTheme.css" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@css/DarkTheme.css" BorderPane.alignment="CENTER">
          <children>
-            <TabPane tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TabPane tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <tabs>
                 <Tab text="Home">
                   <content>
@@ -47,11 +47,6 @@
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                              </columnResizePolicy>
                                           </TableView>
-                                          <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logoutAction" prefWidth="90.0" text="Log out" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Button>
                                        </children>
                                     </AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="798.0" prefWidth="867.0" styleClass="background" stylesheets="@css/DarkTheme.css">
@@ -135,7 +130,7 @@
                                                 <String fx:value="ComboBox" />
                                                 <String fx:value="list-cell" />
                                              </styleClass></ComboBox>
-                                          <Button fx:id="voteBtn" layoutX="217.0" layoutY="502.0" mnemonicParsing="false" onAction="#addVote" prefWidth="80.0" text="Vote">
+                                          <Button fx:id="voteBtn" layoutX="217.0" layoutY="502.0" mnemonicParsing="false" onAction="#addVote" prefHeight="30.0" prefWidth="80.0" text="Vote">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
@@ -213,8 +208,8 @@
                                              </columnResizePolicy>
                                           </TableView>
                                           <TextField fx:id="searchText" layoutX="18.0" layoutY="64.0" prefWidth="240.0" promptText="Search films..." AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="64.0" />
-                                          <Button fx:id="deleteBtn" layoutX="272.0" layoutY="54.0" mnemonicParsing="false" onAction="#deleteFilm" prefWidth="90.0" text="Delete" AnchorPane.topAnchor="95.0" />
-                                          <Button fx:id="searchBtn" layoutX="272.0" layoutY="67.0" mnemonicParsing="false" onAction="#searchFilm" prefWidth="90.0" text="Search" AnchorPane.topAnchor="64.0" />
+                                          <Button fx:id="deleteBtn" layoutX="272.0" layoutY="104.0" mnemonicParsing="false" onAction="#deleteFilm" prefWidth="100.0" text="Delete" AnchorPane.topAnchor="104.0" />
+                                          <Button fx:id="searchBtn" layoutX="272.0" layoutY="67.0" mnemonicParsing="false" onAction="#searchFilm" prefWidth="100.0" text="Search" AnchorPane.topAnchor="64.0" />
                                           <Label layoutX="133.0" layoutY="14.0" style="-fx-font-size: 24;" text="DELETE FILM" AnchorPane.topAnchor="18.0" />
                                        </children>
                                     </AnchorPane>
@@ -232,7 +227,20 @@
                   </Tab>
               </tabs>
             </TabPane>
+            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logoutAction" prefWidth="110.0" text="Log out" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Label fx:id="errorLabel" alignment="CENTER" layoutX="386.0" layoutY="578.0" style="-fx-text-fill: #ff0400;" text="Hidden Error Message." visible="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <styleClass>
+            <String fx:value="column-header" />
+            <String fx:value="background" />
+         </styleClass>
       </AnchorPane>
    </center>
 </BorderPane>

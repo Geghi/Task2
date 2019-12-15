@@ -28,6 +28,8 @@ public class LoginController implements Initializable {
 	private TextField usernameField;
 	@FXML
 	private PasswordField passwordField;
+	@FXML
+	private Label errorLabel;
 	
 
 	@FXML
@@ -41,16 +43,18 @@ public class LoginController implements Initializable {
 
 	@FXML
 	public void loginAction(ActionEvent event) throws IOException {
-		boolean check = MainApp.managerM.checkUser(usernameField.getText());
-		
-		if(check) {
-			System.out.println("user found");
-		} else {
-			System.out.println("User not found");
+		if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+			errorLabel.setText("You have to specify a Username and a Password");
+			errorLabel.setVisible(true);
 			return;
 		}
-		if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
-			System.err.println("You have to specify a Username and a Password");
+		
+		boolean check = MainApp.managerM.checkUser(usernameField.getText(), passwordField.getText());
+		if(check) {
+			System.out.println("The user " + usernameField.getText() + " is now logged in.");
+		} else {
+			errorLabel.setText("User not found");
+			errorLabel.setVisible(true);
 			return;
 		}
 		

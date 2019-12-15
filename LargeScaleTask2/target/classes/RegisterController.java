@@ -17,10 +17,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import main.resources.moviesEvaluation.MainApp;
 
 public class RegisterController implements Initializable {
 	@FXML
-	private Button registerBtn;	
+	private Button registerBtn;
 	@FXML
 	private Label loginLink;
 	@FXML
@@ -33,8 +34,10 @@ public class RegisterController implements Initializable {
 	private PasswordField confirmField;
 	@FXML
 	private TextField countryField;
-
 	@FXML
+	private Label errorLabel;
+
+	@FXML //Redirect to the Login Page.
 	public void loadLoginPage(MouseEvent event) throws IOException {
 		Parent Home = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -45,24 +48,40 @@ public class RegisterController implements Initializable {
 
 	@FXML
 	public void registerAction(ActionEvent event) throws IOException {
-		if( nameField.getText().isEmpty() || userField.getText().isEmpty() || 
-				passwordField.getText().isEmpty() || confirmField.getText().isEmpty() || 
-				countryField.getText().isEmpty() ) {
-				System.err.println("All the fields are required.");
-				return;
-			}
-		if(!passwordField.getText().contentEquals(confirmField.getText())) {
-			System.err.println("Passwords does not match! retry.");
+		String name = nameField.getText();
+		String username = userField.getText();
+		String password = passwordField.getText();
+		String confirm = confirmField.getText();
+		String country = countryField.getText();
+
+		//check if all fields are not empty.
+		if (name.isEmpty() || username.isEmpty() || password.isEmpty() || confirm.isEmpty() || country.isEmpty()) {
+			errorLabel.setText("All the fields are required.");
+			errorLabel.setVisible(true);
 			return;
 		}
 		
+		//Check if passwords are equals.
+		if(!password.equals(confirm)) {
+			errorLabel.setText("Passwords does not match, retry!");
+			passwordField.setText("");
+			confirmField.setText("");
+			errorLabel.setVisible(true);
+			return;
+		}
+		
+		//TODO add a country check.
+		
+		//Register the user in the Database.
+		MainApp.managerM.registerUser(name, username, password, country);
+		//Redirect to the Login page.
 		Parent Home = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Scene scene = new Scene(Home);
 		window.setScene(scene);
 		window.show();
 	}
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub

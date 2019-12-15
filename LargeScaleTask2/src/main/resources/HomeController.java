@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TableColumn;
@@ -55,10 +56,14 @@ public class HomeController implements Initializable {
 	private Button logoutBtn;
 	@FXML
 	private Button addBtn;
+	@FXML
+	private Label errorLabel;
 
 	@FXML
 	private void addFilm(ActionEvent event) {
-		System.out.println("Testing");
+		errorLabel.setText("Be patient, we need to implement that function!");
+		errorLabel.setVisible(true);
+		return;
 	}
 
 	@FXML
@@ -71,23 +76,17 @@ public class HomeController implements Initializable {
 	}
 
 	@FXML
-	private void initializeBox() {
-		analyticsSelection.setValue("Item 1");
-		analyticsSelection.setItems(analyticsValues);
-		filters.setValue("Item 1");
-		filters.setItems(filtersValues);
-		voteBox.setValue(1);
-		voteBox.setItems(voteValues);
-	}
-
-	@FXML
 	public void deleteFilm(ActionEvent event) {
-		System.out.println("test");
+		errorLabel.setText("Be patient, we need to implement that function!");
+		errorLabel.setVisible(true);
+		return;
 	}
 
 	@FXML
 	public void searchFilm(ActionEvent event) {
-		System.out.println("Test2");
+		errorLabel.setText("Be patient, we need to implement that function!");
+		errorLabel.setVisible(true);
+		return;
 	}
 
 	@FXML
@@ -109,4 +108,15 @@ public class HomeController implements Initializable {
 		FilmColumn.setCellValueFactory(new PropertyValueFactory<String, String>("First Film"));
 		inizializePieChart();
 	}
+	
+	@FXML
+	private void initializeBox() {
+		analyticsSelection.setValue("Item 1");
+		analyticsSelection.setItems(analyticsValues);
+		filters.setValue("Item 1");
+		filters.setItems(filtersValues);
+		voteBox.setValue(1);
+		voteBox.setItems(voteValues);
+	}
+
 }
