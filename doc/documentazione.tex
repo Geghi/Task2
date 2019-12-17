@@ -51,10 +51,22 @@ Besides, the system administrator can add new films to the application database 
 \vspace{8mm}
 \includegraphics[width=\textwidth]{./images/diagrams/UserMockup} 
 \vspace{3mm}
-\captionof{figure}{Mockup}
+\captionof{figure}{Mockup user}
 \label{fig:mockup}
 \end{center}
 \end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{center}
+\vspace{8mm}
+\includegraphics[width=\textwidth]{./images/diagrams/admin_activity} 
+\vspace{3mm}
+\captionof{figure}{Mockup admin}
+\label{fig:mockup_admin}
+\end{center}
+\end{minipage}
+
+
 
 \clearpage
 
@@ -71,6 +83,10 @@ The system has to allow the user to carry out basic functions such as:
 \item To login into the system.
 \item To search for a film.
 \item To vote a film.
+\item For each year to view the country that produced more films.
+\item For each production house to view the genre more produced.
+\item To view the most movie voted.
+\item For each countries to view the most movie voted.
 \end{itemize}
 \vspace{2mm}
 The system has to allow the administrator to carry out basic functions such as:
@@ -81,15 +97,17 @@ The system has to allow the administrator to carry out basic functions such as:
 \item To delete a film.
 \item To view a list of top rated films.
 \item To view the a list of the most searched films.
+\item To view the user most active in the application.
 \end{itemize}
 \vspace{2mm}
 
 \subsubsection{Non-functional requirements}
 \begin{itemize}
 \item Usability, ease of use and intuitiveness of the application by the user.
-\item Avaliablility, with the service guaranteed h24.
+\item Avaliablility, with the service guaranteed h24, using replicas.
 \item The system should support simultaneous users.
 \item The system should provide access to the database with a few seconds of latency.
+\item Enforced consistency.
 \end{itemize}
 
 \clearpage
