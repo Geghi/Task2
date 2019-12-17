@@ -7,7 +7,6 @@ import com.mongodb.client.*;
 import static com.mongodb.client.model.Filters.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class MongoManager {
@@ -31,7 +30,6 @@ public class MongoManager {
 	}
 
 	public User checkUser(String username, String password) {
-//		MongoCursor<Document> cursor = userCollection.find(and(eq("username", username),eq("password", password))).iterator();
 		Document found = (Document) userCollection.find(and(eq("username", username), eq("password", password)))
 				.first();
 		try {
@@ -56,33 +54,37 @@ public class MongoManager {
 	}
 
 	public void addFilms(String jsonText) {
-		System.out.println(jsonText);
-		String[] jsonLine = jsonText.split("\n");
-		for (int i = 0; i < jsonLine.length; i++) {
-			Document doc = Document.parse(jsonLine[i]);
-			filmCollection.insertOne(doc);
+		try {
+			System.out.println(jsonText);
+			String[] jsonLine = jsonText.split("\n");
+			for (int i = 0; i < jsonLine.length; i++) {
+				Document doc = Document.parse(jsonLine[i]);
+				filmCollection.insertOne(doc);
+			}
+			System.out.println("Insert Completed!");
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-
-		System.out.println("Insert Completed!");
-
-//        CHECK
-//		MongoCursor<Document> cursor = filmCollection.find().iterator();
-//		while(cursor.hasNext()) {
-//			System.out.println(cursor.next());
-//		}
-
 	}
 
 	public List<Film> searchFilm(String title) {
-		MongoCursor<Document> cursor = filmCollection.find(regex("Title",".*"+title+".*")).limit(10).iterator();
-		List<Film> films = new ArrayList<>();
-		while(cursor.hasNext()) {
-			
-			System.out.println(cursor.next());
+		try {
+			MongoCursor<Document> cursor = filmCollection.find(regex("Title", ".*" + title + ".*", "-i")).limit(30)
+					.iterator();
+			List<Film> films = new ArrayList<>();
+			while (cursor.hasNext()) {
+				Document filmDocument = cursor.next();
+				Film film = new Film(filmDocument.getString("Title"));
+				films.add(film);
+			}
+			return films;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-		return films;
+		return null;
+
 	}
-	
 
 	public void quit() {
 		mongoClient.close();

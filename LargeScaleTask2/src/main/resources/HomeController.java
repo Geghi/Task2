@@ -40,7 +40,7 @@ public class HomeController implements Initializable {
 	ObservableList<String> filtersValues = FXCollections.observableArrayList("Item 1", "Item 2");
 	ObservableList<Integer> voteValues = FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 	@FXML
-	private Button voteBtn, searchBtn, deleteBtn, addBtn, logoutBtn;
+	private Button voteBtn, searchBtn, searchBtnAdmin, deleteBtn, addBtn, logoutBtn;
 	@FXML
 	private ComboBox<Integer> voteBox;
 	@FXML
@@ -52,7 +52,7 @@ public class HomeController implements Initializable {
 	@FXML
 	private PieChart pieChart;
 	@FXML
-	private TextField searchText;
+	private TextField searchText, searchTextAdmin;
 	@FXML
 	private TextArea jsonArea;
 	@FXML
@@ -92,10 +92,23 @@ public class HomeController implements Initializable {
 
 	@FXML
 	public void searchFilm(ActionEvent event) {
-		updateTable(filmHomeTable, filmHomeColumn, 0);
-		errorLabel.setText("Be patient, we need to implement that function!");
-		errorLabel.setVisible(true);
-		return;
+		Button btn = (Button) event.getSource();
+		if (btn.getId().equals("searchBtn")) {
+			if (searchText.getText().isEmpty()) {
+				errorLabel.setText("Please insert a title.");
+				errorLabel.setVisible(true);
+				return;
+			}
+			updateTable(filmHomeTable, filmHomeColumn, 0);
+		} else if(btn.getId().equals("searchBtnAdmin")) {
+			if (searchTextAdmin.getText().isEmpty()) {
+				errorLabel.setText("Please insert a title.");
+				errorLabel.setVisible(true);
+				return;
+			}
+			updateTable(filmAdminTable, filmAdminColumn, 2);
+		}
+
 	}
 
 	@FXML
@@ -115,8 +128,10 @@ public class HomeController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (!MainApp.user.getAdmin())
 			tabPane.getTabs().remove(adminTab);
+
 		else
-			updateTable(filmAdminTable, filmAdminColumn, 0);
+			initializeTable(filmAdminColumn);
+		initializeTables();
 		initializeBox();
 		inizializePieChart();
 		updateTable(filmAnalyticsTable, filmAnalyticsColumn, 1);
@@ -133,25 +148,36 @@ public class HomeController implements Initializable {
 	}
 
 	private void updateTable(TableView<Film> table, TableColumn<Film, String> column, int check) {
-		final ObservableList<Film> films;
+
+		ObservableList<Film> films;
 		List<Film> filmList = new ArrayList<>();
 		String title = null;
 		if (check == 0) {
 			title = searchText.getText();
-			if(!title.isEmpty()) {
-				filmList.addAll(MainApp.managerM.searchFilm(title));
-			}
-			// TODO User and Admin query (Search)
-			films = FXCollections.observableArrayList(new Film("Prova film user 1"), new Film("prova film user 2"),
-					new Film("prova film user 3"));
-			films.addAll(filmList);
-			
-		} else {
+			filmList.addAll(MainApp.managerM.searchFilm(title));
+
+		} else if (check == 1) {
 			// TODO Analytics query
 			films = FXCollections.observableArrayList(new Film("Prova film analytics 1"),
 					new Film("prova film analytics 2"), new Film("prova film analytics 3"));
+		} else {
+			title = searchTextAdmin.getText();
+			filmList.addAll(MainApp.managerM.searchFilm(title));
 		}
-		
+
+		films = FXCollections.observableArrayList();
+		films.addAll(filmList);
+
+		column.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
+		table.setItems(films);
+	}
+
+	private void initializeTables() {
+		initializeTable(filmHomeColumn);
+		initializeTable(filmAnalyticsColumn);
+	}
+
+	private void initializeTable(TableColumn<Film, String> column) {
 		column.setCellFactory(tc -> {
 			TableCell<Film, String> cell = new TableCell<>();
 			Text text = new Text();
@@ -161,9 +187,6 @@ public class HomeController implements Initializable {
 			text.getStyleClass().add("columnText");
 			return cell;
 		});
-
-		column.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
-		table.setItems(films);
 	}
 
 }

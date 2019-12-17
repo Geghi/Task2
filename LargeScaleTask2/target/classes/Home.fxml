@@ -244,7 +244,7 @@
                                                       </VBox>
                                                    </children>
                                                 </HBox>
-                                                <TableView fx:id="filmAdminTable" focusTraversable="false" prefHeight="200.0" prefWidth="200.0">
+                                                <TableView fx:id="filmAdminTable" focusTraversable="false">
                                                    <columns>
                                                       <TableColumn fx:id="filmAdminColumn" prefWidth="75.0" text="Film" />
                                                    </columns>
