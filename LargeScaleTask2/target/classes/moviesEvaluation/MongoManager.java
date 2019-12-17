@@ -3,7 +3,12 @@ package main.resources.moviesEvaluation;
 import org.bson.Document;
 
 import com.mongodb.client.*;
+
 import static com.mongodb.client.model.Filters.*;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class MongoManager {
 
@@ -27,32 +32,58 @@ public class MongoManager {
 
 	public User checkUser(String username, String password) {
 //		MongoCursor<Document> cursor = userCollection.find(and(eq("username", username),eq("password", password))).iterator();
-		Document found = (Document) userCollection.find(and(eq("username", username),eq("password", password))).first();
+		Document found = (Document) userCollection.find(and(eq("username", username), eq("password", password)))
+				.first();
 		try {
 			if (found != null) {
 				MainApp.user = new User(found.getString("name"), found.getString("username"),
-						found.getString("password"), found.getString("country"),
-						found.getBoolean("admin"));
+						found.getString("password"), found.getString("country"), found.getBoolean("admin"));
 				System.out.println(found);
 				return MainApp.user;
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
+
 		return MainApp.user;
 	}
-	
+
 	public void registerUser(String name, String username, String password, String country) {
-		Document document = new Document("name", name)
-				.append("username", username)
-				.append("password", password)
-				.append("country", country)
-				.append("admin", false);
+		Document document = new Document("name", name).append("username", username).append("password", password)
+				.append("country", country).append("admin", false);
 
 		userCollection.insertOne(document);
 	}
+
+	public void addFilms(String jsonText) {
+		System.out.println(jsonText);
+		String[] jsonLine = jsonText.split("\n");
+		for (int i = 0; i < jsonLine.length; i++) {
+			Document doc = Document.parse(jsonLine[i]);
+			filmCollection.insertOne(doc);
+		}
+
+		System.out.println("Insert Completed!");
+
+//        CHECK
+//		MongoCursor<Document> cursor = filmCollection.find().iterator();
+//		while(cursor.hasNext()) {
+//			System.out.println(cursor.next());
+//		}
+
+	}
+
+	public List<Film> searchFilm(String title) {
+		MongoCursor<Document> cursor = filmCollection.find(regex("Title",".*"+title+".*")).limit(10).iterator();
+		List<Film> films = new ArrayList<>();
+		while(cursor.hasNext()) {
+			
+			System.out.println(cursor.next());
+		}
+		return films;
+	}
 	
+
 	public void quit() {
 		mongoClient.close();
 	}

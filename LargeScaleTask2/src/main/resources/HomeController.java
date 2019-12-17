@@ -1,9 +1,12 @@
 package main.resources;
 
+import main.resources.moviesEvaluation.Film;
 import main.resources.moviesEvaluation.MainApp;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -19,14 +22,16 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class HomeController implements Initializable {
@@ -41,15 +46,15 @@ public class HomeController implements Initializable {
 	@FXML
 	private ComboBox<String> filters, analyticsSelection;
 	@FXML
-	private Menu Analytics;
+	private TableView<Film> filmHomeTable, filmAnalyticsTable, filmAdminTable;
 	@FXML
-	private TableView<String> FilmTable;
-	@FXML
-	private TableColumn<String, String> FilmColumn;
+	private TableColumn<Film, String> filmHomeColumn, filmAnalyticsColumn, filmAdminColumn;
 	@FXML
 	private PieChart pieChart;
 	@FXML
 	private TextField searchText;
+	@FXML
+	private TextArea jsonArea;
 	@FXML
 	private Label errorLabel;
 	@FXML
@@ -61,6 +66,9 @@ public class HomeController implements Initializable {
 	private void addFilm(ActionEvent event) {
 		errorLabel.setText("Be patient, we need to implement that function!");
 		errorLabel.setVisible(true);
+
+		MainApp.managerM.addFilms(jsonArea.getText());
+
 		return;
 	}
 
@@ -84,6 +92,7 @@ public class HomeController implements Initializable {
 
 	@FXML
 	public void searchFilm(ActionEvent event) {
+		updateTable(filmHomeTable, filmHomeColumn, 0);
 		errorLabel.setText("Be patient, we need to implement that function!");
 		errorLabel.setVisible(true);
 		return;
@@ -106,11 +115,13 @@ public class HomeController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (!MainApp.user.getAdmin())
 			tabPane.getTabs().remove(adminTab);
+		else
+			updateTable(filmAdminTable, filmAdminColumn, 0);
 		initializeBox();
-		FilmColumn.setCellValueFactory(new PropertyValueFactory<String, String>("First Film"));
 		inizializePieChart();
+		updateTable(filmAnalyticsTable, filmAnalyticsColumn, 1);
 	}
-	
+
 	@FXML
 	private void initializeBox() {
 		analyticsSelection.setValue("Item 1");
@@ -119,6 +130,40 @@ public class HomeController implements Initializable {
 		filters.setItems(filtersValues);
 		voteBox.setValue(1);
 		voteBox.setItems(voteValues);
+	}
+
+	private void updateTable(TableView<Film> table, TableColumn<Film, String> column, int check) {
+		final ObservableList<Film> films;
+		List<Film> filmList = new ArrayList<>();
+		String title = null;
+		if (check == 0) {
+			title = searchText.getText();
+			if(!title.isEmpty()) {
+				filmList.addAll(MainApp.managerM.searchFilm(title));
+			}
+			// TODO User and Admin query (Search)
+			films = FXCollections.observableArrayList(new Film("Prova film user 1"), new Film("prova film user 2"),
+					new Film("prova film user 3"));
+			films.addAll(filmList);
+			
+		} else {
+			// TODO Analytics query
+			films = FXCollections.observableArrayList(new Film("Prova film analytics 1"),
+					new Film("prova film analytics 2"), new Film("prova film analytics 3"));
+		}
+		
+		column.setCellFactory(tc -> {
+			TableCell<Film, String> cell = new TableCell<>();
+			Text text = new Text();
+			cell.setGraphic(text);
+			text.wrappingWidthProperty().bind(column.widthProperty());
+			text.textProperty().bind(cell.itemProperty());
+			text.getStyleClass().add("columnText");
+			return cell;
+		});
+
+		column.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
+		table.setItems(films);
 	}
 
 }
