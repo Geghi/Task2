@@ -30,7 +30,7 @@
    <center>
       <AnchorPane minHeight="400.0" minWidth="600.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@css/DarkTheme.css" BorderPane.alignment="CENTER">
          <children>
-            <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TabPane fx:id="tabPane" focusTraversable="false" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <tabs>
                 <Tab fx:id="homeTab" text="Home">
                   <content>
@@ -48,7 +48,7 @@
                                                       <Button fx:id="searchBtn" minWidth="100.0" mnemonicParsing="false" onAction="#searchFilm" prefWidth="100.0" text="Search" />
                                                    </children>
                                                 </HBox>
-                                                <TableView fx:id="filmHomeTable">
+                                                <TableView fx:id="filmHomeTable" focusTraversable="false">
                                                    <columns>
                                                       <TableColumn fx:id="filmHomeColumn" prefWidth="75.0" text="Film" />
                                                    </columns>
@@ -67,7 +67,7 @@
 	<children>
                                           <VBox alignment="CENTER" minWidth="200.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <Label alignment="CENTER" style="-fx-font-size: 18;" text="FILM INFORMATIONS" textAlignment="CENTER">
+                                                <Label alignment="CENTER" focusTraversable="false" style="-fx-font-size: 18;" text="FILM INFORMATIONS" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="System Bold" size="19.0" />
                                                    </font>
@@ -92,42 +92,42 @@
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                   </rowConstraints>
                                                    <children>
-                                                      <Label text="Author">
+                                                      <Label focusTraversable="false" text="Author">
                                                          <padding>
                                                             <Insets left="10.0" />
                                                          </padding>
                                                       </Label>
-                                                      <Label text="NULL" GridPane.columnIndex="1">
+                                                      <Label focusTraversable="false" text="NULL" GridPane.columnIndex="1">
                                                          <padding>
                                                             <Insets left="10.0" />
                                                          </padding>
                                                       </Label>
-                                                      <Label text="NULL" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                      <Label focusTraversable="false" text="NULL" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                          <padding>
                                                             <Insets left="10.0" />
                                                          </padding>
                                                       </Label>
-                                                      <Label text="Gener" GridPane.rowIndex="2">
+                                                      <Label focusTraversable="false" text="Gener" GridPane.rowIndex="2">
                                                          <padding>
                                                             <Insets left="10.0" />
                                                          </padding>
                                                       </Label>
-                                                      <Label text="Title" GridPane.rowIndex="1">
+                                                      <Label focusTraversable="false" text="Title" GridPane.rowIndex="1">
                                                          <padding>
                                                             <Insets left="10.0" />
                                                          </padding>
                                                       </Label>
-                                                      <Label text="NULL" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                      <Label focusTraversable="false" text="NULL" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                                          <padding>
                                                             <Insets left="10.0" />
                                                          </padding>
                                                       </Label>
-                                                      <Label text="NULL" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                      <Label focusTraversable="false" text="NULL" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                          <padding>
                                                             <Insets left="10.0" />
                                                          </padding>
                                                       </Label>
-                                                      <Label text="Duration" GridPane.rowIndex="3">
+                                                      <Label focusTraversable="false" text="Duration" GridPane.rowIndex="3">
                                                          <padding>
                                                             <Insets left="10.0" />
                                                          </padding>
