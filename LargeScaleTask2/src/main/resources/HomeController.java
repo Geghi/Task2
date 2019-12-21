@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,7 +23,6 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableCell;
@@ -31,6 +31,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -56,67 +59,15 @@ public class HomeController implements Initializable {
 	@FXML
 	private TextArea jsonArea;
 	@FXML
-	private Label errorLabel;
+	private Label errorLabel, directorLabel, yearLabel, productionLabel, ratingLabel;
 	@FXML
 	private TabPane tabPane;
 	@FXML
 	private Tab adminTab, analyticsTab, homeTab;
+	@FXML
+	private ImageView imgPoster;
 
 	@FXML
-	private void addFilm(ActionEvent event) {
-		errorLabel.setText("Be patient, we need to implement that function!");
-		errorLabel.setVisible(true);
-
-		MainApp.managerM.addFilms(jsonArea.getText());
-
-		return;
-	}
-
-	@FXML
-	private void logoutAction(ActionEvent event) throws IOException {
-		MainApp.user = null;
-		Parent Home = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Scene scene = new Scene(Home);
-		window.setScene(scene);
-		window.show();
-		System.out.println("Logout completed.");
-	}
-
-	@FXML
-	public void deleteFilm(ActionEvent event) {
-		errorLabel.setText("Be patient, we need to implement that function!");
-		errorLabel.setVisible(true);
-		return;
-	}
-
-	@FXML
-	public void searchFilm(ActionEvent event) {
-		Button btn = (Button) event.getSource();
-		if (btn.getId().equals("searchBtn")) {
-			if (searchText.getText().isEmpty()) {
-				errorLabel.setText("Please insert a title.");
-				errorLabel.setVisible(true);
-				return;
-			}
-			updateTable(filmHomeTable, filmHomeColumn, 0);
-		} else if(btn.getId().equals("searchBtnAdmin")) {
-			if (searchTextAdmin.getText().isEmpty()) {
-				errorLabel.setText("Please insert a title.");
-				errorLabel.setVisible(true);
-				return;
-			}
-			updateTable(filmAdminTable, filmAdminColumn, 2);
-		}
-
-	}
-
-	@FXML
-	public void addVote(ActionEvent event) {
-		SingleSelectionModel<Integer> x = voteBox.getSelectionModel();
-		System.out.println(x.getSelectedItem());
-	}
-
 	public void inizializePieChart() {
 		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Horror", 50),
 				new PieChart.Data("Action", 30), new PieChart.Data("Fantasy", 90), new PieChart.Data("Anime", 10));
@@ -148,7 +99,6 @@ public class HomeController implements Initializable {
 	}
 
 	private void updateTable(TableView<Film> table, TableColumn<Film, String> column, int check) {
-
 		ObservableList<Film> films;
 		List<Film> filmList = new ArrayList<>();
 		String title = null;
@@ -158,8 +108,7 @@ public class HomeController implements Initializable {
 
 		} else if (check == 1) {
 			// TODO Analytics query
-			films = FXCollections.observableArrayList(new Film("Prova film analytics 1"),
-					new Film("prova film analytics 2"), new Film("prova film analytics 3"));
+			films = FXCollections.observableArrayList();
 		} else {
 			title = searchTextAdmin.getText();
 			filmList.addAll(MainApp.managerM.searchFilm(title));
@@ -189,4 +138,114 @@ public class HomeController implements Initializable {
 		});
 	}
 
+	@FXML
+	private void addFilm(ActionEvent event) {
+		try {
+			errorLabel.setText("Be patient, we need to implement that function!");
+			errorLabel.setVisible(true);
+			MainApp.managerM.addFilms(jsonArea.getText());
+			return;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	@FXML
+	private void logoutAction(ActionEvent event) throws IOException {
+		MainApp.user = null;
+		Parent Home = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Scene scene = new Scene(Home);
+		window.setScene(scene);
+		window.show();
+		System.out.println("Logout completed.");
+	}
+
+	@FXML
+	public void deleteFilm(ActionEvent event) {
+		try {
+			Film film = filmAdminTable.getSelectionModel().getSelectedItem();
+			MainApp.managerM.deleteFilm(film);
+			updateTable(filmAdminTable, filmAdminColumn, 2);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	@FXML
+	public void searchFilm(ActionEvent event) {
+		try {
+			Button btn = (Button) event.getSource();
+			if (btn.getId().equals("searchBtn")) {
+				if (searchText.getText().isEmpty()) {
+					errorLabel.setText("Please insert a title.");
+					errorLabel.setVisible(true);
+					return;
+				}
+				updateTable(filmHomeTable, filmHomeColumn, 0);
+			} else if (btn.getId().equals("searchBtnAdmin")) {
+				if (searchTextAdmin.getText().isEmpty()) {
+					errorLabel.setText("Please insert a title.");
+					errorLabel.setVisible(true);
+					return;
+				}
+				updateTable(filmAdminTable, filmAdminColumn, 2);
+			}
+			errorLabel.setVisible(false);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	@FXML
+	public void addVote(ActionEvent event) {
+		try {
+			int vote = voteBox.getSelectionModel().getSelectedItem();
+			Film film = filmHomeTable.getSelectionModel().getSelectedItem();
+
+			Double updatedRating = ((film.getVotes() * film.getRating()) + vote) / (film.getVotes() + 1);
+			film.setVotes(film.getVotes() + 1);
+			film.setRating(updatedRating);
+			Double roundedRating = (double) Math.round(updatedRating * 10) / 10;
+			ratingLabel.setText(Double.toString(roundedRating));
+			MainApp.managerM.addVote(film, vote, roundedRating);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	@FXML
+	public void showFilmInformations(MouseEvent event) {
+		try {
+			Film film = filmHomeTable.getSelectionModel().getSelectedItem();
+			directorLabel.setText(film.getDirector());
+			yearLabel.setText(Integer.toString(film.getYear()));
+			productionLabel.setText(film.getProduction());
+			Double rating = (double) Math.round(film.getRating() * 10) / 10;
+			ratingLabel.setText(Double.toString(rating));
+			Image image;
+			try {
+				image = new Image(film.getPoster());
+			} catch (Exception ex) {
+				image = new Image("/Images/default.png");
+			}
+
+			imgPoster.setImage(image);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	@FXML
+	public void tabSwap(Event event) {
+		// TODO exception to handle.
+		try {
+//			if(errorLabel.isVisible())  // I don't know why this piece give an exception..
+//				errorLabel.setVisible(false);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 }

@@ -3,6 +3,7 @@ package main.resources.moviesEvaluation;
 import org.bson.Document;
 
 import com.mongodb.client.*;
+import com.mongodb.client.result.DeleteResult;
 
 import static com.mongodb.client.model.Filters.*;
 
@@ -26,17 +27,16 @@ public class MongoManager {
 		database = mongoClient.getDatabase(DB_NAME);
 		userCollection = database.getCollection("Users");
 		filmCollection = database.getCollection("Films");
-
 	}
 
 	public User checkUser(String username, String password) {
-		Document found = (Document) userCollection.find(and(eq("username", username), eq("password", password)))
-				.first();
 		try {
+			Document found = (Document) userCollection.find(and(eq("username", username), eq("password", password)))
+					.first();
+
 			if (found != null) {
 				MainApp.user = new User(found.getString("name"), found.getString("username"),
 						found.getString("password"), found.getString("country"), found.getBoolean("admin"));
-				System.out.println(found);
 				return MainApp.user;
 			}
 		} catch (Exception ex) {
@@ -47,15 +47,17 @@ public class MongoManager {
 	}
 
 	public void registerUser(String name, String username, String password, String country) {
-		Document document = new Document("name", name).append("username", username).append("password", password)
-				.append("country", country).append("admin", false);
-
-		userCollection.insertOne(document);
+		try {
+			Document document = new Document("name", name).append("username", username).append("password", password)
+					.append("country", country).append("admin", false);
+			userCollection.insertOne(document);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	public void addFilms(String jsonText) {
 		try {
-			System.out.println(jsonText);
 			String[] jsonLine = jsonText.split("\n");
 			for (int i = 0; i < jsonLine.length; i++) {
 				Document doc = Document.parse(jsonLine[i]);
@@ -74,7 +76,15 @@ public class MongoManager {
 			List<Film> films = new ArrayList<>();
 			while (cursor.hasNext()) {
 				Document filmDocument = cursor.next();
-				Film film = new Film(filmDocument.getString("Title"));
+				String filmTitle = filmDocument.getString("Title");
+				String director = filmDocument.getString("Director");
+				String production = filmDocument.getString("Production");
+				String poster = filmDocument.getString("Poster");
+				String year = filmDocument.getString("Year");
+				String rating = filmDocument.getString("imdbRating");
+				String votes = filmDocument.getString("imdbVotes");
+
+				Film film = new Film(filmTitle, director, production, poster, year, rating, votes);
 				films.add(film);
 			}
 			return films;
@@ -84,6 +94,32 @@ public class MongoManager {
 		}
 		return null;
 
+	}
+
+	public void addVote(Film film, int vote, Double updatedRating) {
+		try {
+			Document found = (Document) filmCollection
+					.find(and(eq("Title", film.getTitle()), eq("Year", Integer.toString(film.getYear())))).first();
+			if (found != null) {
+				filmCollection.updateMany(
+						and(eq("Title", film.getTitle()), eq("Year", Integer.toString(film.getYear()))),
+						new Document("$set", new Document("imdbRating", Double.toString(updatedRating))
+								.append("imdbVotes", Integer.toString(film.getVotes()))));
+			}
+			System.out.println("Vote Updated!");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public void deleteFilm(Film film) {
+		try {
+			DeleteResult deleteResult = filmCollection
+					.deleteMany(and(eq("Title", film.getTitle()), eq("Year", Integer.toString(film.getYear()))));
+			System.out.println("Total number of films deleted: " + deleteResult.getDeletedCount());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	public void quit() {
