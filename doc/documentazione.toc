@@ -7,6 +7,13 @@
 \contentsline {subsubsection}{\numberline {2.1.2}Non-functional requirements}{3}% 
 \contentsline {subsection}{\numberline {2.2}Use case}{4}% 
 \contentsline {subsubsection}{\numberline {2.2.1}Use Cases Description}{4}% 
-\contentsline {subsection}{\numberline {2.3}Class diagram}{6}% 
+\contentsline {subsection}{\numberline {2.3}Analysis of entities}{6}% 
 \contentsline {section}{\numberline {3}Design}{7}% 
 \contentsline {subsection}{\numberline {3.1}Software architecture}{7}% 
+\contentsline {subsection}{\numberline {3.2}Populating database}{7}% 
+\contentsline {subsection}{\numberline {3.3}MongoDb index}{9}% 
+\contentsline {section}{\numberline {4}Implementation}{10}% 
+\contentsline {subsection}{\numberline {4.1}Used technologies}{10}% 
+\contentsline {subsection}{\numberline {4.2}Replica setup}{10}% 
+\contentsline {subsection}{\numberline {4.3}Java class description}{11}% 
+\contentsline {subsection}{\numberline {4.4}GUI}{11}% 

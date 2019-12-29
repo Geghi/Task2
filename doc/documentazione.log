@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7050 64-bit) (preloaded format=pdflatex 2019.7.22)  17 DEC 2019 15:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7050 64-bit) (preloaded format=pdflatex 2019.7.22)  29 DEC 2019 10:59
 entering extended mode
 **./documentazione.tex
 (documentazione.tex
@@ -503,48 +503,113 @@ Overfull \hbox (15.0pt too wide) in paragraph at lines 141--149
 [4
 
 ] [5 <./images/diagrams/CinemaEvaluate.jpeg>]
-<./images/diagrams/AnalysisUML.png, id=56, 544.0325pt x 447.6725pt>
+<./images/diagrams/AnalysisUML.png, id=56, 614.295pt x 61.22874pt>
 File: ./images/diagrams/AnalysisUML.png Graphic file (type png)
 <use ./images/diagrams/AnalysisUML.png>
 Package pdftex.def Info: ./images/diagrams/AnalysisUML.png  used on input line 
 159.
-(pdftex.def)             Requested size: 296.84093pt x 244.27382pt.
+(pdftex.def)             Requested size: 296.84093pt x 29.58751pt.
  [6
 
  <./images/diagrams/AnalysisUML.png>]
-<./images/diagrams/architecture_diagram.png, id=61, 313.77225pt x 290.2845pt>
+<./images/diagrams/architecture_diagram.png, id=61, 674.52pt x 603.25375pt>
 File: ./images/diagrams/architecture_diagram.png Graphic file (type png)
 <use ./images/diagrams/architecture_diagram.png>
 Package pdftex.def Info: ./images/diagrams/architecture_diagram.png  used on in
 put line 183.
-(pdftex.def)             Requested size: 307.55214pt x 284.52756pt.
- [7
+(pdftex.def)             Requested size: 318.13602pt x 284.52756pt.
 
- <./images/diagrams/architecture_diagram.png>] (documentazione.aux) ) 
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
+
+ []
+
+<./images/screens/OMDBScraperScreen.jpg, id=62, 640.3925pt x 317.68687pt>
+File: ./images/screens/OMDBScraperScreen.jpg Graphic file (type jpg)
+<use ./images/screens/OMDBScraperScreen.jpg>
+Package pdftex.def Info: ./images/screens/OMDBScraperScreen.jpg  used on input 
+line 197.
+(pdftex.def)             Requested size: 458.85432pt x 227.62204pt.
+
+Overfull \hbox (34.79399pt too wide) in paragraph at lines 197--199
+ [] 
+ []
+
+
+Overfull \hbox (15.0pt too wide) in paragraph at lines 194--205
+[]$[]$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 194--205
+
+ []
+
+[7
+
+ <./images/diagrams/architecture_diagram.png>]
+<./images/screens/elementJSONExample.jpg, id=67, 358.84062pt x 276.03125pt>
+File: ./images/screens/elementJSONExample.jpg Graphic file (type jpg)
+<use ./images/screens/elementJSONExample.jpg>
+Package pdftex.def Info: ./images/screens/elementJSONExample.jpg  used on input
+ line 209.
+(pdftex.def)             Requested size: 347.73003pt x 267.4559pt.
+
+Overfull \hbox (15.0pt too wide) in paragraph at lines 206--217
+[]$[]$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 206--217
+
+ []
+
+[8 <./images/screens/OMDBScraperScreen.jpg> <./images/screens/elementJSONExampl
+e.jpg>] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 226--230
+
+ []
+
+(java_code/replicaSetup.tex
+("C:\Users\Marco\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstlang1.
+sty"
+File: lstlang1.sty 2019/02/27 1.8b listings language file
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 3.
+LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 21.
+) [10
+
+] [11] (documentazione.aux) ) 
 Here is how much of TeX's memory you used:
- 6120 strings out of 492895
- 95920 string characters out of 3123735
- 199744 words of memory out of 3000000
- 9942 multiletter control sequences out of 15000+200000
- 9803 words of font info for 22 fonts, out of 3000000 for 9000
+ 6549 strings out of 492895
+ 100281 string characters out of 3123735
+ 402588 words of memory out of 3000000
+ 10351 multiletter control sequences out of 15000+200000
+ 13076 words of font info for 30 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 51i,11n,46p,577b,351s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users
-\Marco\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk>
+ 51i,11n,46p,716b,1210s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\Marco\AppData\Local\MiKTeX\2.9\fonts/pk
+/ljfour/jknappen/ec/dpi600\ecti0800.pk> <C:\Users\Marco\AppData\Local\MiKTeX\2.
+9\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\Marco\AppData\Local
+\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\Marco\App
+Data\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0900.pk> <C:\Users
+\Marco\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx0900.pk>
  <C:\Users\Marco\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ec
-rm0900.pk> <C:\Users\Marco\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec
-/dpi600\ecbx0900.pk> <C:\Users\Marco\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/j
-knappen/ec/dpi600\ecrm1000.pk> <C:\Users\Marco\AppData\Local\MiKTeX\2.9\fonts/p
-k/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\Marco\AppData\Local\MiKTeX\2
-.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk><C:/Users/Marco/AppData/Local
-/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Marco/
-AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/
-Users/Marco/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-r12.pfb><C:/Users/Marco/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmsy10.pfb>
-Output written on documentazione.pdf (9 pages, 371803 bytes).
+rm1000.pk> <C:\Users\Marco\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec
+/dpi600\ecbx1000.pk> <C:\Users\Marco\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/j
+knappen/ec/dpi600\ecbx1440.pk><C:/Users/Marco/AppData/Local/Programs/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Marco/AppData/Local/Progra
+ms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Marco/AppData/
+Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Ma
+rco/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+><C:/Users/Marco/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmsy8.pfb>
+Output written on documentazione.pdf (13 pages, 661342 bytes).
 PDF statistics:
- 271 PDF objects out of 1000 (max. 8388607)
+ 414 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
