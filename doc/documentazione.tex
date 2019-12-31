@@ -141,7 +141,7 @@ Vote a film & Vote Film & User, Admin & The user submits the vote on a selected 
 \begin{minipage}{\linewidth}
 \begin{center}
 \vspace{8mm}
-\includegraphics[ width=0.8\textheight]{./images/diagrams/CinemaEvaluate} 
+\includegraphics[ width=0.7\textheight]{./images/diagrams/UseCase.png} 
 \captionof{figure}{Use cases diagram}
 \vspace{3mm}
 \end{center}
@@ -170,10 +170,9 @@ This diagram represent the main entities of the application and the relations be
 \section{Design}
 
 \subsection{Software architecture}
-The application is designed over 3 different layers, see figure \ref{fig:architecture_diagram}:
+The application is designed over 2 different layers, see figure \ref{fig:architecture_diagram}:
 \begin{itemize}
 \item Front-end
-\item Middleware
 \item Back-end
 \end{itemize}
 \vspace{5mm}
@@ -214,6 +213,16 @@ Using our “OmdbScraper” application, we managed to obtain the collection of 
 \end{center}
 \end{minipage}
 We integrated our movies dataset with a plot dataset, found on kaggle (wiki\_plot). In order to do so, we searched for matching between the plot’s movie title and the movie title in our collection; once the matching was found, the plot field in the original element was replaced with the data presents in the plot dataset.\\
+Moreover we manage some data types, because scraping OpenMovie platform, we obtain every fields in a string format, but to compute the analytics operations, describes on functional requirements section, we need to have some fields in a number format. We run the following javascript code on mongo shell, to perform the conversion:
+\vspace{2mm}
+\input{./java_code/conversion.tex}
+\vspace{5mm}
+
+% ----- ANALYTICS -----
+\subsection{Analytics and statistics}
+\subsubsection{View top production}
+This analytics is performed to display all production houses.
+\subsubsection{Top rated by year and country}
 
 \subsection{MongoDb index}
 In order to speeding up some operations, we introduce some indexes ...
@@ -237,7 +246,9 @@ The following code shows how it is realized the architecture in which 3 mongo se
 
 \subsection{GUI}
 
-
+\clearpage
+% MANUAL%
+\section{User Manual}
 
 
 

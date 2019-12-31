@@ -11,9 +11,13 @@
 \contentsline {section}{\numberline {3}Design}{7}% 
 \contentsline {subsection}{\numberline {3.1}Software architecture}{7}% 
 \contentsline {subsection}{\numberline {3.2}Populating database}{7}% 
-\contentsline {subsection}{\numberline {3.3}MongoDb index}{9}% 
+\contentsline {subsection}{\numberline {3.3}Analytics and statistics}{9}% 
+\contentsline {subsubsection}{\numberline {3.3.1}View top production}{9}% 
+\contentsline {subsubsection}{\numberline {3.3.2}Top rated by year and country}{9}% 
+\contentsline {subsection}{\numberline {3.4}MongoDb index}{9}% 
 \contentsline {section}{\numberline {4}Implementation}{10}% 
 \contentsline {subsection}{\numberline {4.1}Used technologies}{10}% 
 \contentsline {subsection}{\numberline {4.2}Replica setup}{10}% 
 \contentsline {subsection}{\numberline {4.3}Java class description}{11}% 
 \contentsline {subsection}{\numberline {4.4}GUI}{11}% 
+\contentsline {section}{\numberline {5}User Manual}{12}% 
