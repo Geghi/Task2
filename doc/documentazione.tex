@@ -9,6 +9,7 @@
 \usepackage{scrextend}
 \usepackage[margin=1.2in]{geometry}
 \usepackage[font=small,labelfont=bf]{caption}
+\usepackage{url}
 
 \begin{document}
 \selectlanguage{english}
@@ -40,33 +41,26 @@
 
 
 \section{Introduction}\pagenumbering{arabic}
-The \textbf{Cine-Valutami} application offers a search and consultation service in the field of cinema. When the application starts, the system requires authentication to use the service.
-The logged-in user can perform a search by entering the first characters of a film title in the search bar, obtaining a list of 10 films in the database. After that you can select one of the proposed titles or carry out a more in-depth search, adding characters.
-At the time of selection, the system allows you to view more information in the section on the right, including cover, title, director and rating.
-The user can leave a mark from 1 to 5 for the selected film.
-There is also a module for the system administrator, who will be redirected to an activity different from that of the user, in which he can view some statistics linked to the films and to the searches carried out by the users of the application, in particular: ranking of 10 most voted films, ranking of the 10 most sought after films.
-Besides, the system administrator can add new films to the application database or delete those already present, by searching by title.
-\begin{minipage}{\linewidth}
-\begin{center}
-\vspace{8mm}
+The \textbf{Cine-Valutami} application offers a search and information service in the field of cinema. When the application starts, the system requires authentication to use the service.
+The logged-in user can perform a search by entering the first characters of a movie title in the search bar, obtaining a list of 10 movies in the database. After that you can select one of the proposed titles or carry out a more in-depth search, adding characters.
+Selecting a row, the system allows you to view more information in the right section, including cover, title, director and ratings.
+The user can leave a mark from 1 to 5 for the selected movie.
+There is also a module for the system administrator: when he logs in, he's redirected to a different activity than the user's one. In this page, he can view some statistics linked to the movies and the searches carried out by the users of the application, such as the ranking of 10 most voted films or the 10 most sought after films.
+Moreover, the system admin can add new movies to the application database or delete those already present, by searching by title.
+
+\begin{figure}[h]
+\centering
 \includegraphics[width=\textwidth]{./images/diagrams/UserMockup} 
-\vspace{3mm}
-\captionof{figure}{Mockup user}
+\caption{User Mockup}
 \label{fig:mockup}
-\end{center}
-\end{minipage}
+\end{figure}
 
-\begin{minipage}{\linewidth}
-\begin{center}
-\vspace{8mm}
-\includegraphics[width=\textwidth]{./images/diagrams/admin_activity} 
-\vspace{3mm}
-\captionof{figure}{Mockup admin}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{./images/diagrams/admin_activity}
+\caption{Admin Mockup}
 \label{fig:mockup_admin}
-\end{center}
-\end{minipage}
-
-
+\end{figure}
 
 \clearpage
 
@@ -75,29 +69,25 @@ Besides, the system administrator can add new films to the application database 
 % ----- REQUIREMENTS -----
 \subsection{Requirements}
 
-
 \subsubsection{Functional requirement}
 The system has to allow the user to carry out basic functions such as:
 \begin{itemize}
 \item To sign up into the system.
-\item To login into the system.
-\item To search for a film.
-\item To vote a film.
-\item For each year to view the country that produced more films.
-\item For each production house to view the genre more produced.
-\item To view the most movie voted.
-\item For each countries to view the most movie voted.
+\item To login to the system.
+\item To search for a movie.
+\item To vote a movie.
+\item To view a list of the top rated movies, both in general and filtered by a selected country.
+\item To view a list of the top production houses.
+\item To view the top countries in making movies, filtered by a selected year.
+\item To view the most active users in the application, i.e. the users that have given most votes.
 \end{itemize}
 \vspace{2mm}
 The system has to allow the administrator to carry out basic functions such as:
 \begin{itemize}
-\item To login into the system.
-\item To add a film.
-\item To update a film.
-\item To delete a film.
-\item To view a list of top rated films.
-\item To view the a list of the most searched films.
-\item To view the user most active in the application.
+\item To login to the system.
+\item To add a movie.
+\item To update a movie.
+\item To delete a movie.
 \end{itemize}
 \vspace{2mm}
 
@@ -113,27 +103,27 @@ The system has to allow the administrator to carry out basic functions such as:
 \clearpage
 
 % ----- USE CASES -----
-\subsection{Use case}
+\subsection{Use Cases}
 
 \textbf{Actors}
 \begin{itemize}
-\item{User : this actor represents a user of the system}
-\item{Admin : this actor represents the administrator of the system}
+\item{User: this actor represents a user of the application}
+\item{Admin: this actor represents the administrator of the application}
 \end{itemize}
 
 \subsubsection{Use Cases Description}
 \begin{table}[h]
 \centering
-\begin{tabular}{p{0.2\textwidth}p{0.1\textwidth}lp{0.5\textwidth}}
+\begin{tabular}{p{0.16\textwidth}p{0.2\textwidth}lp{0.5\textwidth}}
 \hline
 \textbf{Event} & \textbf{UseCase} & \textbf{Actor(s)} & \textbf{Description}\\ \hline
 Log in, Log out & Login,  Logout & Admin, User & The user logs in/out the application.\\ \hline
 Display all the Films & Browse, Find, Display Films & User, Admin & The user chooses that he wants to view the list of Films. The system browses the data on the db and returns them on the interface.\\ \hline
-View Statistics & View Statistic, View Top Rated Films, View Most Searched Films & Admin & The Admin clicks on button to view the statistics. The system browses on the db the informations used in the calculation and display the result.\\ \hline
-Add a film & Add Film & Admin & The admin submits the Film informations. The system updates the db and the interface.\\ \hline
+View Statistics & View Top Rated Films, View Top Productions, View Top Film-maker Countries, View Most Active Users & Admin & The Admin clicks on the button to view the statistics. The system browses on the db the informations used in the calculation and display the result.\\ \hline
+Add a film & Add Film & Admin & The admin submits the Film information. The system updates the db and the interface.\\ \hline
 Update a film & Update Film & Admin & The admin selects the film and commits the new informations. The system updates the db and the interface.\\ \hline
 Delete a film & Delete Film & Admin & The admin selects the film and submits the delete. The system updates the db and the interface.\\ \hline
-View the film informations & Select Film, Display Info Film & User, Admin & The user selects the film. The system shows the film informations on the interface.\\ \hline
+View the film informations & Select Film, Display Film Info & User, Admin & The user selects the film. The system shows the film informations on the interface.\\ \hline
 Vote a film & Vote Film & User, Admin & The user submits the vote on a selected film. The system updates the db and the interface.\\ \hline
 \end{tabular}
 \end{table}
@@ -152,11 +142,11 @@ Vote a film & Vote Film & User, Admin & The user submits the vote on a selected 
 
 
 \subsection{Analysis of entities}
-This diagram represent the main entities of the application and the relations between them.
+This diagram represents the main entities of the application and the relations between them.
 \begin{minipage}{\linewidth}
 \begin{center}
 \vspace{4mm}
-\includegraphics[width = 0.7\textwidth]{./images/diagrams/AnalysisUML.png} 
+\includegraphics[width = 0.7\textwidth]{./images/diagrams/Analysisuml} 
 \vspace{2mm}
 \captionof{figure}{UML analysis diagram}
 \label{fig:useCases}
@@ -168,6 +158,8 @@ This diagram represent the main entities of the application and the relations be
 \clearpage
 % ----- DESIGN -----
 \section{Design}
+% TO DO %
+% Scelta di MONGO e motivazione %
 
 \subsection{Software architecture}
 The application is designed over 2 different layers, see figure \ref{fig:architecture_diagram}:
@@ -187,8 +179,14 @@ The application is designed over 2 different layers, see figure \ref{fig:archite
 \end{minipage}
 \vspace{7mm}
 
-\subsection{Populating database}
-The dataset used in the MoviesEvaluation application was created by scraping the Open Movie Database, using their API ( http://www.omdbapi.com/ ). Before started building up the dataset using the API, it was necessary to obtain a list of movie titles, to be passed to the API; the list of titles was built up by scraping Wikipedia page. Once the first 9000 titles’ list was ready, the only thing left to do was to obtain the key requested by the OMDb API to download the films’ information. The keys provided by the database allow users to download 1000 film’s information per day. Once the movies’ list and the keys were ready, we could start to use our scraping application.\\
+\subsection{Populating the database}
+The dataset used in the \textbf{Moviegram} application was created by scraping the Open Movie Database, using their API (\url{http://www.omdbapi.com/}). Given a movie title, this API returns a json document containing all the information in the OMDB about that movie. Before started building up the dataset using the API, it was necessary to obtain a list of movie titles, to be passed to the API; the list of titles was built up using different web pages as sources:
+\begin{itemize}
+\item a page of Wikipedia was scraped
+\item the pages referring to each year from 2007 to 2021 on the site \url{https://www.wildaboutmovies.com/}
+\item a list in the GitHub repository \url{https://github.com/fivethirtyeight/data}
+\end{itemize}
+Once the titles’ list was ready, the only thing left to do was to obtain the key requested by the OMDb API to download the films’ information. Each key provided by the database allows a user to download 1000 film’s information per day. Once the movies’ list and the keys were ready, we could start to use our scraping application.\\
 
 \begin{minipage}{\linewidth}
 \begin{center}
@@ -220,9 +218,9 @@ Moreover we manage some data types, because scraping OpenMovie platform, we obta
 
 % ----- ANALYTICS -----
 \subsection{Analytics and statistics}
-\subsubsection{View top production}
-This analytics is performed to display all production houses.
-\subsubsection{Top rated by year and country}
+\subsubsection{View the top production houses}
+This analytic is performed to display all production houses.
+\subsubsection{Top rated movies by year and country}
 
 \subsection{MongoDb index}
 In order to speeding up some operations, we introduce some indexes ...

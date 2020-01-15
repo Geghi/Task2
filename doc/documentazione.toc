@@ -1,23 +1,23 @@
 \babel@toc {english}{}
 \babel@toc {english}{}
-\contentsline {section}{\numberline {1}Introduction}{1}% 
-\contentsline {section}{\numberline {2}Analysis and workflow}{3}% 
-\contentsline {subsection}{\numberline {2.1}Requirements}{3}% 
-\contentsline {subsubsection}{\numberline {2.1.1}Functional requirement}{3}% 
-\contentsline {subsubsection}{\numberline {2.1.2}Non-functional requirements}{3}% 
-\contentsline {subsection}{\numberline {2.2}Use case}{4}% 
-\contentsline {subsubsection}{\numberline {2.2.1}Use Cases Description}{4}% 
-\contentsline {subsection}{\numberline {2.3}Analysis of entities}{6}% 
-\contentsline {section}{\numberline {3}Design}{7}% 
-\contentsline {subsection}{\numberline {3.1}Software architecture}{7}% 
-\contentsline {subsection}{\numberline {3.2}Populating database}{7}% 
-\contentsline {subsection}{\numberline {3.3}Analytics and statistics}{9}% 
-\contentsline {subsubsection}{\numberline {3.3.1}View top production}{9}% 
-\contentsline {subsubsection}{\numberline {3.3.2}Top rated by year and country}{9}% 
-\contentsline {subsection}{\numberline {3.4}MongoDb index}{9}% 
-\contentsline {section}{\numberline {4}Implementation}{10}% 
-\contentsline {subsection}{\numberline {4.1}Used technologies}{10}% 
-\contentsline {subsection}{\numberline {4.2}Replica setup}{10}% 
-\contentsline {subsection}{\numberline {4.3}Java class description}{11}% 
-\contentsline {subsection}{\numberline {4.4}GUI}{11}% 
-\contentsline {section}{\numberline {5}User Manual}{12}% 
+\contentsline {section}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {2}Analysis and workflow}{3}
+\contentsline {subsection}{\numberline {2.1}Requirements}{3}
+\contentsline {subsubsection}{\numberline {2.1.1}Functional requirement}{3}
+\contentsline {subsubsection}{\numberline {2.1.2}Non-functional requirements}{3}
+\contentsline {subsection}{\numberline {2.2}Use Cases}{4}
+\contentsline {subsubsection}{\numberline {2.2.1}Use Cases Description}{4}
+\contentsline {subsection}{\numberline {2.3}Analysis of entities}{6}
+\contentsline {section}{\numberline {3}Design}{7}
+\contentsline {subsection}{\numberline {3.1}Software architecture}{7}
+\contentsline {subsection}{\numberline {3.2}Populating the database}{7}
+\contentsline {subsection}{\numberline {3.3}Analytics and statistics}{9}
+\contentsline {subsubsection}{\numberline {3.3.1}View the top production houses}{9}
+\contentsline {subsubsection}{\numberline {3.3.2}Top rated movies by year and country}{9}
+\contentsline {subsection}{\numberline {3.4}MongoDb index}{9}
+\contentsline {section}{\numberline {4}Implementation}{10}
+\contentsline {subsection}{\numberline {4.1}Used technologies}{10}
+\contentsline {subsection}{\numberline {4.2}Replica setup}{10}
+\contentsline {subsection}{\numberline {4.3}Java class description}{11}
+\contentsline {subsection}{\numberline {4.4}GUI}{11}
+\contentsline {section}{\numberline {5}User Manual}{12}
