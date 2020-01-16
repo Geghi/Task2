@@ -86,7 +86,6 @@ The system has to allow the administrator to carry out basic functions such as:
 \begin{itemize}
 \item To login to the system.
 \item To add a movie.
-\item To update a movie.
 \item To delete a movie.
 \end{itemize}
 \vspace{2mm}
@@ -241,354 +240,117 @@ The following code shows how it is realized the architecture in which 3 mongo se
 \input{./java_code/replicaSetup.tex}
 \vspace{5mm}
 \subsection{Java class description}
+\subsubsection{Declaretion of class Film}
+The following java-code shows a declaration of the class Film.
+\vspace{2mm}
+\\ <code here>
+\vspace{5mm}
+
+\subsubsection{Declaretion of class User}
+The following java-code shows a declaration of the class User.
+\vspace{2mm}
+	\\ <code here>
+\vspace{5mm}
+
+ Another foundamental class is MongoManager, that manages the db-connection and the related operations.
+ The implementation of a set of CRUD operations is desribed as follows.
+
+
+\subsection{Create}
+Adding one or more films to the database using a json document as input.
+\vspace{2mm}
+ \\<Code here>
+\vspace{5mm}
+
+\subsection{Read}
+This functionality returns a list of films searched by title. A film is returned if its title contains a piece of the searched title (case insensitive).\\
+\vspace{2mm}
+\\<code here>
+\vspace{5mm}
+
+\subsection{Update}
+This operation allows users to update their vote about a selected film.\\
+\vspace{2mm}
+\\<code here>
+\vspace{5mm}
+
+\subsection{Delete}
+This operation allows an admin to remove a selected film from the database.\\
+\vspace{2mm}
+\\<code here>
+\vspace{5mm}
+
+\clearpage
+
+\subsection{Analytics}
+In this phase the analytics operations that a user is able to perform on the database are shown.
 
 \subsection{GUI}
+There are three fxml documents, one for each page of the application, which describes the objects showed in the GUI interface of the related page.
+\begin{itemize}
+\item Home.fxml
+\item Login.fxml
+\item Register.fxml
+\end{itemize}
+In addiction there are 3 classes, called Controllers, that are in charge of handling events of the objects defined in the associated fxml document.
+\begin{itemize}
+\item HomeController.java
+\item LoginController.java
+\item RegisterController.java
+\end{itemize}
 
 \clearpage
 % MANUAL%
 \section{User Manual}
+When you first run the application, the interface you get is the login one, figure~\ref{fig:screen0}. \\
 
+<login page image--> image name: screen0>\\
 
+In case you are not registered you can click the link at the bottom of the page to be redirected to a register page, figure~\ref{fig:screen1}, otherwise you can sign in the application and by default you get the interface shown in figure~\ref{fig:screen2}\\
 
+<register page image --> image name: screen1>\\
 
+<Application home page after login --> image name: screen2> \\
 
+From here you can search for a film by typing in the relative field and clicking the search button. You'll get a list of films that contains the text entered in the table below. Now you can select a film from the table and all the informations will be shown in the right pane of the application, figure~\ref{fig:screen3}. In the bottom right you are able to add a vote from 1 to 10 for the selected film.\\
 
+<homepage after searching a film and selectiong one --> image name: screen3>\\
 
+In the top left of the page there are two tabs. by default after the login you are in the Home tab, by clicking the Analytics Tab you will see the following page.
 
+<analytics tab page --> image name: screen4>\\
 
+Here you have a choice box (left) to select what kind of analytics you want to be performed from the existing ones, and another one to apply a filter (right), figure~\ref{fig:screen5}. \\
 
+<default analytics page --> image name: screen5>\\
 
+After selecting an analytics you will see the results in the table below, and for some of them you will get a piechart aswell, figure~\ref{fig:screen6}\\
 
+<analytics page after performing analytics -->image name: screen6>\\
 
+To log out, just click on the appropriate button at the bottom.
 
+\clearpage
+%ADIMN MANUAL%
+\subsection{Admin Manual}
+If you have an admin user, you are entitled to make changes on the film lists. You need to log in inserting your username and password, and the application will recognize you as the administrator and show up a third tab called "Admin", figure~\ref{fig:admin0}\\
 
+<page of the admin tab --> image name: admin0>\\
 
+In the Admin tab you can search for a film the same way the user did in the Home tab and after selecting one you are able to delete it by clicking the "Delete" button. On the right pane you are able to insert a json document in the text field, that represent a film in the database, and by clicking the Add button you will insert one or more films in the database (fig.~\ref{fig:admin1}).\\ 
 
+<admin tab after searching films and with a json document in the text field --> image name: admin1>
 
-
-
-
-
-
-
-
-
-
-
-
-\iffalse
 
 \clearpage
 \subsection{Database design}
-The application is developped over a relational-database, using the MySql platform. The figure \ref{fig:diagramma_er} shows the ER-diagram of the database.\\
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\vspace{1mm}
-\includegraphics[width=155mm]{./images/diagrams/er_diagram.png} 
-\vspace{2mm}
-\captionof{figure}{ER diagram\\}
-\label{fig:diagramma_er}
-\end{center}
-\end{minipage}
+The application is developped over a no-SQL database, using the MongoDb platform.
 
 \vspace{19mm}
 
 
 
 \clearpage
-% ----- IMPLEMENTATION -----
-
-
-
-\section{Implementation}
-\subsection{Used technologies}
-The application is developed in java programming language, version 11.0.4, and in JavaFX system to create the GUI, version 11, so it should run on each platform in which JVM is installed, but the application is tested and guardantee on Ubuntu 16 and Window OS. Moreover Maven is used  to build and mantain the project, version 3.8.0. \\
-The middleware layer is built thanks to Hibernate, version 5.4.4.0.\\
-The jdbc driver manage the comunication between middleware layer and backend layer, version 8.0.17.\\ 
-For the backend layer it is used Apache as web-server, version 2.4 (including Php, MySql).\\
-So this application is tested using these technologies, considering these particular versions: for other versions the correct execution isn't guaranteed .
-\subsection{Snippets of code}
-This phase describes the most interesting parts about the creation and interaction with the database.\\
-The following classes are mapped in the table of the database: 
-
-\begin{itemize}	
-\item Degree
-\item Student
-\item Professor
-\item Subject
-\item ProfessorComment
-\item ProfessotSubject
-\end{itemize}
-
-
-\begin{itemize}	
-\item Degree
-\item Student
-\item Professor
-\item Subject
-\item ProfessorComment
-\item ProfessotSubject
-\end{itemize}
-These classes are declared using the Hibernate annotations syntax.\\
-
-\subsubsection{Declaretion of class Subject}
-The following java-code shows a declaration of the class Subject.
-\vspace{2mm}
-\input{./java_code/declarationSubject.tex}
-\vspace{5mm}
-
-
-\subsubsection{Declaretion of class Person}
-The following java-code shows a declaration of the class Person. The @MappedSuperclass annotation is used to map the superclass.
-\vspace{2mm}
-\input{./java_code/declarationPerson.tex}
-\vspace{5mm}
-
-
-\subsubsection{Declaretion of class Professor}
-The following java-code shows a declaration of the class Professor.
-\vspace{2mm}
-\input{./java_code/declarationProfessor.tex}
-\vspace{5mm}
-
-
-\subsubsection{Declaretion of class Student}
-The following java-code shows a declaration of the class Student.
-\vspace{2mm}
-\input{./java_code/declarationStudent.tex}
-\vspace{5mm}
-
-
-\subsubsection{Declaretion of class Comment}
-The following java-code shows a declaration of the class Comment. The @MappedSuperclass annotation is used to map the superclass.
-\vspace{2mm}
-\input{./java_code/declarationComment.tex}
-\vspace{5mm}
-
-
-\subsubsection{Declaretion of class SubjectComment}
-The following java-code shows a declaration of the class SubjectComment.
-\vspace{2mm}
-\input{./java_code/declarationSubjectComment.tex}
-\vspace{5mm}
-
-
-\subsubsection{Declaretion of class ProfessorComment}
-The following java-code shows a declaration of the class ProfessorComment.
-\vspace{2mm}
-\input{./java_code/declarationProfessorComment.tex}
-\vspace{5mm}
-
-
-\subsubsection{Declaretion of class Degree}
-The following java-code shows a declaration of the class Degree.
-\vspace{2mm}
-\input{./java_code/declarationDegree.tex}
-\vspace{5mm}
-
-\begin{minipage}{\linewidth}
-\begin{center}
-\vspace{1mm}
-\includegraphics[width=155mm]{./images/diagrams/er_diagram2.png} 
-\captionof{figure}{ER diagram\\}
-\label{fig:diagramma_er2}
-\end{center}
-\end{minipage}
-\vspace{5mm}\\
- Another foundamental class is ManagerEM, that manages the db-connection and the related operations.
- The implementation of a set of CRUD operations, regarding the class Subject, is desribed as follows.
-
-\subsection{Create}
-Creating a new subject specifying general informations, the professor holding the course and the associated degree program as parameters.\\
-\vspace{2mm}
-\input{./java_code/create.tex}
-\vspace{5mm}
-
-\subsection{Read}
-This functionality returns a list of subjects interrogating the database using a query written in Hibernate Query Language (HQL).\\
-\vspace{2mm}
-\input{./java_code/read.tex}
-\vspace{5mm}
-
-\subsection{Update}
-This operation allows students to update their comments about a selected subject.\\
-\vspace{2mm}
-\input{./java_code/update.tex}
-\vspace{5mm}
-
-\subsection{Delete}
-This operation allows a student to delete their comments about a selected subject.\\
-\vspace{2mm}
-\input{./java_code/delete.tex}
-\vspace{5mm}
-
-\subsection{GUI}
-Moreover there are 3 classes to manage the graphic user interface: 
-\begin{itemize}
-\item GraphicInterface
-\item CommentTable
-\item ProfSubjectTable
-\end{itemize}
- These classes use the javaFX framework to build the GUI and handle the related events.
-
-\clearpage
-
-
-% ----- LEVEL DB -----
-\section{Level DB}
-
-Key-values databases are one of the simplest examples of NoSQL stores that can be found. In a key-value database, data are persistently stored assigning a value to a uniqle identifier, which takes the name of key; couples of key-values are stored in namespaces (buckets) and in each buckets, keys must be unique. \\
-The main strenghts of the key-value database are: 
-\begin{itemize}
-\item Simplicity
-\item Speed 
-\item Scalability
-\end{itemize}
-Key-value database are mostly used when speed in retrieving data and ease of storage are more important than the organization of data into complex structures. So, in general, classics RDBMS are preferred when organization and management is more important than perfomances; typically, when a database presents a lot of relations among entities, key-values stores aren’t the best choice. When the structure of our database is simple, instead, we could use the key-value stores because they are more capable of providing higher performances than RDBMS.\\
-It is also true that simple relations between entities are represented in key-value database as well, just by building up keys in a predefined way.\\
-The new architecture is shown in figure \ref{fig:architecture_diagram_levelDB}:\\
-\begin{minipage}{\linewidth}
-\begin{center}
-\vspace{7mm}
-\includegraphics[height = 100mm]{./images/diagrams/architectureLevelDB.png} 
-\vspace{6mm}
-\captionof{figure}{Software architecture diagram\\}
-\label{fig:architecture_diagram_levelDB}
-\vspace{6mm}
-\end{center}
-\end{minipage}
-LevelDB is a tool used to create a key-value database. It stores data under the form of key-value pairs locally in .sst file. Thanks to the property of those kind of databases we can think to set up a cache memory for our application using LevelDB.\\
-We need to store information about professors/courses, with their relative comments, belonging to the same degree of the student that is actually logged. The idea is that the student will check those information more frequently than in the case of professors or courses of different degree.\\
-When a student logs in, we retrieve and store the sequent data: professors (with their relative comments) and courses (with relative comments) of the same degree of the student. Those informations are then used to populate the tables needed during the normal operations of the application. We create the key for that data in the following way:
-\begin{itemize}
-\item For the professors’ data:\\ \textbf{professors:\$professor\_id:\$attribute\_name}\\ where the attributes are: name, surname and info.
-\item For the subjects’ data:\\ \textbf{subjects:\$subject\_id:\$attribute\_name}\\ where the attributes are: name, credits and info.
-\item For the professor’s comments data:\\ \textbf{prof\_comments:\$prof\_comments\_id:\$user\_id:\$professor\_id:\$attribute\_name}\\ where the attributes are: text and date.
-\item For the subject’s comments data:\\ \textbf{subject\_comments:\$subject\_comment\_id:\$user\_id:\$subject\_id:\$attribute\_name}\\ where the attributes are: text and date.
-\end{itemize}
-\vspace{2mm}
-Every time a users choose to see the informations about professors or subjects belonging to his same degree, we display the data stored locally. Once the user select a professor or a subject, the comment for that professor or for that subject are retrieved from the local file. \\
-During the normal operation of the application, a student can add a new comment or update or modify one of his previously submitted comments.\\
-When a user add a comment on one of the target objects (professors or subjects of his same degree), the new comment is first added onthe local file then the adding is propagated on the database. When a user modify or delete a comment, the action is only operated on the local file, when the user logs out those operations are then propagated on the relational database.\\
-The admin, which is a super-user whith higher privileges, has to skip those step; in fact, the admin’s operations skip the local file and affect first the relational database, and then the key-value file, without the asynchronous steps.\\
-
-
-
-\clearpage
-% ----- MANUAL -----
-\section{User Manual}
-When you first run the application, the interface you get is the one in figure~\ref{fig:screen0}. 
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.88\textwidth]{images/screens/screen0}
-\captionof{figure}{First view of the application}
-\label{fig:screen0}
-\end{figure}
-
-The default display includes the list of all registered professors in the table on the right. You can choose to display the professors of a single degree course, using the drop-down menu on the right (fig.~\ref{fig:screen1}), or decide to view the list of subjects (fig.~\ref{fig:screen2}), for which is also available the degree course's filter. 
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.88\textwidth]{images/screens/screen1}
-\captionof{figure}{Selection of professors filtered by "Ingegneria Informatica" degree course}
-\label{fig:screen1}
-\end{figure}
-\clearpage
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.88\textwidth]{images/screens/screen2}
-\captionof{figure}{Selection of subjects}
-\label{fig:screen2}
-\end{figure}
-
-If you have a registered account, you can log in to the application, so that the comments' operations aren't blocked. Enter your username and your password in the suited fields at the top and click on "Login" (fig.~\ref{fig:screenLogin}).
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.88\textwidth]{images/screens/screenLogin}
-\captionof{figure}{Application interface after the user "Alice" has logged in}
-\label{fig:screenLogin}
-\end{figure}
-
-If you now want to be able to see the comments associated with a particular professor, you have to click on the name of the professor: in the table on the left the list of comments already received will appear (fig.~\ref{fig:screen3}). With this operation, you'll be able to visualize also the information related to that professor.
-
-To leave a comment, you need to enter the text in the field below the table and then click on the "Comment" button. The result obtained from these operations is shown in fig.~\ref{fig:screen4}.
-
-\begin{figure}
-\centering
-\includegraphics[width=0.9\textwidth]{images/screens/screen3}
-\captionof{figure}{Displaying the comments related to a professor}
-\label{fig:screen3}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[width=0.9\textwidth]{images/screens/screen4}
-\captionof{figure}{Interface after adding a comment}
-\label{fig:screen4}
-\end{figure}
-
-You can also decide to modify the comment you just uploaded or another comment you made on a previous session. To do so, you need to click on the comment you want to update, change the text in the field below the table and then click on the "Update" button (fig.~\ref{fig:screen5}).
-Finally you have the chance to delete your comment, by clicking on "Delete" after selecting it. Notice that you can modify or delete just the comments that you made.
-
-The operations of adding, updating and deleting work as well for the the subjects' comments.
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.88\textwidth]{images/screens/screen5}
-\captionof{figure}{Interface after updating a comment}
-\label{fig:screen5}
-\end{figure}
-
-To log out, just click on the appropriate button at the top, next to the user label.
-
-Moreover, if you don't have a registered username, you can still browse through the application, search for professors 'and subjects' information and read all comments. You are just unable to leave or change any comments.
-
-\clearpage
-%ADIMN MANUAL%
-\subsection{Admin Manual}
-If you have an admin user, you are entitled to make changes both on the professors' and the subjects' lists. You need to log in inserting your username and password, and the application will recognize you as the administrator and show up the buttons for modifying the data (fig.~\ref{fig:adminLogin}).
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.88\textwidth]{images/screens/adminLogin}
-\captionof{figure}{Interface after the administrator has logged in}
-\label{fig:adminLogin}
-\end{figure}
-
-You can choose to add a new professor, using the input fields at the bottom left. You have to specify the name, surname, and description, then press the "Add" button (fig.~\ref{fig:admin1}).
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.88\textwidth]{images/screens/admin1}
-\captionof{figure}{Adding a new professor}
-\label{fig:admin1}
-\end{figure}
-\clearpage
-You can also modify the data related to a professor: click on the professor you are interested in and change the information shown in the apposite input fields. Finally, you have the chance to delete a professor by clicking on the "Delete" button after selecting the wanted professor (fig.~\ref{fig:admin2}).
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.88\textwidth]{images/screens/admin2}
-\captionof{figure}{Screen of the application's interface from which you can either update or delete a professor}
-\label{fig:admin2}
-\end{figure}
-
-All these operations are available for the subjects as well. The only difference is that when you want to add a new subject you also need to specify the id of the professor teaching it (or a list of ids, separeted by commas, if there are more professors teaching it). Moreover, you must have precisely displayed in the table the subjects of the same degree course of the new one (fig.~\ref{fig:admin3}).
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.88\textwidth]{images/screens/admin3}
-\captionof{figure}{Interface after adding a new subject, ready to modify or delete it}
-\label{fig:admin3}
-\end{figure}
-\clearpage
-The administrator can delete comments posted by all the users, too. Just click on the comment and then on the "Delete" button (fig.~\ref{fig:admin4}).
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.88\textwidth]{images/screens/admin4}
-\captionof{figure}{Screen of the application's interface from which the admin can delete a comment}
-\label{fig:admin4}
-\end{figure}
-
-\fi
 
 \end{document}
 
