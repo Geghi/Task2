@@ -1,5 +1,4 @@
 \documentclass[a4paper, oneside]{article}
-
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -10,6 +9,7 @@
 \usepackage[margin=1.2in]{geometry}
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{url}
+\usepackage{verbatim}
 
 \begin{document}
 \selectlanguage{english}
@@ -41,7 +41,7 @@
 
 
 \section{Introduction}\pagenumbering{arabic}
-The \textbf{Cine-Valutami} application offers a search and information service in the field of cinema. When the application starts, the system requires authentication to use the service.
+The \textbf{Moviegram} application offers a search and information service in the field of cinema. When the application starts, the system requires authentication to use the service.
 The logged-in user can perform a search by entering the first characters of a movie title in the search bar, obtaining a list of 10 movies in the database. After that you can select one of the proposed titles or carry out a more in-depth search, adding characters.
 Selecting a row, the system allows you to view more information in the right section, including cover, title, director and ratings.
 The user can leave a mark from 1 to 5 for the selected movie.
@@ -157,8 +157,9 @@ This diagram represents the main entities of the application and the relations b
 \clearpage
 % ----- DESIGN -----
 \section{Design}
-% TO DO %
-% Scelta di MONGO e motivazione %
+
+\subsection{Database Choice}
+After the analysis phase, which has been carried out so far, we start with the design of the \textbf{Moviegram} application. We decide to use MongoDB as data support. Its document-based structure is very useful for the large amount of data that we need to maintain and access, as well as its high scalability, qualities that we do not find in a relational database. Thanks to the help of indexes, we can make very fast queries, while thanks to replicas we can guarantee the data consistency.
 
 \subsection{Software architecture}
 The application is designed over 2 different layers, see figure \ref{fig:architecture_diagram}:
@@ -177,13 +178,13 @@ The application is designed over 2 different layers, see figure \ref{fig:archite
 \end{center}
 \end{minipage}
 \vspace{7mm}
-
+\clearpage
 \subsection{Populating the database}
-The dataset used in the \textbf{Moviegram} application was created by scraping the Open Movie Database, using their API (\url{http://www.omdbapi.com/}). Given a movie title, this API returns a json document containing all the information in the OMDB about that movie. Before started building up the dataset using the API, it was necessary to obtain a list of movie titles, to be passed to the API; the list of titles was built up using different web pages as sources:
+The dataset used in the \textbf{Moviegram} application was created by scraping the Open Movie Database, using their API (\url{http://www.omdbapi.com/}). Given a movie title, this API returns all the information in the OMDb about that movie. Before started building up the dataset using the API, it was necessary to obtain a list of movie titles, to be passed to the API; the list of titles was built up using different web pages as sources:
 \begin{itemize}
 \item a page of Wikipedia was scraped
-\item the pages referring to each year from 2007 to 2021 on the site \url{https://www.wildaboutmovies.com/}
-\item a list in the GitHub repository \url{https://github.com/fivethirtyeight/data}
+\item the pages referring to each year from 2007 to 2021 on the site \url{https://www.wildaboutmovies.com/} were scraped
+\item a csv file in the GitHub repository \url{https://github.com/fivethirtyeight/data} was used
 \end{itemize}
 Once the titles’ list was ready, the only thing left to do was to obtain the key requested by the OMDb API to download the films’ information. Each key provided by the database allows a user to download 1000 film’s information per day. Once the movies’ list and the keys were ready, we could start to use our scraping application.\\
 
@@ -209,11 +210,44 @@ Using our “OmdbScraper” application, we managed to obtain the collection of 
 \vspace{5mm}
 \end{center}
 \end{minipage}
-We integrated our movies dataset with a plot dataset, found on kaggle (wiki\_plot). In order to do so, we searched for matching between the plot’s movie title and the movie title in our collection; once the matching was found, the plot field in the original element was replaced with the data presents in the plot dataset.\\
-Moreover we manage some data types, because scraping OpenMovie platform, we obtain every fields in a string format, but to compute the analytics operations, describes on functional requirements section, we need to have some fields in a number format. We run the following javascript code on mongo shell, to perform the conversion:
+We integrated our movies dataset with a plot dataset, found on \url{kaggle.com} (wiki\_plot). In order to do so, we searched for matching between the plot’s movie title and the movie title in our collection; once the matching was found, the plot field in the original element was replaced with the data presents in the plot dataset.\\
+Moreover, we managed some data types because, scraping the OpenMovie platform, we'd obtained every field in a string format, but to compute the analytics operations described in the functional requirements section, we need to have some fields in a number format. We ran the following javascript code on the mongo shell, to perform the conversion:
 \vspace{2mm}
 \input{./java_code/conversion.tex}
 \vspace{5mm}
+
+Finally, for the users' information, we didn't use any kind of scraping or sources. We just created a collection with a few documents, one for each of us, leaving this part of the database as a prototype for future public use. Every user has maintained in the db his name, username, password, and country, as well as a list with the titles of the movies he voted and the relative vote.
+% inserire immagine di un documento utente 
+\begin{comment}
+	{
+		Name:"Alice",
+		Username:"alice",
+		Password:"alice",
+		Country:"Italy"
+		Numrates:"0",
+		Rated:
+		[
+			{Movie:"", Rate:"", Timestamp:""},
+			{Movie:"", Rate:"", Timestamp:""},
+			...
+		}
+	}
+\end{comment}
+In the film collection, on the other hand, the list of users who voted for each film is not kept, but only a field that keeps the number of votes received (\textit{imdbVotes}) and one that keeps the average vote (\textit{imdbRating}).
+
+% ----- INDEXES -----
+\subsection{MongoDb indexes}
+\subsubsection{Index 1}
+The first index introduced is related to the users collection. This collection is indexed using 'Numrates', a counter for the number of rates that a user has given.
+This index will improve the performance of the operation that returns the ranking of the most active users on the plattform.
+\begin{verbatim}
+     db.users.createIndex({"Numrates" : -1 });
+\end{verbatim}
+\subsubsection{Index 2}
+In order to speeding up the operation that displays the top rated movies related to a specific country, we introduce 2 indexes on the fields 'Country' and 'Ratings'. Theese 2 indexes decrease the performance of the operation that displays the top movies, not considering the country, but we expect the previous operation to be compute more frequently.
+\begin{verbatim}
+     db.films.createIndex({"Country" : 1, "imdbRating" : -1});
+\end{verbatim}
 
 % ----- ANALYTICS -----
 \subsection{Analytics and statistics}
@@ -221,8 +255,7 @@ Moreover we manage some data types, because scraping OpenMovie platform, we obta
 This analytic is performed to display all production houses.
 \subsubsection{Top rated movies by year and country}
 
-\subsection{MongoDb index}
-In order to speeding up some operations, we introduce some indexes ...
+
 
 \clearpage
 
@@ -240,13 +273,13 @@ The following code shows how it is realized the architecture in which 3 mongo se
 \input{./java_code/replicaSetup.tex}
 \vspace{5mm}
 \subsection{Java class description}
-\subsubsection{Declaretion of class Film}
+\subsubsection{Declaration of class Film}
 The following java-code shows a declaration of the class Film.
 \vspace{2mm}
 \\ <code here>
 \vspace{5mm}
 
-\subsubsection{Declaretion of class User}
+\subsubsection{Declaration of class User}
 The following java-code shows a declaration of the class User.
 \vspace{2mm}
 	\\ <code here>
@@ -341,21 +374,4 @@ In the Admin tab you can search for a film the same way the user did in the Home
 
 <admin tab after searching films and with a json document in the text field --> image name: admin1>
 
-
-\clearpage
-\subsection{Database design}
-The application is developped over a no-SQL database, using the MongoDb platform.
-
-\vspace{19mm}
-
-
-
-\clearpage
-
 \end{document}
-
-
-
-
-
-
