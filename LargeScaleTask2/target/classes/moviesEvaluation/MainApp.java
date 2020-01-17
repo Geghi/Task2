@@ -18,7 +18,7 @@ public class MainApp extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("MoviesEvaluations");
+		this.primaryStage.setTitle("Moviegram");
 
 		managerM = new MongoManager(27017, "localhost");
 

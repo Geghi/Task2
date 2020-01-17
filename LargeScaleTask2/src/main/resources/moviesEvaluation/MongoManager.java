@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MongoManager {
 
-	final private String DB_NAME = "MoviesEvaluation";
+	final private String DB_NAME = "Moviegram";
 	private int port;
 	private String ip;
 	MongoClient mongoClient;
@@ -25,18 +25,18 @@ public class MongoManager {
 		ip = i;
 		mongoClient = MongoClients.create("mongodb://" + ip + ":" + port);
 		database = mongoClient.getDatabase(DB_NAME);
-		userCollection = database.getCollection("Users");
-		filmCollection = database.getCollection("Films");
+		userCollection = database.getCollection("usersCollection");
+		filmCollection = database.getCollection("moviesCollection");
 	}
 
 	public User checkUser(String username, String password) {
 		try {
-			Document found = (Document) userCollection.find(and(eq("username", username), eq("password", password)))
+			Document found = (Document) userCollection.find(and(eq("Username", username), eq("Password", password)))
 					.first();
 
 			if (found != null) {
-				MainApp.user = new User(found.getString("name"), found.getString("username"),
-						found.getString("password"), found.getString("country"), found.getBoolean("admin"));
+				MainApp.user = new User(found.getString("Name"), found.getString("Username"),
+						found.getString("Password"), found.getString("Country"), found.getBoolean("Admin"));
 				return MainApp.user;
 			}
 		} catch (Exception ex) {
@@ -48,8 +48,8 @@ public class MongoManager {
 
 	public void registerUser(String name, String username, String password, String country) {
 		try {
-			Document document = new Document("name", name).append("username", username).append("password", password)
-					.append("country", country).append("admin", false);
+			Document document = new Document("Name", name).append("Username", username).append("Password", password)
+					.append("Country", country).append("Admin", false);
 			userCollection.insertOne(document);
 		} catch (Exception ex) {
 			ex.printStackTrace();

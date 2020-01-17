@@ -206,8 +206,8 @@ public class HomeController implements Initializable {
 
 			Double updatedRating = ((film.getVotes() * film.getRating()) + vote) / (film.getVotes() + 1);
 			film.setVotes(film.getVotes() + 1);
-			film.setRating(updatedRating);
 			Double roundedRating = (double) Math.round(updatedRating * 10) / 10;
+			film.setRating(roundedRating);
 			ratingLabel.setText(Double.toString(roundedRating));
 			MainApp.managerM.addVote(film, vote, roundedRating);
 		} catch (Exception ex) {
