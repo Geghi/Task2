@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7050 64-bit) (preloaded format=pdflatex 2019.7.22)  16 JAN 2020 20:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7050 64-bit) (preloaded format=pdflatex 2019.7.22)  17 JAN 2020 14:25
 entering extended mode
 **./documentazione.tex
 (documentazione.tex
@@ -526,7 +526,7 @@ Overfull \hbox (15.0pt too wide) in paragraph at lines 203--2
 
  <./images/screens/OMDBScraperScreen.jpg>]) [9 <./images/screens/elementJSONExa
 mple.jpg>] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 265--269
+Underfull \hbox (badness 10000) in paragraph at lines 283--287
 
  []
 
@@ -543,59 +543,7 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <8> not available
 
 ]
 
-LaTeX Warning: Reference `fig:screen0' on page 14 undefined on input line 338.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 338--339
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 340--341
-
- []
-
-
-LaTeX Warning: Reference `fig:screen1' on page 14 undefined on input line 342.
-
-
-LaTeX Warning: Reference `fig:screen2' on page 14 undefined on input line 342.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 342--343
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 344--345
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 346--347
-
- []
-
-
-LaTeX Warning: Reference `fig:screen3' on page 14 undefined on input line 348.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 348--349
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 350--351
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 354--355
-
- []
-
-
-LaTeX Warning: Reference `fig:screen5' on page 14 undefined on input line 356.
+LaTeX Warning: Reference `fig:screen0' on page 14 undefined on input line 356.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 356--357
@@ -608,7 +556,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 358--359
  []
 
 
-LaTeX Warning: Reference `fig:screen6' on page 14 undefined on input line 360.
+LaTeX Warning: Reference `fig:screen1' on page 14 undefined on input line 360.
+
+
+LaTeX Warning: Reference `fig:screen2' on page 14 undefined on input line 360.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 360--361
@@ -620,27 +571,76 @@ Underfull \hbox (badness 10000) in paragraph at lines 362--363
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 364--365
+
+ []
+
+
+LaTeX Warning: Reference `fig:screen3' on page 14 undefined on input line 366.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 366--367
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 368--369
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 372--373
+
+ []
+
+
+LaTeX Warning: Reference `fig:screen5' on page 14 undefined on input line 374.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 374--375
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 376--377
+
+ []
+
+
+LaTeX Warning: Reference `fig:screen6' on page 14 undefined on input line 378.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 378--379
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 380--381
+
+ []
+
 [14
 
 ]
 
-LaTeX Warning: Reference `fig:admin0' on page 15 undefined on input line 369.
+LaTeX Warning: Reference `fig:admin0' on page 15 undefined on input line 387.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 369--370
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 371--372
+Underfull \hbox (badness 10000) in paragraph at lines 387--388
 
  []
 
 
-LaTeX Warning: Reference `fig:admin1' on page 15 undefined on input line 373.
+Underfull \hbox (badness 10000) in paragraph at lines 389--390
+
+ []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--374
+LaTeX Warning: Reference `fig:admin1' on page 15 undefined on input line 391.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 391--392
 
  []
 
@@ -677,9 +677,9 @@ rograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Marco/App
 Data/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Us
 ers/Marco/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy
 8.pfb>
-Output written on documentazione.pdf (17 pages, 624235 bytes).
+Output written on documentazione.pdf (17 pages, 629631 bytes).
 PDF statistics:
- 510 PDF objects out of 1000 (max. 8388607)
+ 524 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

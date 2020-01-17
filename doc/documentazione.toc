@@ -17,7 +17,7 @@
 \contentsline {subsubsection}{\numberline {3.4.2}Index 2}{10}% 
 \contentsline {subsection}{\numberline {3.5}Analytics and statistics}{10}% 
 \contentsline {subsubsection}{\numberline {3.5.1}View the top production houses}{10}% 
-\contentsline {subsubsection}{\numberline {3.5.2}Top rated movies by year and country}{10}% 
+\contentsline {subsubsection}{\numberline {3.5.2}View top 10 country of production, once selected a year}{10}% 
 \contentsline {section}{\numberline {4}Implementation}{11}% 
 \contentsline {subsection}{\numberline {4.1}Used technologies}{11}% 
 \contentsline {subsection}{\numberline {4.2}Replica setup}{11}% 

@@ -252,10 +252,28 @@ In order to speeding up the operation that displays the top rated movies related
 % ----- ANALYTICS -----
 \subsection{Analytics and statistics}
 \subsubsection{View the top production houses}
-This analytic is performed to display all production houses.
-\subsubsection{Top rated movies by year and country}
+This analytic is performed to display the production houses that produced the most films. To do so, we make an aggregation pipeline to recover from our database the information about the production houses’ production. \\
+The first thing to do is to filter out the document with a “N/A” value in the production field; done that, we aggregate on Production (production houses) summing every film made by that specific company; as a last thing to do, we order the resulting documents in ascending order.\\
+View top production.Aggregate per production summing up, excluding “N/A” and sorting.
+\begin{verbatim}
+   db.Films.aggregate([
+       {$match:{  Production: {$ne: “N/A”}}},
+       {$group:{ _id: “$Production”, NFilm: {$sum: 1}}},
+       {$sort:{NFilm: -1}}
+   ]);
+\end{verbatim}
 
 
+\subsubsection{View top 10 country of production, once selected a year}
+In that case, we let the user choose the year for which compute the aggregation. The users’ year choose is passed to the java function that will produce the aggregation. In our example we selected the year 2005.\\
+The first thing we do is selecting only the records for the chosen year, this is done with the \$match phase. The second thing we do is grouping per “\$Country” and summing up all the document for that country; the last thing we do is the sorting in ascendant order relying on the NFilms field.
+\begin{verbatim}
+   db.Films.aggregate([
+       {$match:{ Year : "2005"}},
+       {$group:{ _id: “$Country”, NFilms:{ $sum: sum:1}}},
+       {$sort:{ NFilms:-1}}
+   ]);
+\end{verbatim}
 
 \clearpage
 
