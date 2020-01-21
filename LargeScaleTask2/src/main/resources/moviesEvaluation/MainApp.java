@@ -23,7 +23,7 @@ public class MainApp extends Application {
 		managerM = new MongoManager(27017, "localhost");
 
 		initLayout();
-
+		managerM.topProduction();
 	}
 
 //    Initializes the home layout.

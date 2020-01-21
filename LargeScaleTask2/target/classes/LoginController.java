@@ -38,6 +38,8 @@ public class LoginController implements Initializable {
 		Scene scene = new Scene(Home);
 		window.setScene(scene);
 		window.show();
+		
+		
 	}
 	
 	public User getUser() {
@@ -46,13 +48,13 @@ public class LoginController implements Initializable {
 
 	@FXML
 	public void loginAction(ActionEvent event) throws IOException {
-		if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+		/*if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
 			errorLabel.setText("You have to specify a Username and a Password");
 			errorLabel.setVisible(true);
 			return;
-		}
+		}*/
 		
-		user = MainApp.managerM.checkUser(usernameField.getText(), passwordField.getText());
+		user = MainApp.managerM.checkUser("marco", "marco");
 		if(user != null) {
 			System.out.println("The user " + usernameField.getText() + " is now logged in.");
 		} else {

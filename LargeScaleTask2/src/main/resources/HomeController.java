@@ -2,12 +2,16 @@ package main.resources;
 
 import main.resources.moviesEvaluation.Film;
 import main.resources.moviesEvaluation.MainApp;
+import main.resources.moviesEvaluation.ProductionNFilm;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,7 +43,7 @@ import javafx.stage.Stage;
 
 public class HomeController implements Initializable {
 
-	ObservableList<String> analyticsValues = FXCollections.observableArrayList("Item 1", "Item 2");
+	ObservableList<String> analyticsValues = FXCollections.observableArrayList("Top Rated Films", "Top Productions", "Top Rated Country"); 
 	ObservableList<String> filtersValues = FXCollections.observableArrayList("Item 1", "Item 2");
 	ObservableList<Integer> voteValues = FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 	@FXML
@@ -90,12 +94,40 @@ public class HomeController implements Initializable {
 
 	@FXML
 	private void initializeBox() {
-		analyticsSelection.setValue("Item 1");
+		if(MainApp.user.getAdmin()) {
+			analyticsValues.add("Top Active Users");
+		}
+		
 		analyticsSelection.setItems(analyticsValues);
-		filters.setValue("Item 1");
-		filters.setItems(filtersValues);
-		voteBox.setValue(1);
-		voteBox.setItems(voteValues);
+		analyticsSelection.setValue("Select analytics");
+		filters.setVisible(false);
+		
+		analyticsSelection.valueProperty().addListener((obs, oldItem, newItem) -> {
+            if(analyticsSelection.getValue().equals("Top Rated Films")) {
+            	filters.setVisible(true);
+            	//filters.setItems(new )
+            	MainApp.managerM.getYears();
+            }
+            else if(analyticsSelection.getValue().equals("Top Productions")) {
+            	MainApp.managerM.getYears();
+            	filters.setVisible(true);
+            }
+            else if(analyticsSelection.getValue().equals("Top Rated Country")) {
+            	filters.setItems(MainApp.managerM.getYears());
+            	filters.setVisible(false);
+            	
+            }
+            else if(analyticsSelection.getValue().equals("Top Active Users")) {
+            	MainApp.managerM.getYears();
+            	filters.setVisible(false);
+            }
+           
+            
+        });
+		}
+	
+	private void hello() {
+		System.out.print("hello\n");
 	}
 
 	private void updateTable(TableView<Film> table, TableColumn<Film, String> column, int check) {
@@ -236,6 +268,11 @@ public class HomeController implements Initializable {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+	}
+	
+	public void showTopProduction(){
+		//ProductionNFilm[] = MainApp.managerM.topProduction();
+		
 	}
 
 	@FXML

@@ -3,11 +3,21 @@ package main.resources.moviesEvaluation;
 import org.bson.Document;
 
 import com.mongodb.client.*;
+import com.mongodb.client.model.Aggregates;
+import com.mongodb.client.model.Sorts;
+import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.result.DeleteResult;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import static com.mongodb.client.model.Filters.*;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class MongoManager {
@@ -96,6 +106,44 @@ public class MongoManager {
 
 	}
 
+	public ObservableList<String> getYears(){
+		
+		ObservableList<String> list = FXCollections.observableArrayList();
+		try {
+			
+			//MongoCursor<Document> cursor = filmCollection.distinct("Year", Document.class).filter( regex("Year", "/^[0-9]{4}$/")).iterator();
+			
+			//Document cursor = filmCollection.distinct("Year", Document.class);
+			//System.out.print(filmCollection.distinct("Year", String.class).filter( regex("Year", "/^[0-9]{4}$/")).into(new ArrayList<String>()));
+			ArrayList a = filmCollection.distinct("Year", String.class).into(new ArrayList<String>());
+			System.out.println(a);
+			System.out.println(a.size());
+			System.out.println(a.get(1).getClass());
+			a.sort(Collections.reverseOrder());
+			
+			System.out.println(a);
+			for(int i = 0; i<a.size(); i++) {
+				if(a.get(i).toString().length() > 4) {
+					a.remove(i);
+					i--;
+				}
+				else {
+					list.add((String) a.get(i));
+				}
+			}
+			System.out.println(a);
+			
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ObservableList<String> getCountries(){
+		return null;
+	}
+	
 	public void addVote(Film film, int vote, Double updatedRating) {
 		try {
 			Document found = (Document) filmCollection
@@ -122,6 +170,41 @@ public class MongoManager {
 		}
 	}
 
+	public ProductionNFilm[] topProduction() {
+		String tmp, house, film;
+		String[] split;
+		split = new String[2];
+		ProductionNFilm[] ret;
+		ret = new ProductionNFilm[10];
+		int i = 0;
+		MongoCursor<Document> cursor = filmCollection.aggregate(Arrays.asList(Aggregates.match(nin("Production", Arrays.asList("N/A", null))), 
+																			  Aggregates.group("$Production", Accumulators.sum("NFilm", 1L)), 
+																			  Aggregates.sort(Sorts.descending("NFilm")))				
+				).iterator();
+		try {
+			while(i < 10) {
+				tmp = cursor.next().toJson();
+				tmp = tmp.replace("{", "");
+				tmp = tmp.replace("}", "");
+				tmp = tmp.replace('"', ' ');
+				tmp = tmp.replace("$numberLong :", "");
+				//System.out.println(tmp);
+				split = tmp.split(",");
+				split[0] = split[0].replace(" ", "");
+				split[1] = split[1].replace(" ", "");
+				house = split[0].split(":")[1];
+				film = split[1].split(":")[1];
+				//System.out.println(house + " " + film);
+				ret[i] = new ProductionNFilm(house, Integer.parseInt(film));
+				System.out.println(ret[i].getProductionHouse() + " " + ret[i].getNFilm());
+				i++;
+			}
+		}finally {
+			cursor.close();
+		}
+		return ret;
+	}
+	
 	public void quit() {
 		mongoClient.close();
 	}
