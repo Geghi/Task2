@@ -105,16 +105,67 @@ public class MongoManager {
 		return null;
 
 	}
+	
+	public List<Film> searchFilmsSorted() {
+		try {
+			MongoCursor<Document> cursor = filmCollection.find().limit(30)
+					.iterator();
+			List<Film> films = new ArrayList<>();
+			while (cursor.hasNext()) {
+				Document filmDocument = cursor.next();
+				String filmTitle = filmDocument.getString("Title");
+				String director = filmDocument.getString("Director");
+				String production = filmDocument.getString("Production");
+				String poster = filmDocument.getString("Poster");
+				String year = filmDocument.getString("Year");
+				String rating = filmDocument.getString("imdbRating");
+				String votes = filmDocument.getString("imdbVotes");
+
+				Film film = new Film(filmTitle, director, production, poster, year, rating, votes);
+				films.add(film);
+			}
+			return films;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	public List<Film> searchFilmsSortedFiltered(String country) {
+		try {
+			MongoCursor<Document> cursor = filmCollection.find(eq("Country", country)).limit(30)
+					.iterator();
+			List<Film> films = new ArrayList<>();
+			while (cursor.hasNext()) {
+				Document filmDocument = cursor.next();
+				String filmTitle = filmDocument.getString("Title");
+				String director = filmDocument.getString("Director");
+				String production = filmDocument.getString("Production");
+				String poster = filmDocument.getString("Poster");
+				String year = filmDocument.getString("Year");
+				String rating = filmDocument.getString("imdbRating");
+				String votes = filmDocument.getString("imdbVotes");
+
+				Film film = new Film(filmTitle, director, production, poster, year, rating, votes);
+				films.add(film);
+			}
+			return films;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+
+	}
+	
 
 	public ObservableList<String> getYears(){
 		
 		ObservableList<String> list = FXCollections.observableArrayList();
 		try {
 			
-			//MongoCursor<Document> cursor = filmCollection.distinct("Year", Document.class).filter( regex("Year", "/^[0-9]{4}$/")).iterator();
-			
-			//Document cursor = filmCollection.distinct("Year", Document.class);
-			//System.out.print(filmCollection.distinct("Year", String.class).filter( regex("Year", "/^[0-9]{4}$/")).into(new ArrayList<String>()));
 			ArrayList a = filmCollection.distinct("Year", String.class).into(new ArrayList<String>());
 			System.out.println(a);
 			System.out.println(a.size());
@@ -141,7 +192,32 @@ public class MongoManager {
 	}
 	
 	public ObservableList<String> getCountries(){
-		return null;
+		ObservableList<String> list = FXCollections.observableArrayList();
+		try {
+			ArrayList a = filmCollection.distinct("Country", String.class).into(new ArrayList<String>());
+			System.out.println(a);
+			System.out.println(a.size());
+			System.out.println(a.get(1).getClass());
+			a.sort(Collections.reverseOrder());
+			
+			System.out.println(a);
+			for(int i = 0; i<a.size(); i++) {
+				if(a.get(i).toString().contains(",")) {
+					a.remove(i);
+					i--;
+				}
+				else {
+					list.add((String) a.get(i));
+				}
+			}
+			System.out.println(a);
+			
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return list;
+		
 	}
 	
 	public void addVote(Film film, int vote, Double updatedRating) {
@@ -170,12 +246,11 @@ public class MongoManager {
 		}
 	}
 
-	public ProductionNFilm[] topProduction() {
+	public ObservableList<ProductionNFilm> topProduction() {
 		String tmp, house, film;
 		String[] split;
 		split = new String[2];
-		ProductionNFilm[] ret;
-		ret = new ProductionNFilm[10];
+		ObservableList<ProductionNFilm> ret = FXCollections.observableArrayList();
 		int i = 0;
 		MongoCursor<Document> cursor = filmCollection.aggregate(Arrays.asList(Aggregates.match(nin("Production", Arrays.asList("N/A", null))), 
 																			  Aggregates.group("$Production", Accumulators.sum("NFilm", 1L)), 
@@ -194,9 +269,7 @@ public class MongoManager {
 				split[1] = split[1].replace(" ", "");
 				house = split[0].split(":")[1];
 				film = split[1].split(":")[1];
-				//System.out.println(house + " " + film);
-				ret[i] = new ProductionNFilm(house, Integer.parseInt(film));
-				System.out.println(ret[i].getProductionHouse() + " " + ret[i].getNFilm());
+				ret.add(new ProductionNFilm(house, Integer.parseInt(film)));
 				i++;
 			}
 		}finally {

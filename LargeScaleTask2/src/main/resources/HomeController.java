@@ -35,6 +35,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -53,9 +54,9 @@ public class HomeController implements Initializable {
 	@FXML
 	private ComboBox<String> filters, analyticsSelection;
 	@FXML
-	private TableView<Film> filmHomeTable, filmAnalyticsTable, filmAdminTable;
+	private TableView<Film> filmHomeTable, filmAdminTable, filmAnalyticsTable;
 	@FXML
-	private TableColumn<Film, String> filmHomeColumn, filmAnalyticsColumn, filmAdminColumn;
+	private TableColumn<Film, String> filmHomeColumn, filmAdminColumn, filmAnalyticsColumn;
 	@FXML
 	private PieChart pieChart;
 	@FXML
@@ -88,10 +89,9 @@ public class HomeController implements Initializable {
 			initializeTable(filmAdminColumn);
 		initializeTables();
 		initializeBox();
-		inizializePieChart();
-		updateTable(filmAnalyticsTable, filmAnalyticsColumn, 1);
+		inizializePieChart();	
 	}
-
+	
 	@FXML
 	private void initializeBox() {
 		if(MainApp.user.getAdmin()) {
@@ -102,46 +102,87 @@ public class HomeController implements Initializable {
 		analyticsSelection.setValue("Select analytics");
 		filters.setVisible(false);
 		
+
 		analyticsSelection.valueProperty().addListener((obs, oldItem, newItem) -> {
+			
+			// TOP RATED FILMS
             if(analyticsSelection.getValue().equals("Top Rated Films")) {
             	filters.setVisible(true);
-            	//filters.setItems(new )
-            	MainApp.managerM.getYears();
+            	filters.setItems(MainApp.managerM.getCountries());
+
+            	updateTableAnalytics(filmAnalyticsTable, filmAnalyticsColumn, MainApp.managerM.searchFilmsSorted());
+            	
+            	filters.valueProperty().addListener((obss, oldItems, newItems) -> {
+            		
+            		updateTableAnalytics(filmAnalyticsTable, filmAnalyticsColumn,
+            				MainApp.managerM.searchFilmsSortedFiltered(filters.getSelectionModel().getSelectedItem()));
+            			
+            	});
             }
+            
+            
+            // TOP PRODUCTIONS
             else if(analyticsSelection.getValue().equals("Top Productions")) {
-            	MainApp.managerM.getYears();
-            	filters.setVisible(true);
-            }
-            else if(analyticsSelection.getValue().equals("Top Rated Country")) {
-            	filters.setItems(MainApp.managerM.getYears());
             	filters.setVisible(false);
             	
+            	// questa funzione del manager ritorna una observable list contenente i top houseProduction
+            	// devo passsarla a una funzione che la metta in una tabella
+            	MainApp.managerM.topProduction(); 
             }
+            
+            
+            // TOP RATED COUNTRIES
+            else if(analyticsSelection.getValue().equals("Top Rated Country")) {
+            	filters.setItems(MainApp.managerM.getYears());
+            	filters.setVisible(true);
+
+            	filters.valueProperty().addListener((obs1, oldItem1, newItem1) -> {
+            		// CHIAMA LA QUERY PASSANDO L'ANNO
+            		// l'anno lo prendo da
+            		filters.getSelectionModel().getSelectedItem();
+            	});
+
+            	
+            }
+            
+            
+            // TOP ACTIVE USER
             else if(analyticsSelection.getValue().equals("Top Active Users")) {
-            	MainApp.managerM.getYears();
             	filters.setVisible(false);
+            	
+            	
             }
            
             
         });
 		}
 	
-	private void hello() {
-		System.out.print("hello\n");
+	
+	private void updateTableAnalytics(TableView<Film> table, TableColumn<Film,String> filmAnalyticsColumn, List<Film> list) {
+		
+		ObservableList<Film> films = FXCollections.observableArrayList();
+		for(int i=0; i<list.size(); i++) {
+			films.add((Film)list.get(i));
+		}
+		filmAnalyticsColumn.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
+		table.setItems(films);
 	}
-
+	
+	
 	private void updateTable(TableView<Film> table, TableColumn<Film, String> column, int check) {
 		ObservableList<Film> films;
 		List<Film> filmList = new ArrayList<>();
 		String title = null;
+		
+		
+		// 0 -> update home table
 		if (check == 0) {
 			title = searchText.getText();
 			filmList.addAll(MainApp.managerM.searchFilm(title));
-
-		} else if (check == 1) {
-			// TODO Analytics query
-			films = FXCollections.observableArrayList();
-		} else {
+		} 
+		
+		// 2 -> update admin table
+		else {
 			title = searchTextAdmin.getText();
 			filmList.addAll(MainApp.managerM.searchFilm(title));
 		}
@@ -155,9 +196,22 @@ public class HomeController implements Initializable {
 
 	private void initializeTables() {
 		initializeTable(filmHomeColumn);
-		initializeTable(filmAnalyticsColumn);
+		initializeTableAnalytics(filmAnalyticsColumn);
 	}
 
+	
+	private void initializeTableAnalytics(TableColumn<Film, String> column) {
+		column.setCellFactory(tc -> {
+			TableCell<Film, String> cell = new TableCell<>();
+			Text text = new Text();
+			cell.setGraphic(text);
+			text.wrappingWidthProperty().bind(column.widthProperty());
+			text.textProperty().bind(cell.itemProperty());
+			text.getStyleClass().add("columnText");
+			return cell;
+		});
+	}
+	
 	private void initializeTable(TableColumn<Film, String> column) {
 		column.setCellFactory(tc -> {
 			TableCell<Film, String> cell = new TableCell<>();

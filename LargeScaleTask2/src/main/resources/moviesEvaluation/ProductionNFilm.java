@@ -1,19 +1,20 @@
 package main.resources.moviesEvaluation;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class ProductionNFilm {
 	private SimpleStringProperty productionHouse;
-	private int NFilm;
+	private SimpleIntegerProperty NFilm;
 	
 	public ProductionNFilm(String pH, int nF){
 		productionHouse = new SimpleStringProperty(pH);
-		NFilm = nF;
+		NFilm = new SimpleIntegerProperty(nF);
 	}
 	public String getProductionHouse() {
 		return productionHouse.get();
 	}
 	public int getNFilm() {
-		return NFilm;
+		return NFilm.get();
 	}
 }
