@@ -54,9 +54,13 @@ public class HomeController implements Initializable {
 	@FXML
 	private ComboBox<String> filters, analyticsSelection;
 	@FXML
-	private TableView<Film> filmHomeTable, filmAdminTable, filmAnalyticsTable;
+	private TableView<Film> filmHomeTable, filmAdminTable ;
+	@FXML 
+	private TableView<Object> filmAnalyticsTable;
 	@FXML
-	private TableColumn<Film, String> filmHomeColumn, filmAdminColumn, filmAnalyticsColumn;
+	private TableColumn<Film, String> filmHomeColumn, filmAdminColumn;
+	@FXML
+	private TableColumn<Object, String> filmAnalyticsColumn;
 	@FXML
 	private PieChart pieChart;
 	@FXML
@@ -158,14 +162,14 @@ public class HomeController implements Initializable {
 		}
 	
 	
-	private void updateTableAnalytics(TableView<Film> table, TableColumn<Film,String> filmAnalyticsColumn, List<Film> list) {
+	private void updateTableAnalytics(TableView<Object> table, TableColumn<Object,String> filmAnalyticsColumn, List<Object> list) {
 		
-		ObservableList<Film> films = FXCollections.observableArrayList();
+		ObservableList<Object> items = FXCollections.observableArrayList();
 		for(int i=0; i<list.size(); i++) {
-			films.add((Film)list.get(i));
+			items.add(list.get(i));
 		}
-		filmAnalyticsColumn.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
-		table.setItems(films);
+		filmAnalyticsColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("title"));
+		table.setItems(items);
 	}
 	
 	
@@ -200,9 +204,9 @@ public class HomeController implements Initializable {
 	}
 
 	
-	private void initializeTableAnalytics(TableColumn<Film, String> column) {
+	private void initializeTableAnalytics(TableColumn<Object, String> column) {
 		column.setCellFactory(tc -> {
-			TableCell<Film, String> cell = new TableCell<>();
+			TableCell<Object, String> cell = new TableCell<>();
 			Text text = new Text();
 			cell.setGraphic(text);
 			text.wrappingWidthProperty().bind(column.widthProperty());

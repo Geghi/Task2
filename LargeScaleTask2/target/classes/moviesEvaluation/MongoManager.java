@@ -106,23 +106,17 @@ public class MongoManager {
 
 	}
 	
-	public List<Film> searchFilmsSorted() {
+	public List<Object> searchFilmsSorted() {
 		try {
 			MongoCursor<Document> cursor = filmCollection.find().limit(30)
 					.iterator();
-			List<Film> films = new ArrayList<>();
+			List<Object> films = new ArrayList<>();
 			while (cursor.hasNext()) {
 				Document filmDocument = cursor.next();
-				String filmTitle = filmDocument.getString("Title");
-				String director = filmDocument.getString("Director");
-				String production = filmDocument.getString("Production");
-				String poster = filmDocument.getString("Poster");
-				String year = filmDocument.getString("Year");
-				String rating = filmDocument.getString("imdbRating");
-				String votes = filmDocument.getString("imdbVotes");
-
-				Film film = new Film(filmTitle, director, production, poster, year, rating, votes);
-				films.add(film);
+				
+				Film film = createFilmObject(filmDocument);
+			
+				films.add((Object)film);
 			}
 			return films;
 
@@ -133,23 +127,16 @@ public class MongoManager {
 	}
 	
 	
-	public List<Film> searchFilmsSortedFiltered(String country) {
+	public List<Object> searchFilmsSortedFiltered(String country) {
 		try {
 			MongoCursor<Document> cursor = filmCollection.find(eq("Country", country)).limit(30)
 					.iterator();
-			List<Film> films = new ArrayList<>();
+			List<Object> films = new ArrayList<>();
 			while (cursor.hasNext()) {
 				Document filmDocument = cursor.next();
-				String filmTitle = filmDocument.getString("Title");
-				String director = filmDocument.getString("Director");
-				String production = filmDocument.getString("Production");
-				String poster = filmDocument.getString("Poster");
-				String year = filmDocument.getString("Year");
-				String rating = filmDocument.getString("imdbRating");
-				String votes = filmDocument.getString("imdbVotes");
-
-				Film film = new Film(filmTitle, director, production, poster, year, rating, votes);
-				films.add(film);
+				
+				Film film = createFilmObject(filmDocument);
+				films.add((Object)film);
 			}
 			return films;
 
@@ -166,7 +153,7 @@ public class MongoManager {
 		ObservableList<String> list = FXCollections.observableArrayList();
 		try {
 			
-			ArrayList a = filmCollection.distinct("Year", String.class).into(new ArrayList<String>());
+			ArrayList<String> a = filmCollection.distinct("Year", String.class).into(new ArrayList<String>());
 			System.out.println(a);
 			System.out.println(a.size());
 			System.out.println(a.get(1).getClass());
@@ -194,7 +181,7 @@ public class MongoManager {
 	public ObservableList<String> getCountries(){
 		ObservableList<String> list = FXCollections.observableArrayList();
 		try {
-			ArrayList a = filmCollection.distinct("Country", String.class).into(new ArrayList<String>());
+			ArrayList<String> a = filmCollection.distinct("Country", String.class).into(new ArrayList<String>());
 			System.out.println(a);
 			System.out.println(a.size());
 			System.out.println(a.get(1).getClass());
@@ -276,6 +263,19 @@ public class MongoManager {
 			cursor.close();
 		}
 		return ret;
+	}
+	
+	public Film createFilmObject(Document filmDocument) {
+		String filmTitle = filmDocument.getString("Title");
+		String director = filmDocument.getString("Director");
+		String production = filmDocument.getString("Production");
+		String poster = filmDocument.getString("Poster");
+		String year = filmDocument.getString("Year");
+		String rating = filmDocument.getString("imdbRating");
+		String votes = filmDocument.getString("imdbVotes");
+
+		Film film = new Film(filmTitle, director, production, poster, year, rating, votes);
+		return film;
 	}
 	
 	public void quit() {
