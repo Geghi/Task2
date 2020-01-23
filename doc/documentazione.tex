@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{frontespizio}
+\usepackage{float}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{scrextend}
@@ -294,41 +295,40 @@ The following code shows how it is realized the architecture in which 3 mongo se
 \subsubsection{Declaration of class Film}
 The following java-code shows a declaration of the class Film.
 \vspace{2mm}
-\\ <code here>
+\input{./java_code/film.tex}
 \vspace{5mm}
 
 \subsubsection{Declaration of class User}
 The following java-code shows a declaration of the class User.
 \vspace{2mm}
-	\\ <code here>
+\input{./java_code/user.tex}
 \vspace{5mm}
-
- Another foundamental class is MongoManager, that manages the db-connection and the related operations.
- The implementation of a set of CRUD operations is desribed as follows.
+Another foundamental class is MongoManager, that manages the db-connection and the related operations.
+The implementation of a set of CRUD operations is desribed as follows.
 
 
 \subsection{Create}
 Adding one or more films to the database using a json document as input.
 \vspace{2mm}
- \\<Code here>
+\input{./java_code/addFilm.tex}
 \vspace{5mm}
 
 \subsection{Read}
-This functionality returns a list of films searched by title. A film is returned if its title contains a piece of the searched title (case insensitive).\\
+This functionality returns a list of films searched by title. A film is returned if its title contains a piece of the searched title (case insensitive).
 \vspace{2mm}
-\\<code here>
+\input{./java_code/searchFilm.tex}
 \vspace{5mm}
 
 \subsection{Update}
-This operation allows users to update their vote about a selected film.\\
+This operation allows users to update their vote about a selected film.
 \vspace{2mm}
-\\<code here>
+\input{./java_code/updateVote.tex}
 \vspace{5mm}
 
 \subsection{Delete}
-This operation allows an admin to remove a selected film from the database.\\
+This operation allows an admin to remove a selected film from the database.
 \vspace{2mm}
-\\<code here>
+\input{./java_code/deleteFilm.tex}
 \vspace{5mm}
 
 \clearpage
@@ -353,43 +353,71 @@ In addiction there are 3 classes, called Controllers, that are in charge of hand
 \clearpage
 % MANUAL%
 \section{User Manual}
-When you first run the application, the interface you get is the login one, figure~\ref{fig:screen0}. \\
+When you first run the application, the interface you get is the login one, figure~\ref{fig:screen0}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{./images/screens/screen0} 
+\caption{Login page.}
+\label{fig:screen0}
+\end{figure}
 
-<login page image--> image name: screen0>\\
+\noindent In case you are not registered you can click the link at the bottom of the page to be redirected to a register page, figure~\ref{fig:screen1}, otherwise you can sign in the application and by default you get the interface shown in figure~\ref{fig:screen2}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{./images/screens/screen1} 
+\caption{Register page.}
+\label{fig:screen1}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{./images/screens/screen2} 
+\caption{Home page.}
+\label{fig:screen2}
+\end{figure}
 
-In case you are not registered you can click the link at the bottom of the page to be redirected to a register page, figure~\ref{fig:screen1}, otherwise you can sign in the application and by default you get the interface shown in figure~\ref{fig:screen2}\\
+\noindent From here you can search for a film by typing in the relative field and clicking the search button. You'll get a list of films that contains the text entered in the table below. Now you can select a film from the table and all the informations will be shown in the right pane of the application, figure~\ref{fig:screen3}. In the bottom right you are able to add a vote from 1 to 10 for the selected film.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{./images/screens/screen3} 
+\caption{Searching and selecting a film.}
+\label{fig:screen3}
+\end{figure}
 
-<register page image --> image name: screen1>\\
+\noindent In the top left of the page there are two tabs. by default after the login you are in the Home tab, by clicking the Analytics Tab you will see the following page.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{./images/screens/screen4} 
+\caption{Analytics page.}
+\label{fig:screen4}
+\end{figure}
 
-<Application home page after login --> image name: screen2> \\
+\noindent Here you have a choice box (left) to select what kind of analytics you want to be performed from the existing ones, and another one to apply a filter (right). After selecting an analytics you will see the results in the table below, and for some of them you will get a piechart aswell, figure~\ref{fig:screen5}\\
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{./images/screens/screen5} 
+\caption{Performing an analytics.}
+\label{fig:screen5}
+\end{figure}
 
-From here you can search for a film by typing in the relative field and clicking the search button. You'll get a list of films that contains the text entered in the table below. Now you can select a film from the table and all the informations will be shown in the right pane of the application, figure~\ref{fig:screen3}. In the bottom right you are able to add a vote from 1 to 10 for the selected film.\\
-
-<homepage after searching a film and selectiong one --> image name: screen3>\\
-
-In the top left of the page there are two tabs. by default after the login you are in the Home tab, by clicking the Analytics Tab you will see the following page.
-
-<analytics tab page --> image name: screen4>\\
-
-Here you have a choice box (left) to select what kind of analytics you want to be performed from the existing ones, and another one to apply a filter (right), figure~\ref{fig:screen5}. \\
-
-<default analytics page --> image name: screen5>\\
-
-After selecting an analytics you will see the results in the table below, and for some of them you will get a piechart aswell, figure~\ref{fig:screen6}\\
-
-<analytics page after performing analytics -->image name: screen6>\\
-
-To log out, just click on the appropriate button at the bottom.
+\noindent To log out, just click on the appropriate button at the bottom.
 
 \clearpage
 %ADIMN MANUAL%
 \subsection{Admin Manual}
-If you have an admin user, you are entitled to make changes on the film lists. You need to log in inserting your username and password, and the application will recognize you as the administrator and show up a third tab called "Admin", figure~\ref{fig:admin0}\\
+If you have an admin user, you are entitled to make changes on the film lists. You need to log in inserting your username and password, and the application will recognize you as the administrator and show up a third tab called "Admin", figure~\ref{fig:admin0}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{./images/screens/admin0} 
+\caption{Adnim page.}
+\label{fig:admin0}
+\end{figure}
 
-<page of the admin tab --> image name: admin0>\\
-
-In the Admin tab you can search for a film the same way the user did in the Home tab and after selecting one you are able to delete it by clicking the "Delete" button. On the right pane you are able to insert a json document in the text field, that represent a film in the database, and by clicking the Add button you will insert one or more films in the database (fig.~\ref{fig:admin1}).\\ 
-
-<admin tab after searching films and with a json document in the text field --> image name: admin1>
+\noindent In the Admin tab you can search for a film the same way the user did in the Home tab and after selecting one you are able to delete it by clicking the "Delete" button. On the right pane you are able to insert a json document in the text field, that represent a film in the database, and by clicking the Add button you will insert one or more films in the database (fig.~\ref{fig:admin1}).
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{./images/screens/admin1} 
+\caption{Admin page after searching for a film.}
+\label{fig:admin1}
+\end{figure}
 
 \end{document}

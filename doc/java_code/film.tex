@@ -1,0 +1,47 @@
+% ----- android wearable module -----
+\begin{lstlisting}[language=Java,  basicstyle=\footnotesize]
+public class Film {
+	private String id;
+	private SimpleStringProperty title;
+	private String director;
+	private String production;
+	private String poster;
+	private int year;
+	private Double rating;
+	private int votes;
+	
+
+	public Film(String _id, String title, String director,
+	 String production,	String poster, String year, String rating,
+	  String votes) {
+		
+		id = _id;
+		if (!rating.equals("N/A")) {
+			this.rating = Double.parseDouble(rating);
+		} else {
+			this.rating = 0.0;
+		}
+
+		if (!votes.equals("N/A")) {
+			this.votes = Integer.parseInt(votes.replaceAll(",", ""));
+		} else {
+			this.votes = 0;
+		}
+
+		if (!year.equals("N/A")) {
+			// remove spaces and tabs and pick only the first 4 char
+			this.year = Integer.parseInt(year.replaceAll("\\s+", "")
+			.substring(0, 4));
+		} else {
+			this.year = -1;
+		}
+
+		this.title = new SimpleStringProperty(title);
+		this.director = director;
+		this.production = production;
+		this.poster = poster;
+
+	}
+	...
+}
+\end{lstlisting}

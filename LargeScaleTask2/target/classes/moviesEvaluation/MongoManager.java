@@ -46,9 +46,9 @@ public class MongoManager {
 
 			if (found != null) {
 				MainApp.user = new User(found.getObjectId("_id").toString(), found.getString("Name"),
-										found.getString("Username"), found.getString("Password"),
-										found.getString("Country"), found.getBoolean("Admin"));
-				
+						found.getString("Username"), found.getString("Password"), found.getString("Country"),
+						found.getBoolean("Admin"));
+
 				return MainApp.user;
 			}
 		} catch (Exception ex) {
@@ -88,16 +88,7 @@ public class MongoManager {
 			List<Film> films = new ArrayList<>();
 			while (cursor.hasNext()) {
 				Document filmDocument = cursor.next();
-				String id = filmDocument.getObjectId("_id").toString();
-				String filmTitle = filmDocument.getString("Title");
-				String director = filmDocument.getString("Director");
-				String production = filmDocument.getString("Production");
-				String poster = filmDocument.getString("Poster");
-				String year = filmDocument.getString("Year");
-				String rating = filmDocument.getString("imdbRating");
-				String votes = filmDocument.getString("imdbVotes");
-
-				Film film = new Film(id, filmTitle, director, production, poster, year, rating, votes);
+				Film film = createFilmObject(filmDocument);
 				films.add(film);
 			}
 			return films;
@@ -106,20 +97,18 @@ public class MongoManager {
 			ex.printStackTrace();
 		}
 		return null;
-
 	}
-	
+
 	public List<Object> searchFilmsSorted() {
 		try {
-			MongoCursor<Document> cursor = filmCollection.find().limit(30)
-					.iterator();
+			MongoCursor<Document> cursor = filmCollection.find().limit(30).iterator();
 			List<Object> films = new ArrayList<>();
 			while (cursor.hasNext()) {
 				Document filmDocument = cursor.next();
-				
+
 				Film film = createFilmObject(filmDocument);
-			
-				films.add((Object)film);
+
+				films.add((Object) film);
 			}
 			return films;
 
@@ -128,18 +117,16 @@ public class MongoManager {
 		}
 		return null;
 	}
-	
-	
+
 	public List<Object> searchFilmsSortedFiltered(String country) {
 		try {
-			MongoCursor<Document> cursor = filmCollection.find(eq("Country", country)).limit(30)
-					.iterator();
+			MongoCursor<Document> cursor = filmCollection.find(eq("Country", country)).limit(30).iterator();
 			List<Object> films = new ArrayList<>();
 			while (cursor.hasNext()) {
 				Document filmDocument = cursor.next();
-				
+
 				Film film = createFilmObject(filmDocument);
-				films.add((Object)film);
+				films.add((Object) film);
 			}
 			return films;
 
@@ -149,39 +136,36 @@ public class MongoManager {
 		return null;
 
 	}
-	
 
-	public ObservableList<String> getYears(){
-		
+	public ObservableList<String> getYears() {
+
 		ObservableList<String> list = FXCollections.observableArrayList();
 		try {
-			
+
 			ArrayList<String> a = filmCollection.distinct("Year", String.class).into(new ArrayList<String>());
 			System.out.println(a);
 			System.out.println(a.size());
 			System.out.println(a.get(1).getClass());
 			a.sort(Collections.reverseOrder());
-			
+
 			System.out.println(a);
-			for(int i = 0; i<a.size(); i++) {
-				if(a.get(i).toString().length() > 4) {
+			for (int i = 0; i < a.size(); i++) {
+				if (a.get(i).toString().length() > 4) {
 					a.remove(i);
 					i--;
-				}
-				else {
+				} else {
 					list.add((String) a.get(i));
 				}
 			}
 			System.out.println(a);
-			
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return list;
 	}
-	
-	public ObservableList<String> getCountries(){
+
+	public ObservableList<String> getCountries() {
 		ObservableList<String> list = FXCollections.observableArrayList();
 		try {
 			ArrayList<String> a = filmCollection.distinct("Country", String.class).into(new ArrayList<String>());
@@ -189,27 +173,25 @@ public class MongoManager {
 			System.out.println(a.size());
 			System.out.println(a.get(1).getClass());
 			a.sort(Collections.reverseOrder());
-			
+
 			System.out.println(a);
-			for(int i = 0; i<a.size(); i++) {
-				if(a.get(i).toString().contains(",")) {
+			for (int i = 0; i < a.size(); i++) {
+				if (a.get(i).toString().contains(",")) {
 					a.remove(i);
 					i--;
-				}
-				else {
+				} else {
 					list.add((String) a.get(i));
 				}
 			}
 			System.out.println(a);
-			
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return list;
-		
+
 	}
-	
+
 	public void addVote(Film film, int vote, Double updatedRating) {
 		try {
 			Document found = (Document) filmCollection
@@ -219,11 +201,7 @@ public class MongoManager {
 						and(eq("Title", film.getTitle()), eq("Year", Integer.toString(film.getYear()))),
 						new Document("$set", new Document("imdbRating", Double.toString(updatedRating))
 								.append("imdbVotes", Integer.toString(film.getVotes()))));
-				
-				
-				
-				
-				
+
 			}
 			System.out.println("Vote Updated!");
 		} catch (Exception ex) {
@@ -240,44 +218,38 @@ public class MongoManager {
 			ex.printStackTrace();
 		}
 	}
-	
-	//ObservableList<Object>
-	public ObservableList<Object>  topCountries(String year){
+
+	// ObservableList<Object>
+	public ObservableList<Object> topCountries(String year) {
 		String tmp, countries, nfilm;
 		ObservableList<Object> ret = FXCollections.observableArrayList();
 		int i = 0;
 		String[] split;
 		split = new String[2];
-		MongoCursor<Document> cursor = filmCollection.aggregate(Arrays.asList(
-												Aggregates.match(eq("Year", year)),
-												Aggregates.group("$Country", Accumulators.sum("NFilm", 1L)),
-												Aggregates.sort(Sorts.descending("NFilm")))
-											).iterator();
-		
-		
-		
+		MongoCursor<Document> cursor = filmCollection.aggregate(Arrays.asList(Aggregates.match(eq("Year", year)),
+				Aggregates.group("$Country", Accumulators.sum("NFilm", 1L)),
+				Aggregates.sort(Sorts.descending("NFilm")))).iterator();
+
 		try {
-			while(i < 10 && cursor.hasNext()) {
+			while (i < 10 && cursor.hasNext()) {
 				tmp = cursor.next().toString();
-				//System.out.println(cursor.next());
-				
-				
-				
+				// System.out.println(cursor.next());
+
 				tmp = tmp.replace("Document{{_id=", "");
 				tmp = tmp.replace("}}", "");
-				
-				//System.out.println(tmp);
+
+				// System.out.println(tmp);
 				split = tmp.split(", NFilm=");
 				split[0] = split[0].replace(" ", "");
 				split[1] = split[1].replace(" ", "");
 				System.out.println(split[0] + " " + split[1]);
 				countries = split[0] + "  (" + split[1] + ")";
 				nfilm = split[1];
-				
-				ret.add((Object)new ProductionNFilm(countries, Integer.parseInt(nfilm)));
+
+				ret.add((Object) new ProductionNFilm(countries, Integer.parseInt(nfilm)));
 				i++;
 			}
-		}finally {
+		} finally {
 			cursor.close();
 		}
 		return ret;
@@ -289,32 +261,33 @@ public class MongoManager {
 		split = new String[2];
 		ObservableList<Object> ret = FXCollections.observableArrayList();
 		int i = 0;
-		MongoCursor<Document> cursor = filmCollection.aggregate(Arrays.asList(Aggregates.match(nin("Production", Arrays.asList("N/A", null))), 
-																			  Aggregates.group("$Production", Accumulators.sum("NFilm", 1L)), 
-																			  Aggregates.sort(Sorts.descending("NFilm")))				
-				).iterator();
+		MongoCursor<Document> cursor = filmCollection
+				.aggregate(Arrays.asList(Aggregates.match(nin("Production", Arrays.asList("N/A", null))),
+						Aggregates.group("$Production", Accumulators.sum("NFilm", 1L)),
+						Aggregates.sort(Sorts.descending("NFilm"))))
+				.iterator();
 		try {
-			while(i < 10) {
+			while (i < 10) {
 				tmp = cursor.next().toJson();
 				tmp = tmp.replace("{", "");
 				tmp = tmp.replace("}", "");
 				tmp = tmp.replace('"', ' ');
 				tmp = tmp.replace("$numberLong :", "");
-				//System.out.println(tmp);
+				// System.out.println(tmp);
 				split = tmp.split(",");
 				split[0] = split[0].replace(" ", "");
 				split[1] = split[1].replace(" ", "");
 				house = split[0].split(":")[1] + "  (" + split[1].split(":")[1] + ")";
 				film = split[1].split(":")[1];
-				ret.add((Object)new ProductionNFilm(house, Integer.parseInt(film)));
+				ret.add((Object) new ProductionNFilm(house, Integer.parseInt(film)));
 				i++;
 			}
-		}finally {
+		} finally {
 			cursor.close();
 		}
 		return ret;
 	}
-	
+
 	public Film createFilmObject(Document filmDocument) {
 		String id = filmDocument.getObjectId("_id").toString();
 		String filmTitle = filmDocument.getString("Title");
@@ -328,7 +301,7 @@ public class MongoManager {
 		Film film = new Film(id, filmTitle, director, production, poster, year, rating, votes);
 		return film;
 	}
-	
+
 	public void quit() {
 		mongoClient.close();
 	}

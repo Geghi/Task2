@@ -1,0 +1,36 @@
+% ----- android wearable module -----
+\begin{lstlisting}[language=Java,  basicstyle=\footnotesize]
+	public List<Film> searchFilm(String title) {
+		try {
+			MongoCursor<Document> cursor = filmCollection.find(regex
+			("Title", ".*" + title + ".*", "-i")).limit(30)
+					.iterator();
+			List<Film> films = new ArrayList<>();
+			while (cursor.hasNext()) {
+				Document filmDocument = cursor.next();
+				Film film = createFilmObject(filmDocument);
+				films.add(film);
+			}
+			return films;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Film createFilmObject(Document filmDocument) {
+		String id = filmDocument.getObjectId("_id").toString();
+		String filmTitle = filmDocument.getString("Title");
+		String director = filmDocument.getString("Director");
+		String production = filmDocument.getString("Production");
+		String poster = filmDocument.getString("Poster");
+		String year = filmDocument.getString("Year");
+		String rating = filmDocument.getString("imdbRating");
+		String votes = filmDocument.getString("imdbVotes");
+
+		Film film = new Film(id, filmTitle, director,
+		production, poster, year, rating, votes);
+		return film;
+	}
+\end{lstlisting}

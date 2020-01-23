@@ -1,0 +1,22 @@
+% ----- android wearable module -----
+\begin{lstlisting}[language=Java,  basicstyle=\footnotesize]
+public void addVote(Film film, int vote, Double updatedRating) {
+	try {
+		Document found = (Document) filmCollection
+		.find(and(eq("Title", film.getTitle()), eq("Year",
+		 Integer.toString(film.getYear())))).first();
+		if (found != null) {
+			filmCollection.updateMany(
+			and(eq("Title", film.getTitle()), 
+			eq("Year", Integer.toString(film.getYear()))),
+			new Document("$set", new Document("imdbRating",
+			Double.toString(updatedRating))
+			.append("imdbVotes", Integer.toString(film.getVotes()))));
+
+		}
+		System.out.println("Vote Updated!");
+	} catch (Exception ex) {
+		ex.printStackTrace();
+	}
+}
+\end{lstlisting}

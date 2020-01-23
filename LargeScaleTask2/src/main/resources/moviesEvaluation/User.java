@@ -10,7 +10,7 @@ public class User {
 	
 	
 	public User(String _id, String name, String username, String password, String country, Boolean admin) {
-		id = _id;
+		this.id = _id;
 		this.name = name;
 		this.username = username;
 		this.password = password;
@@ -18,6 +18,14 @@ public class User {
 		this.admin = admin;
 	}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}

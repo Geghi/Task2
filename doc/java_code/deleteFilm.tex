@@ -1,0 +1,14 @@
+% ----- android wearable module -----
+\begin{lstlisting}[language=Java,  basicstyle=\footnotesize]
+	public void deleteFilm(Film film) {
+		try {
+			DeleteResult deleteResult = filmCollection
+			.deleteMany(and(eq("Title", film.getTitle()),
+			eq("Year", Integer.toString(film.getYear()))));
+			System.out.println("Total number of films deleted: "
+			+ deleteResult.getDeletedCount());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+\end{lstlisting}

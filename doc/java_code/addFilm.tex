@@ -1,0 +1,15 @@
+% ----- android wearable module -----
+\begin{lstlisting}[language=Java,  basicstyle=\footnotesize]
+	public void addFilms(String jsonText) {
+		try {
+			String[] jsonLine = jsonText.split("\n");
+			for (int i = 0; i < jsonLine.length; i++) {
+				Document doc = Document.parse(jsonLine[i]);
+				filmCollection.insertOne(doc);
+			}
+			System.out.println("Insert Completed!");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+\end{lstlisting}

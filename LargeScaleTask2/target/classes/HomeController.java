@@ -272,8 +272,6 @@ public class HomeController implements Initializable {
 	@FXML
 	private void addFilm(ActionEvent event) {
 		try {
-			errorLabel.setText("Be patient, we need to implement that function!");
-			errorLabel.setVisible(true);
 			MainApp.managerM.addFilms(jsonArea.getText());
 			return;
 
