@@ -132,6 +132,16 @@
                                                             <Insets left="10.0" />
                                                          </padding>
                                                       </Label>
+                                                      <Label fx:id="voteLabel" focusTraversable="false" text="NULL" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                         <padding>
+                                                            <Insets left="10.0" />
+                                                         </padding>
+                                                      </Label>
+                                                      <Label focusTraversable="false" text="Your vote" GridPane.rowIndex="4">
+                                                         <padding>
+                                                            <Insets left="10.0" />
+                                                         </padding>
+                                                      </Label>
                                                    </children>
                                                 </GridPane>
                                                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
@@ -196,7 +206,7 @@
                                                 </HBox>
                                                 <TableView fx:id="filmAnalyticsTable">
                                                    <columns>
-                                                      <TableColumn fx:id="filmAnalyticsColumn" prefWidth="75.0" text="Film" />
+                                                      <TableColumn fx:id="filmAnalyticsColumn" prefWidth="75.0" text="Films" />
                                                    </columns>
                                                    <columnResizePolicy>
                                                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

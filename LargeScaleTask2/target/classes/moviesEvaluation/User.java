@@ -1,13 +1,16 @@
 package main.resources.moviesEvaluation;
 
 public class User {
+	private String id;
 	private String name;
 	private String username;
 	private String password;
 	private String country;
 	private Boolean admin;
 	
-	public User(String name, String username, String password, String country, Boolean admin) {
+	
+	public User(String _id, String name, String username, String password, String country, Boolean admin) {
+		id = _id;
 		this.name = name;
 		this.username = username;
 		this.password = password;

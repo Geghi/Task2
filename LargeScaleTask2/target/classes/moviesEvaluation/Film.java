@@ -3,6 +3,7 @@ package main.resources.moviesEvaluation;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Film {
+	private String id;
 	private SimpleStringProperty title;
 	private String director;
 	private String production;
@@ -10,9 +11,12 @@ public class Film {
 	private int year;
 	private Double rating;
 	private int votes;
+	
 
-	public Film(String title, String director, String production, String poster, String year, String rating,
-			String votes) {
+	public Film(String _id, String title, String director, String production,
+				String poster, String year, String rating, String votes) {
+		
+		id = _id;
 		if (!rating.equals("N/A")) {
 			this.rating = Double.parseDouble(rating);
 		} else {

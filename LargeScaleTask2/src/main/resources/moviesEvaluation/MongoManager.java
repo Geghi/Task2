@@ -45,8 +45,10 @@ public class MongoManager {
 					.first();
 
 			if (found != null) {
-				MainApp.user = new User(found.getString("Name"), found.getString("Username"),
-						found.getString("Password"), found.getString("Country"), found.getBoolean("Admin"));
+				MainApp.user = new User(found.getObjectId("_id").toString(), found.getString("Name"),
+										found.getString("Username"), found.getString("Password"),
+										found.getString("Country"), found.getBoolean("Admin"));
+				
 				return MainApp.user;
 			}
 		} catch (Exception ex) {
@@ -86,6 +88,7 @@ public class MongoManager {
 			List<Film> films = new ArrayList<>();
 			while (cursor.hasNext()) {
 				Document filmDocument = cursor.next();
+				String id = filmDocument.getObjectId("_id").toString();
 				String filmTitle = filmDocument.getString("Title");
 				String director = filmDocument.getString("Director");
 				String production = filmDocument.getString("Production");
@@ -94,7 +97,7 @@ public class MongoManager {
 				String rating = filmDocument.getString("imdbRating");
 				String votes = filmDocument.getString("imdbVotes");
 
-				Film film = new Film(filmTitle, director, production, poster, year, rating, votes);
+				Film film = new Film(id, filmTitle, director, production, poster, year, rating, votes);
 				films.add(film);
 			}
 			return films;
@@ -216,6 +219,11 @@ public class MongoManager {
 						and(eq("Title", film.getTitle()), eq("Year", Integer.toString(film.getYear()))),
 						new Document("$set", new Document("imdbRating", Double.toString(updatedRating))
 								.append("imdbVotes", Integer.toString(film.getVotes()))));
+				
+				
+				
+				
+				
 			}
 			System.out.println("Vote Updated!");
 		} catch (Exception ex) {
@@ -232,12 +240,54 @@ public class MongoManager {
 			ex.printStackTrace();
 		}
 	}
+	
+	//ObservableList<Object>
+	public ObservableList<Object>  topCountries(String year){
+		String tmp, countries, nfilm;
+		ObservableList<Object> ret = FXCollections.observableArrayList();
+		int i = 0;
+		String[] split;
+		split = new String[2];
+		MongoCursor<Document> cursor = filmCollection.aggregate(Arrays.asList(
+												Aggregates.match(eq("Year", year)),
+												Aggregates.group("$Country", Accumulators.sum("NFilm", 1L)),
+												Aggregates.sort(Sorts.descending("NFilm")))
+											).iterator();
+		
+		
+		
+		try {
+			while(i < 10 && cursor.hasNext()) {
+				tmp = cursor.next().toString();
+				//System.out.println(cursor.next());
+				
+				
+				
+				tmp = tmp.replace("Document{{_id=", "");
+				tmp = tmp.replace("}}", "");
+				
+				//System.out.println(tmp);
+				split = tmp.split(", NFilm=");
+				split[0] = split[0].replace(" ", "");
+				split[1] = split[1].replace(" ", "");
+				System.out.println(split[0] + " " + split[1]);
+				countries = split[0] + "  (" + split[1] + ")";
+				nfilm = split[1];
+				
+				ret.add((Object)new ProductionNFilm(countries, Integer.parseInt(nfilm)));
+				i++;
+			}
+		}finally {
+			cursor.close();
+		}
+		return ret;
+	}
 
-	public ObservableList<ProductionNFilm> topProduction() {
+	public ObservableList<Object> topProduction() {
 		String tmp, house, film;
 		String[] split;
 		split = new String[2];
-		ObservableList<ProductionNFilm> ret = FXCollections.observableArrayList();
+		ObservableList<Object> ret = FXCollections.observableArrayList();
 		int i = 0;
 		MongoCursor<Document> cursor = filmCollection.aggregate(Arrays.asList(Aggregates.match(nin("Production", Arrays.asList("N/A", null))), 
 																			  Aggregates.group("$Production", Accumulators.sum("NFilm", 1L)), 
@@ -254,9 +304,9 @@ public class MongoManager {
 				split = tmp.split(",");
 				split[0] = split[0].replace(" ", "");
 				split[1] = split[1].replace(" ", "");
-				house = split[0].split(":")[1];
+				house = split[0].split(":")[1] + "  (" + split[1].split(":")[1] + ")";
 				film = split[1].split(":")[1];
-				ret.add(new ProductionNFilm(house, Integer.parseInt(film)));
+				ret.add((Object)new ProductionNFilm(house, Integer.parseInt(film)));
 				i++;
 			}
 		}finally {
@@ -266,6 +316,7 @@ public class MongoManager {
 	}
 	
 	public Film createFilmObject(Document filmDocument) {
+		String id = filmDocument.getObjectId("_id").toString();
 		String filmTitle = filmDocument.getString("Title");
 		String director = filmDocument.getString("Director");
 		String production = filmDocument.getString("Production");
@@ -274,7 +325,7 @@ public class MongoManager {
 		String rating = filmDocument.getString("imdbRating");
 		String votes = filmDocument.getString("imdbVotes");
 
-		Film film = new Film(filmTitle, director, production, poster, year, rating, votes);
+		Film film = new Film(id, filmTitle, director, production, poster, year, rating, votes);
 		return film;
 	}
 	

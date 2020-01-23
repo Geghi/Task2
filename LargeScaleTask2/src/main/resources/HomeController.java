@@ -94,6 +94,8 @@ public class HomeController implements Initializable {
 		initializeTables();
 		initializeBox();
 		inizializePieChart();	
+		
+		voteBox.setItems(voteValues);
 	}
 	
 	@FXML
@@ -113,14 +115,11 @@ public class HomeController implements Initializable {
             if(analyticsSelection.getValue().equals("Top Rated Films")) {
             	filters.setVisible(true);
             	filters.setItems(MainApp.managerM.getCountries());
-
-            	updateTableAnalytics(filmAnalyticsTable, filmAnalyticsColumn, MainApp.managerM.searchFilmsSorted());
+            	updateTableAnalytics(filmAnalyticsTable, filmAnalyticsColumn, MainApp.managerM.searchFilmsSorted(), 0);
             	
             	filters.valueProperty().addListener((obss, oldItems, newItems) -> {
-            		
             		updateTableAnalytics(filmAnalyticsTable, filmAnalyticsColumn,
-            				MainApp.managerM.searchFilmsSortedFiltered(filters.getSelectionModel().getSelectedItem()));
-            			
+            				MainApp.managerM.searchFilmsSortedFiltered(filters.getSelectionModel().getSelectedItem()), 0);
             	});
             }
             
@@ -128,10 +127,7 @@ public class HomeController implements Initializable {
             // TOP PRODUCTIONS
             else if(analyticsSelection.getValue().equals("Top Productions")) {
             	filters.setVisible(false);
-            	
-            	// questa funzione del manager ritorna una observable list contenente i top houseProduction
-            	// devo passsarla a una funzione che la metta in una tabella
-            	MainApp.managerM.topProduction(); 
+            	updateTableAnalytics(filmAnalyticsTable, filmAnalyticsColumn, MainApp.managerM.topProduction(), 1);
             }
             
             
@@ -139,11 +135,13 @@ public class HomeController implements Initializable {
             else if(analyticsSelection.getValue().equals("Top Rated Country")) {
             	filters.setItems(MainApp.managerM.getYears());
             	filters.setVisible(true);
-
+            	
+            	filmAnalyticsColumn.getColumns().clear();
+            	updateTableAnalytics(filmAnalyticsTable, filmAnalyticsColumn, null, -1);
             	filters.valueProperty().addListener((obs1, oldItem1, newItem1) -> {
             		// CHIAMA LA QUERY PASSANDO L'ANNO
             		// l'anno lo prendo da
-            		filters.getSelectionModel().getSelectedItem();
+            		updateTableAnalytics(filmAnalyticsTable, filmAnalyticsColumn, MainApp.managerM.topCountries(filters.getValue()), 1);
             	});
 
             	
@@ -161,15 +159,58 @@ public class HomeController implements Initializable {
         });
 		}
 	
-	
-	private void updateTableAnalytics(TableView<Object> table, TableColumn<Object,String> filmAnalyticsColumn, List<Object> list) {
+	// this function update the analytics table
+	// different instructions must be executed related to the analytics type : 0, 1, 2,3
+	private void updateTableAnalytics(TableView<Object> table, TableColumn<Object,String> filmAnalyticsColumn,
+									  List<Object> list, int opcode) {
 		
-		ObservableList<Object> items = FXCollections.observableArrayList();
-		for(int i=0; i<list.size(); i++) {
-			items.add(list.get(i));
+		// -1 -> To clean
+				if(opcode == -1) {
+					ObservableList<Object> items = FXCollections.observableArrayList();
+					filmAnalyticsColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("title"));
+					table.setItems(items);
+					filmAnalyticsColumn.setText("");
+				}
+		
+		
+		// 0 -> Top rated films
+		if(opcode == 0) {
+			ObservableList<Object> items = FXCollections.observableArrayList();
+			for(int i=0; i<list.size(); i++) {
+				items.add(list.get(i));
+			}
+			filmAnalyticsColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("title"));
+			table.setItems(items);
+			filmAnalyticsColumn.setText("Films");
 		}
-		filmAnalyticsColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("title"));
-		table.setItems(items);
+		
+		
+		// 1 -> Top productions
+		else if(opcode == 1) {
+			ObservableList<Object> items = FXCollections.observableArrayList();
+			for(int i=0; i<list.size(); i++) {
+				items.add(list.get(i));
+			}
+			filmAnalyticsColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("productionHouse"));
+			table.setItems(items);
+			filmAnalyticsColumn.setText("Top productions");
+		}
+		
+		
+		// 2 -> Top countries by year
+		else if(opcode == 2) {
+			
+			
+			filmAnalyticsColumn.setText("Top countries");
+		}
+		
+		
+		// 3 -> Top users
+				else if(opcode == 3) {
+					
+					
+					filmAnalyticsColumn.setText("Top users");
+				}
 	}
 	
 	
