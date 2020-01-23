@@ -118,10 +118,10 @@ The system has to allow the administrator to carry out basic functions such as:
 \hline
 \textbf{Event} & \textbf{UseCase} & \textbf{Actor(s)} & \textbf{Description}\\ \hline
 Log in, Log out & Login,  Logout & Admin, User & The user logs in/out the application.\\ \hline
-Display all the Films & Browse, Find, Display Films & User, Admin & The user chooses that he wants to view the list of Films. The system browses the data on the db and returns them on the interface.\\ \hline
-View Statistics & View Top Rated Films, View Top Productions, View Top Film-maker Countries, View Most Active Users & Admin & The Admin clicks on the button to view the statistics. The system browses on the db the informations used in the calculation and display the result.\\ \hline
+Sign up & Sign up & User & The user sign in the application.\\ \hline
+Display all the Films & Search, Browse, Find, Display Films & User, Admin & The user chooses that he wants to view the list of Films. The system browses the data on the db and returns them on the interface.\\ \hline
+View Statistics & View Top Rated Films, View Top Productions, View Top Film-maker Countries, View Most Active Users & User, Admin & The User clicks on the button to view the statistics. The system browses on the db the informations used in the calculation and display the result.\\ \hline
 Add a film & Add Film & Admin & The admin submits the Film information. The system updates the db and the interface.\\ \hline
-Update a film & Update Film & Admin & The admin selects the film and commits the new informations. The system updates the db and the interface.\\ \hline
 Delete a film & Delete Film & Admin & The admin selects the film and submits the delete. The system updates the db and the interface.\\ \hline
 View the film informations & Select Film, Display Film Info & User, Admin & The user selects the film. The system shows the film informations on the interface.\\ \hline
 Vote a film & Vote Film & User, Admin & The user submits the vote on a selected film. The system updates the db and the interface.\\ \hline
@@ -160,7 +160,7 @@ This diagram represents the main entities of the application and the relations b
 \section{Design}
 
 \subsection{Database Choice}
-After the analysis phase, which has been carried out so far, we start with the design of the \textbf{Moviegram} application. We decide to use MongoDB as data support. Its document-based structure is very useful for the large amount of data that we need to maintain and access, as well as its high scalability, qualities that we do not find in a relational database. Thanks to the help of indexes, we can make very fast queries, while thanks to replicas we can guarantee the data consistency.
+After the analysis phase, which has been carried out so far, we start with the design of the \textbf{Moviegram} application. We decide to use MongoDB as data support. Its document-based structure is very useful for the large amount of data that we need to maintain and access, as well as its high scalability, qualities that we do not find in a relational database. Thanks to the help of indexes, we can make very fast queries, while thanks to replicas we can guarantee the data availability.
 
 \subsection{Software architecture}
 The application is designed over 2 different layers, see figure \ref{fig:architecture_diagram}:
@@ -326,7 +326,7 @@ This operation allows users to update their vote about a selected film.
 \vspace{5mm}
 
 \subsection{Delete}
-This operation allows an admin to remove a selected film from the database.
+This operation allows an admin to remove a selected film from the database. Take notice that the user's votes informations, about that movie, are not removed, in order to avoid decreasing his rank in the top active users.
 \vspace{2mm}
 \input{./java_code/deleteFilm.tex}
 \vspace{5mm}
