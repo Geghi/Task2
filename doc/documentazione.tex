@@ -94,10 +94,9 @@ The system has to allow the administrator to carry out basic functions such as:
 \subsubsection{Non-functional requirements}
 \begin{itemize}
 \item Usability, ease of use and intuitiveness of the application by the user.
-\item Avaliablility, with the service guaranteed h24, using replicas.
-\item The system should support simultaneous users.
+\item Availability, with the service guaranteed h24, using replicas.
 \item The system should provide access to the database with a few seconds of latency.
-\item Enforced consistency.
+\item Eventual consistency.
 \end{itemize}
 
 \clearpage
@@ -162,6 +161,8 @@ This diagram represents the main entities of the application and the relations b
 \subsection{Database Choice}
 After the analysis phase, which has been carried out so far, we start with the design of the \textbf{Moviegram} application. We decide to use MongoDB as data support. Its document-based structure is very useful for the large amount of data that we need to maintain and access, as well as its high scalability, qualities that we do not find in a relational database. Thanks to the help of indexes, we can make very fast queries, while thanks to replicas we can guarantee the data availability.
 
+
+% ----- ACHITECTURE -----
 \subsection{Software architecture}
 The application is designed over 2 different layers, see figure \ref{fig:architecture_diagram}:
 \begin{itemize}
@@ -180,6 +181,13 @@ The application is designed over 2 different layers, see figure \ref{fig:archite
 \end{minipage}
 \vspace{7mm}
 \clearpage
+
+
+\subsection{Write concern for replica set}
+In order to guarantee a high level of availability, we give back the control to application after the write on the primary server, without waiting the update of all replicas.
+As said previous, this choice guarantee a good perfomance in term of speed, but decrease the part related to consistency, it could happen that a user reads some "old" data from a replica, in case of primary server failure.
+
+% ----- RETRIEVE DATA -----
 \subsection{Populating the database}
 The dataset used in the \textbf{Moviegram} application was created by scraping the Open Movie Database, using their API (\url{http://www.omdbapi.com/}). Given a movie title, this API returns all the information in the OMDb about that movie. Before started building up the dataset using the API, it was necessary to obtain a list of movie titles, to be passed to the API; the list of titles was built up using different web pages as sources:
 \begin{itemize}
@@ -235,6 +243,13 @@ Finally, for the users' information, we didn't use any kind of scraping or sourc
 	}
 \end{comment}
 In the film collection, on the other hand, the list of users who voted for each film is not kept, but only a field that keeps the number of votes received (\textit{imdbVotes}) and one that keeps the average vote (\textit{imdbRating}).
+
+% ----- COLLECTIONS -----
+\subsection{Collections}
+At the end we modeled all the entities in two collections: \textit{moviesCollections} and \textit{usersCollections}.\\
+The first store all the information related to each movie, also the following entities: actors, production houses, writers and directors.\\
+The second store all information related to the users, in this collection we store also the entity Vote, inserting each Vote in an array. We decide to store the votes that a user give to a movies in an array in usersCollections instead to store the votes that a movie received in the moviesCollection, because in the application we are interested to retrieve the votes given the logged user.\\
+
 
 % ----- INDEXES -----
 \subsection{MongoDb indexes}
