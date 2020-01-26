@@ -2,7 +2,7 @@ package main.resources;
 
 import main.resources.moviesEvaluation.Film;
 import main.resources.moviesEvaluation.MainApp;
-import main.resources.moviesEvaluation.ProductionNFilm;
+import main.resources.moviesEvaluation.Aggregator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -68,7 +68,7 @@ public class HomeController implements Initializable {
 	@FXML
 	private TextArea jsonArea;
 	@FXML
-	private Label errorLabel, directorLabel, yearLabel, productionLabel, ratingLabel;
+	private Label errorLabel, directorLabel, yearLabel, productionLabel, ratingLabel, voteLabel;
 	@FXML
 	private TabPane tabPane;
 	@FXML
@@ -141,7 +141,7 @@ public class HomeController implements Initializable {
             	filters.valueProperty().addListener((obs1, oldItem1, newItem1) -> {
             		// CHIAMA LA QUERY PASSANDO L'ANNO
             		// l'anno lo prendo da
-            		updateTableAnalytics(filmAnalyticsTable, filmAnalyticsColumn, MainApp.managerM.topCountries(filters.getValue()), 1);
+            		updateTableAnalytics(filmAnalyticsTable, filmAnalyticsColumn, MainApp.managerM.topCountries(filters.getValue()), 2);
             	});
 
             	
@@ -151,8 +151,8 @@ public class HomeController implements Initializable {
             // TOP ACTIVE USER
             else if(analyticsSelection.getValue().equals("Top Active Users")) {
             	filters.setVisible(false);
-            	
-            	
+            	updateTableAnalytics(filmAnalyticsTable, filmAnalyticsColumn, null, -1);
+            	updateTableAnalytics(filmAnalyticsTable, filmAnalyticsColumn, MainApp.managerM.getTopUser(), 3);
             }
            
             
@@ -191,7 +191,7 @@ public class HomeController implements Initializable {
 			for(int i=0; i<list.size(); i++) {
 				items.add(list.get(i));
 			}
-			filmAnalyticsColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("productionHouse"));
+			filmAnalyticsColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("name"));
 			table.setItems(items);
 			filmAnalyticsColumn.setText("Top productions");
 		}
@@ -199,18 +199,27 @@ public class HomeController implements Initializable {
 		
 		// 2 -> Top countries by year
 		else if(opcode == 2) {
-			
+			ObservableList<Object> items = FXCollections.observableArrayList();
+			for(int i=0; i<list.size(); i++) {
+				items.add(list.get(i));
+			}
+			filmAnalyticsColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("name"));
+			table.setItems(items);
 			
 			filmAnalyticsColumn.setText("Top countries");
 		}
 		
 		
 		// 3 -> Top users
-				else if(opcode == 3) {
-					
-					
-					filmAnalyticsColumn.setText("Top users");
-				}
+		else if(opcode == 3) {
+			ObservableList<Object> items = FXCollections.observableArrayList();
+			for(int i=0; i<list.size(); i++) {
+				items.add(list.get(i));
+			}
+			filmAnalyticsColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("name"));
+			table.setItems(items);					
+			filmAnalyticsColumn.setText("Top users");
+		}
 	}
 	
 	
@@ -339,6 +348,9 @@ public class HomeController implements Initializable {
 			film.setRating(roundedRating);
 			ratingLabel.setText(Double.toString(roundedRating));
 			MainApp.managerM.addVote(film, vote, roundedRating);
+			voteLabel.setText(Integer.toString(vote));
+			voteBox.setVisible(false);
+			voteBtn.setVisible(false);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -353,6 +365,16 @@ public class HomeController implements Initializable {
 			productionLabel.setText(film.getProduction());
 			Double rating = (double) Math.round(film.getRating() * 10) / 10;
 			ratingLabel.setText(Double.toString(rating));
+			int vote = MainApp.managerM.getUserVote(MainApp.user.getId(), film.getId());
+			if(vote == -1) {
+				voteLabel.setText(" ");
+				voteBox.setVisible(true);
+				voteBtn.setVisible(true);
+			}else {
+				voteLabel.setText(Integer.toString(vote));
+				voteBox.setVisible(false);
+				voteBtn.setVisible(false);
+			}
 			Image image;
 			try {
 				image = new Image(film.getPoster());
@@ -365,11 +387,6 @@ public class HomeController implements Initializable {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-	}
-	
-	public void showTopProduction(){
-		//ProductionNFilm[] = MainApp.managerM.topProduction();
-		
 	}
 
 	@FXML

@@ -42,6 +42,10 @@ public class Film {
 		this.poster = poster;
 
 	}
+	
+	public String getId() {
+		return id;
+	}
 
 	public String getTitle() {
 		return title.get();
