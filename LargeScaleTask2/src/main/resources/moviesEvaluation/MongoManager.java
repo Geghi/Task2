@@ -3,6 +3,9 @@ package main.resources.moviesEvaluation;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+import com.mongodb.MongoClientSettings;
+import com.mongodb.ServerAddress;
+import com.mongodb.WriteConcern;
 import com.mongodb.client.*;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Sorts;
@@ -36,8 +39,14 @@ public class MongoManager {
 	public MongoManager(int p, String i) {
 		port = p;
 		ip = i;
-		// MongoClient mongoClient = new MongoClient(Arrays.asList(new ServerAddress("localhost", 27017)));
-		mongoClient = MongoClients.create("mongodb://" + ip + ":" + port);
+		mongoClient = MongoClients.create(
+		        MongoClientSettings.builder()
+		                .applyToClusterSettings(builder ->
+		                        builder.hosts(Arrays.asList(new ServerAddress(ip, port))))
+		                .build());
+		//mongoClient = new MongoClient(Arrays.asList(new ServerAddress(ip, port)));
+		//mongoClient = MongoClients.create("mongodb://" + ip + ":" + port);
+		//mongoClient.setWriteConcern(WriteConcern.ACKNOWLEDGED);
 		database = mongoClient.getDatabase(DB_NAME);
 		userCollection = database.getCollection("usersCollection");
 		filmCollection = database.getCollection("moviesCollection");
@@ -95,6 +104,17 @@ public class MongoManager {
 				Film film = createFilmObject(filmDocument);
 				films.add(film);
 			}
+			int i = 0, j;
+			for(; i < films.size(); i++) {
+				String titleTmp = films.get(i).getTitle();
+				for(j = i+1; j < films.size(); j++) {
+					String titleTmp2 = films.get(j).getTitle();
+					if(titleTmp.equals(titleTmp2)) {
+						films.remove(j);
+						j--;
+					}
+				}
+			}
 			return films;
 
 		} catch (Exception ex) {
@@ -107,13 +127,27 @@ public class MongoManager {
 		try {
 			MongoCursor<Document> cursor = filmCollection.find().sort(Sorts.descending("ratingImdb")).limit(30).iterator();
 			List<Object> films = new ArrayList<>();
+			List<Film> films2 = new ArrayList<>();
 			while (cursor.hasNext()) {
 				Document filmDocument = cursor.next();
 
 				Film film = createFilmObject(filmDocument);
-
+				films2.add(film);
 				films.add((Object) film);
 			}
+			int i = 0, j;
+			for(; i < films.size(); i++) {
+				String titleTmp = films2.get(i).getTitle();
+				for(j = i+1; j < films2.size(); j++) {
+					String titleTmp2 = films2.get(j).getTitle();
+					if(titleTmp.equals(titleTmp2)) {
+						films.remove(j);
+						films2.remove(j);
+						j--;
+					}
+				}
+			}
+			
 			return films;
 
 		} catch (Exception ex) {
@@ -127,11 +161,25 @@ public class MongoManager {
 			MongoCursor<Document> cursor = filmCollection.find(eq("Country", country))
 															.sort(Sorts.descending("ratingImdb")).limit(30).iterator();
 			List<Object> films = new ArrayList<>();
+			List<Film> films2 = new ArrayList<>();
 			while (cursor.hasNext()) {
 				Document filmDocument = cursor.next();
 
 				Film film = createFilmObject(filmDocument);
+				films2.add(film);
 				films.add((Object) film);
+			}
+			int i = 0, j;
+			for(; i < films.size(); i++) {
+				String titleTmp = films2.get(i).getTitle();
+				for(j = i+1; j < films2.size(); j++) {
+					String titleTmp2 = films2.get(j).getTitle();
+					if(titleTmp.equals(titleTmp2)) {
+						films.remove(j);
+						films2.remove(j);
+						j--;
+					}
+				}
 			}
 			return films;
 

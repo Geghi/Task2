@@ -93,7 +93,7 @@ public class HomeController implements Initializable {
 			initializeTable(filmAdminColumn);
 		initializeTables();
 		initializeBox();
-		inizializePieChart();	
+		//inizializePieChart();	
 		
 		voteBox.setItems(voteValues);
 	}
@@ -139,8 +139,6 @@ public class HomeController implements Initializable {
             	filmAnalyticsColumn.getColumns().clear();
             	updateTableAnalytics(filmAnalyticsTable, filmAnalyticsColumn, null, -1);
             	filters.valueProperty().addListener((obs1, oldItem1, newItem1) -> {
-            		// CHIAMA LA QUERY PASSANDO L'ANNO
-            		// l'anno lo prendo da
             		updateTableAnalytics(filmAnalyticsTable, filmAnalyticsColumn, MainApp.managerM.topCountries(filters.getValue()), 2);
             	});
 
