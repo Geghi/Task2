@@ -114,16 +114,38 @@ The system has to allow the administrator to carry out basic functions such as:
 \begin{table}[h]
 \centering
 \begin{tabular}{p{0.16\textwidth}p{0.2\textwidth}lp{0.5\textwidth}}
+
+% ----- USE CASES TABLE -----
 \hline
 \textbf{Event} & \textbf{UseCase} & \textbf{Actor(s)} & \textbf{Description}\\ \hline
 Log in, Log out & Login,  Logout & Admin, User & The user logs in/out the application.\\ \hline
+
 Sign up & Sign up & User & The user sign in the application.\\ \hline
-Display all the Films & Search, Browse, Find, Display Films & User, Admin & The user chooses that he wants to view the list of Films. The system browses the data on the db and returns them on the interface.\\ \hline
-View Statistics & View Top Rated Films, View Top Productions, View Top Film-maker Countries, View Most Active Users & User, Admin & The User clicks on the button to view the statistics. The system browses on the db the informations used in the calculation and display the result.\\ \hline
+
+Scan data to perform query & Browse Films, Find By parameter & User, Admin & This use cases are involved in all the operations related to retrieve data from db, moreover it is possible to pass a parameter to the find function. \\ \hline
+
+Set searching parameter &  By country, By title, By year & User, Admin & Use case related to selecting a parameter to pass to other use cases.\\ \hline
+
+Search movies & Search Film & User, Admin & Use case related to the functionality of searching some movies.\\ \hline
+
+Display all the movies & Display Films & User, Admin & The user chooses that he wants to view the list of Films. The system browses the data on the db (using browse and find use cases) and returns them on the interface.\\ \hline
+
+Display the movies ranking & View Top Rated Films & User, Admin & Use case related to the functionality of searching the movies, sorted by the rate. \\ \hline
+
+Display the production houses ranking & View Top Productions & User, Admin & Use case related to the functionality of searching the production houses, sorted by the number of movies produced. \\ \hline
+
+Display the ranking of the countries & View Top Rated  By Year And Country & User, Admin & Use case related to the functionality of searching the countries, sorted by the number of movies produced, given a year. \\ \hline
+
+Display most active users & View Top Active Users & Admin & Use case related to the functionality of searching the users, sorted by the number of votes given.\\ \hline
+
 Add a film & Add Film & Admin & The admin submits the Film information. The system updates the db and the interface.\\ \hline
+
 Delete a film & Delete Film & Admin & The admin selects the film and submits the delete. The system updates the db and the interface.\\ \hline
-View the film informations & Select Film, Display Film Info & User, Admin & The user selects the film. The system shows the film informations on the interface.\\ \hline
-Vote a film & Vote Film & User, Admin & The user submits the vote on a selected film. The system updates the db and the interface.\\ \hline
+
+View the film informations & Display Film Informations & User, Admin & The user selects the film. The system shows the film informations on the interface.\\ \hline
+
+Vote a film & Add Vote & User, Admin & The user submits the vote on a selected film. The system updates the db and the interface.\\ \hline
+
 \end{tabular}
 \end{table}
 
@@ -183,10 +205,19 @@ The application is designed over 2 different layers, see figure \ref{fig:archite
 \clearpage
 
 
-\subsection{Write concern for replica set}
+\subsection{Prepare connection to guarantee Availability}
 In order to guarantee a high level of availability, we give back the control to application after the write on the primary server, without waiting the update of all replicas.
 As said previous, this choice guarantee a good perfomance in term of speed, but decrease the part related to consistency, it could happen that a user reads some "old" data from a replica, in case of primary server failure.
-
+\begin{verbatim}
+     mongoClient = MongoClients.create(
+        MongoClientSettings.builder()
+                .applyToClusterSettings(builder ->
+                        builder.hosts(Arrays.asList(new ServerAddress(ip0, port0),
+                                                    new ServerAddress(ip1, port1),
+                                                    new ServerAddress(ip2, port2))))
+                         .writeConcern(new WriteConcern().ACKNOWLEDGED)
+                .build());
+\end{verbatim}
 % ----- RETRIEVE DATA -----
 \subsection{Populating the database}
 The dataset used in the \textbf{Moviegram} application was created by scraping the Open Movie Database, using their API (\url{http://www.omdbapi.com/}). Given a movie title, this API returns all the information in the OMDb about that movie. Before started building up the dataset using the API, it was necessary to obtain a list of movie titles, to be passed to the API; the list of titles was built up using different web pages as sources:
@@ -204,66 +235,84 @@ Once the titles’ list was ready, the only thing left to do was to obtain the k
 \vspace{6mm}
 \captionof{figure}{Java class of OMDBScraper\\}
 \label{fig:OMDBScraper}
-\vspace{4mm}
+\vspace{2mm}
 \end{center}
 \end{minipage}
-Using our “OmdbScraper” application, we managed to obtain the collection of movies’ information in a JSON format.\\ The format of our JSON elements are the following:\\
+Using our “OmdbScraper” application, we managed to obtain the collection of movies’ information in a JSON format.\\ The format of our JSON elements are the following:
 
 \begin{minipage}{\linewidth}
 \begin{center}
-\vspace{1mm}
-\includegraphics[height = 94mm]{./images/screens/elementJSONExample.jpg} 
-\vspace{6mm}
+\includegraphics[height = 80mm]{./images/screens/elementJSONExample.jpg} 
+\vspace{2mm}
 \captionof{figure}{Example of JSON document\\}
 \label{fig:elementJSONExample}
 \vspace{5mm}
 \end{center}
 \end{minipage}
 We integrated our movies dataset with a plot dataset, found on \url{kaggle.com} (wiki\_plot). In order to do so, we searched for matching between the plot’s movie title and the movie title in our collection; once the matching was found, the plot field in the original element was replaced with the data presents in the plot dataset.\\
+
+% ----- COLLECTIONS -----
+\subsubsection{Collections}
+At the end we modeled all the entities in two collections: \textit{moviesCollection} and \textit{usersCollection}.\\
+The first one store all the information related to each movie, also the following entities: actors, production houses, writers and directors. An example is shown in figure \ref{fig:elementJSONExample}.\\
+The second collection stores all information related to the users (name, username, password, and country), in this case we store also the entity Vote, inserting each Vote in an array. We decide to store the votes that a user give to a movies in an array in usersCollections instead to store the votes that a movie received in the moviesCollection, because in the application we are interested to retrieve the votes given by the logged user.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.57\textwidth]{./images/screens/userCollection} 
+\caption{Example of document of collection of user.}
+\label{fig:admin1}
+\end{figure}
+
+\subsubsection{Data type transformation}
 Moreover, we managed some data types because, scraping the OpenMovie platform, we'd obtained every field in a string format, but to compute the analytics operations described in the functional requirements section, we need to have some fields in a number format. We ran the following javascript code on the mongo shell, to perform the conversion:
 \vspace{2mm}
 \input{./java_code/conversion.tex}
 \vspace{5mm}
 
-Finally, for the users' information, we didn't use any kind of scraping or sources. We just created a collection with a few documents, one for each of us, leaving this part of the database as a prototype for future public use. Every user has maintained in the db his name, username, password, and country, as well as a list with the titles of the movies he voted and the relative vote.
-% inserire immagine di un documento utente 
-\begin{comment}
-	{
-		Name:"Alice",
-		Username:"alice",
-		Password:"alice",
-		Country:"Italy"
-		Numrates:"0",
-		Rated:
-		[
-			{Movie:"", Rate:"", Timestamp:""},
-			{Movie:"", Rate:"", Timestamp:""},
-			...
-		}
-	}
-\end{comment}
-In the film collection, on the other hand, the list of users who voted for each film is not kept, but only a field that keeps the number of votes received (\textit{imdbVotes}) and one that keeps the average vote (\textit{imdbRating}).
-
-% ----- COLLECTIONS -----
-\subsection{Collections}
-At the end we modeled all the entities in two collections: \textit{moviesCollections} and \textit{usersCollections}.\\
-The first store all the information related to each movie, also the following entities: actors, production houses, writers and directors.\\
-The second store all information related to the users, in this collection we store also the entity Vote, inserting each Vote in an array. We decide to store the votes that a user give to a movies in an array in usersCollections instead to store the votes that a movie received in the moviesCollection, because in the application we are interested to retrieve the votes given the logged user.\\
-
 
 % ----- INDEXES -----
 \subsection{MongoDb indexes}
 \subsubsection{Index 1}
-The first index introduced is related to the users collection. This collection is indexed using 'Numrates', a counter for the number of rates that a user has given.
+In order to speeding up the operation that displays the top rated movies, we introduce an index on the field 'Ratings', because also the mongo shell suggests to introduced it, when we execute the query.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{./images/screens/errorSize} 
+\caption{Mongodb error.}
+\label{fig:admin1}
+\end{figure}
+The following snippet of code shows the query and its result in term of performance, limiting the number of records (8000). The query takes 61 milliseconds to be executed, without introducing any index.
+\begin{verbatim}
+     db.movies.find().sort({"imdbRating" : 1}).explain("executionStats");
+\end{verbatim}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{./images/screens/timeNoIndex} 
+\caption{Performance before inserting the index.}
+\label{fig:admin1}
+\end{figure}
+So we introduce an index on imdbRating field and we execute again the query to evaluate the performance.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{./images/screens/createIndex} 
+\caption{Create index.}
+\label{fig:admin1}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{./images/screens/timeIndex} 
+\caption{Performance after inserting the index.}
+\label{fig:admin1}
+\end{figure}
+We can observe that the execution time decrease to 17 milliseconds.
+However this index decrease the performance of the operation that displays the top movies selecting a country, but we expect the previous operation to be compute more frequently.
+
+\subsubsection{Index 2}
+This index is related to the users collection. This collection is indexed using 'Numrates', a counter for the number of rates that a user has given.
 This index will improve the performance of the operation that returns the ranking of the most active users on the plattform.
 \begin{verbatim}
      db.users.createIndex({"Numrates" : -1 });
 \end{verbatim}
-\subsubsection{Index 2}
-In order to speeding up the operation that displays the top rated movies related to a specific country, we introduce 2 indexes on the fields 'Country' and 'Ratings'. Theese 2 indexes decrease the performance of the operation that displays the top movies, not considering the country, but we expect the previous operation to be compute more frequently.
-\begin{verbatim}
-     db.films.createIndex({"Country" : 1, "imdbRating" : -1});
-\end{verbatim}
+It isn't shown the analysis of the performance as in the previous index, because the data of the user are built to test the application and they aren't real.
 
 % ----- ANALYTICS -----
 \subsection{Analytics and statistics}
