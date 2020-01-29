@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7050 64-bit) (preloaded format=pdflatex 2019.7.22)  28 JAN 2020 18:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7050 64-bit) (preloaded format=pdflatex 2019.7.22)  29 JAN 2020 18:53
 entering extended mode
 **./documentazione.tex
 (documentazione.tex
@@ -649,17 +649,17 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
 <./images/screens/screen0.png, id=112, 603.75563pt x 475.02469pt>
 File: ./images/screens/screen0.png Graphic file (type png)
 <use ./images/screens/screen0.png>
-Package pdftex.def Info: ./images/screens/screen0.png  used on input line 423.
+Package pdftex.def Info: ./images/screens/screen0.png  used on input line 420.
 (pdftex.def)             Requested size: 296.84093pt x 233.54694pt.
 <./images/screens/screen1.png, id=113, 603.75563pt x 475.7775pt>
 File: ./images/screens/screen1.png Graphic file (type png)
 <use ./images/screens/screen1.png>
-Package pdftex.def Info: ./images/screens/screen1.png  used on input line 431.
+Package pdftex.def Info: ./images/screens/screen1.png  used on input line 428.
 (pdftex.def)             Requested size: 296.84093pt x 233.91705pt.
 <./images/screens/screen2.png, id=114, 754.31813pt x 475.7775pt>
 File: ./images/screens/screen2.png Graphic file (type png)
 <use ./images/screens/screen2.png>
-Package pdftex.def Info: ./images/screens/screen2.png  used on input line 437.
+Package pdftex.def Info: ./images/screens/screen2.png  used on input line 434.
 (pdftex.def)             Requested size: 296.84093pt x 187.22948pt.
  [18
 
@@ -667,21 +667,21 @@ Package pdftex.def Info: ./images/screens/screen2.png  used on input line 437.
 <./images/screens/screen3.png, id=118, 754.31813pt x 475.7775pt>
 File: ./images/screens/screen3.png Graphic file (type png)
 <use ./images/screens/screen3.png>
-Package pdftex.def Info: ./images/screens/screen3.png  used on input line 445.
+Package pdftex.def Info: ./images/screens/screen3.png  used on input line 442.
 (pdftex.def)             Requested size: 296.84093pt x 187.22948pt.
 <./images/screens/screen4.png, id=119, 754.31813pt x 475.7775pt>
 File: ./images/screens/screen4.png Graphic file (type png)
 <use ./images/screens/screen4.png>
-Package pdftex.def Info: ./images/screens/screen4.png  used on input line 453.
+Package pdftex.def Info: ./images/screens/screen4.png  used on input line 450.
 (pdftex.def)             Requested size: 296.84093pt x 187.22948pt.
  [19 <./images/screens/screen2.png> <./images/screens/screen3.png>]
 <./images/screens/screen5.png, id=123, 754.31813pt x 475.7775pt>
 File: ./images/screens/screen5.png Graphic file (type png)
 <use ./images/screens/screen5.png>
-Package pdftex.def Info: ./images/screens/screen5.png  used on input line 461.
+Package pdftex.def Info: ./images/screens/screen5.png  used on input line 458.
 (pdftex.def)             Requested size: 296.84093pt x 187.22948pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 458--464
+Underfull \hbox (badness 10000) in paragraph at lines 455--461
 
  []
 
@@ -689,12 +689,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 458--464
 <./images/screens/admin0.png, id=127, 754.31813pt x 475.7775pt>
 File: ./images/screens/admin0.png Graphic file (type png)
 <use ./images/screens/admin0.png>
-Package pdftex.def Info: ./images/screens/admin0.png  used on input line 474.
+Package pdftex.def Info: ./images/screens/admin0.png  used on input line 471.
 (pdftex.def)             Requested size: 296.84093pt x 187.22948pt.
 <./images/screens/admin1.png, id=128, 754.31813pt x 475.7775pt>
 File: ./images/screens/admin1.png Graphic file (type png)
 <use ./images/screens/admin1.png>
-Package pdftex.def Info: ./images/screens/admin1.png  used on input line 482.
+Package pdftex.def Info: ./images/screens/admin1.png  used on input line 479.
 (pdftex.def)             Requested size: 296.84093pt x 187.22948pt.
  [21
 
@@ -731,9 +731,9 @@ ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users
 /Marco/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.
 pfb><C:/Users/Marco/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmsy8.pfb>
-Output written on documentazione.pdf (23 pages, 1034359 bytes).
+Output written on documentazione.pdf (23 pages, 1033373 bytes).
 PDF statistics:
- 632 PDF objects out of 1000 (max. 8388607)
+ 631 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  106 words of extra memory for PDF output out of 10000 (max. 10000000)
 

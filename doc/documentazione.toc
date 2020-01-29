@@ -31,7 +31,6 @@
 \contentsline {subsection}{\numberline {4.5}Read}{15}% 
 \contentsline {subsection}{\numberline {4.6}Update}{16}% 
 \contentsline {subsection}{\numberline {4.7}Delete}{16}% 
-\contentsline {subsection}{\numberline {4.8}Analytics}{17}% 
-\contentsline {subsection}{\numberline {4.9}GUI}{17}% 
+\contentsline {subsection}{\numberline {4.8}GUI}{17}% 
 \contentsline {section}{\numberline {5}User Manual}{18}% 
 \contentsline {subsection}{\numberline {5.1}Admin Manual}{21}% 
